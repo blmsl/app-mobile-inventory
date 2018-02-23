@@ -1,0 +1,8 @@
+{
+  "name": "app-mobile-inventory",
+  "app_id": "36217980",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
