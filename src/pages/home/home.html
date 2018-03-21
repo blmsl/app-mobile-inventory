@@ -1,14 +1,50 @@
 <ion-header>
-  <ion-navbar>
+
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button menuToggle icon-only>
+       <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      {{ 'COMMONS.TITLE' | translate }}
     </ion-title>
-  </ion-navbar>
+  </ion-toolbar>
+
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+  <ion-item-group>
+    <ion-item-divider color="light">Extract</ion-item-divider>
+    <ion-item>Productos</ion-item>
+    <ion-item>Productos</ion-item>
+  </ion-item-group>
+
 </ion-content>
+
+<ion-footer>
+  <!-- Main actions. -->
+  <ion-grid class="button-bar">
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button icon-only color="light" (click)="goToPage(createProductPage)">
+          <ion-icon name="add" ></ion-icon>
+        </button>
+      </ion-col>
+      
+      <ion-col col-4>
+        <button ion-button icon-only color="light" (click)="goToPage()">
+          <ion-icon name="qr-scanner" ></ion-icon>
+        </button>
+      </ion-col>
+
+      <ion-col col-4>
+        <button ion-button icon-only color="light" (click)="goToPage()">
+          <ion-icon name="logo-usd" ></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-footer>

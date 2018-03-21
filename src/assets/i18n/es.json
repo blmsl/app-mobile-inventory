@@ -1,0 +1,24 @@
+{
+  "COMMONS": {
+   "TITLE": "GoStock",
+   "SELL": "Vender",
+   "SCANN": "Buscar",
+   "CREATE": "Crear",
+   "UPLOAD": "Cargar",
+   "UPLOAD_IMAGE_FROM_CAMERA": "Camara",
+   "UPLOAD_IMAGE_FROM_GALLERY": "Galería",
+   "CANCEL": "Cancelar"
+  },
+  "DASHBOARD": {
+   "DASHBOARD": "Dashboard"
+  },
+  "PRODUCTS": {
+   "PRODUCTS":"Productos",
+   "CREATE_PRODUCT": "Crear Producto",
+   "PRODUCT_NAME" : "Nombre",
+   "PRODUCT_BRAND": "Marca",
+   "PRODUCT_COLOR": "Color",
+   "PRODUCT_AMOUNT": "Cantidad",
+   "PRODUCT_VALUE": "Precio"
+  }
+}

@@ -1,5 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@node_modules/*": ["../node_modules/*"],
+      "@app/*": ["app/*"],
+      "@pages/*": ["pages/*"],
+      "@guards/*": ["guards/*"],
+      "@models/*": ["models/*"],
+      "@modules/*": ["modules/*"],
+      "@pipes/*": ["pipes/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    },
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "emitDecoratorMetadata": true,

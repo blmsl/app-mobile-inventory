@@ -1,1 +1,17 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-nav #content [root]="rootPage"></ion-nav>
+
+<ion-menu [content]="content">
+    <ion-content>
+        <ion-list>
+            <button ion-item (click)="openPage(rootPage)">
+                <ion-icon name="stats"></ion-icon>
+                {{ 'DASHBOARD.DASHBOARD' | translate }}
+            </button>
+            <button ion-item (click)="openPage(rootPage)">
+                <ion-icon name="cube"></ion-icon>
+                {{ 'PRODUCTS.PRODUCTS' | translate }}
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
