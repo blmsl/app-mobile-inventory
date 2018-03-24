@@ -91,4 +91,9 @@
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
     <plugin name="cordova-plugin-code-push" spec="^1.11.7" />
+    <plugin name="cordova-plugin-ionic" spec="^4.1.3">
+        <variable name="APP_ID" value="36217980" />
+        <variable name="CHANNEL_NAME" value="Master" />
+        <variable name="UPDATE_METHOD" value="background" />
+    </plugin>
 </widget>
