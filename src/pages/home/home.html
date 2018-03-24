@@ -16,9 +16,39 @@
 <ion-content>
 
   <ion-item-group>
-    <ion-item-divider color="light">Extract</ion-item-divider>
-    <ion-item>Productos</ion-item>
-    <ion-item>Productos</ion-item>
+    <!-- range -->
+    <ion-item-divider>{{ 'DASHBOARD.RANGE' | translate  }}</ion-item-divider>
+    <ion-item>
+      <ion-label>{{ 'DASHBOARD.START_DATE' | translate  }}</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{ 'DASHBOARD.END_DATE' | translate  }}</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" ></ion-datetime>
+    </ion-item>
+    
+    <!--extract-->
+    <ion-item-divider>{{ 'DASHBOARD.EXTRACT' | translate  }}</ion-item-divider>
+    <ion-item>
+      <ion-icon name="cube" item-start></ion-icon>
+      {{ 'DASHBOARD.TOTAL_PRODUCTS' | translate  }}
+    </ion-item>
+    <ion-item>
+      <ion-icon name="logo-usd" item-start></ion-icon>
+      {{ 'DASHBOARD.INVENTORY_VALUE' | translate  }}
+    </ion-item>
+    <ion-item>
+      <ion-icon name="logo-usd" item-start></ion-icon>
+      {{ 'DASHBOARD.REVENUE' | translate  }}
+    </ion-item>
+    
+    <!--alerts-->
+    <ion-item-divider>{{ 'DASHBOARD.ALERTS' | translate  }}</ion-item-divider>
+    <ion-item>
+      <ion-icon name="warning" item-start></ion-icon>
+      {{ 'DASHBOARD.ITEMS_WITH_LOW_COUNT' | translate  }}
+    </ion-item>
+    
   </ion-item-group>
 
 </ion-content>
@@ -28,19 +58,19 @@
   <ion-grid class="button-bar">
     <ion-row>
       <ion-col col-4>
-        <button ion-button icon-only color="light" (click)="goToPage(createProductPage)">
+        <button ion-button full icon-only (click)="pushPage(createProductPage)">
           <ion-icon name="add" ></ion-icon>
         </button>
       </ion-col>
       
       <ion-col col-4>
-        <button ion-button icon-only color="light" (click)="goToPage()">
+        <button ion-button full icon-only (click)="pushPage(scannPage)">
           <ion-icon name="qr-scanner" ></ion-icon>
         </button>
       </ion-col>
 
       <ion-col col-4>
-        <button ion-button icon-only color="light" (click)="goToPage()">
+        <button ion-button full icon-only (click)="pushPage(scannPage)">
           <ion-icon name="logo-usd" ></ion-icon>
         </button>
       </ion-col>

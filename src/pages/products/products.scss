@@ -1,0 +1,21 @@
+.filter-list {
+ 
+ .filter-header {
+  ion-icon {
+    margin-right: 10px;
+  }
+ }
+ 
+ .filter-item {
+  display: none;
+ }
+ 
+}
+
+.product-list {
+ .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
+  border-radius: 50%;
+  padding: 20px;
+  background-color: #F4F5F8;
+ }
+}

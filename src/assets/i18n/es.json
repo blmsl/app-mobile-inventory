@@ -7,18 +7,41 @@
    "UPLOAD": "Cargar",
    "UPLOAD_IMAGE_FROM_CAMERA": "Camara",
    "UPLOAD_IMAGE_FROM_GALLERY": "Galería",
-   "CANCEL": "Cancelar"
+   "CANCEL": "Cancelar",
+   "LOGOUT": "Cerrar Sesión",
+   "SETTINGS": "Configuración y Privacidad",
+   "CHANGE_PASSWORD":"Cambiar contraseña",
+   "LOADING": "Cargando..."
   },
   "DASHBOARD": {
-   "DASHBOARD": "Dashboard"
+   "DASHBOARD": "Dashboard",
+   "EXTRACT":"Extracto",
+   "ALERTS": "Alertas",
+   "TOTAL_PRODUCTS": "Productos totales",
+   "INVENTORY_VALUE": "Valor del inventario",
+   "REVENUE": "Ganancias",
+   "ITEMS_WITH_LOW_COUNT": "Productos con pocas existencias",
+   "RANGE": "Rango",
+   "START_DATE": "Fecha de inicio",
+   "END_DATE": "Fecha final"
+  },
+  "PROFILE": {
+   "PROFILE": "Perfil",
+   "INFORMATION": "Información"
   },
   "PRODUCTS": {
    "PRODUCTS":"Productos",
+   "PRODUCT": "Producto",
    "CREATE_PRODUCT": "Crear Producto",
    "PRODUCT_NAME" : "Nombre",
    "PRODUCT_BRAND": "Marca",
    "PRODUCT_COLOR": "Color",
    "PRODUCT_AMOUNT": "Cantidad",
-   "PRODUCT_VALUE": "Precio"
+   "PRODUCT_VALUE": "Precio",
+   "FILTERS": "Filtros"
+  },
+  "SCANN": {
+   "SCANN": "Escanear",
+   "SCANN_MESSAGE": "Escanea el código QR. Si no lo tienes ve a Productos en el menu."
   }
 }

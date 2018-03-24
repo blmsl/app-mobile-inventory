@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
-/**
-import { CodePush, SyncStatus } from '@ionic-native/code-push';
-*/
+import { NavController } from 'ionic-angular';
 
 import { CreateProductPage } from '@pages/create-product/create-product';
+import { ScannPage } from '@pages/scann/scann';
 
 @Component({
   selector: 'page-home',
@@ -13,44 +11,13 @@ import { CreateProductPage } from '@pages/create-product/create-product';
 export class HomePage {
   // Pages.
   createProductPage : any = CreateProductPage;
+  scannPage : any = ScannPage;
 
-  constructor(public navCtrl: NavController, private platform: Platform) {
-      /**
-      // https://www.youtube.com/watch?v=866PN-ccfm4
-      this.platform.ready().then(() => {
-        
-        this.codePush.sync({}, (progress) => {
-          
-        }).subscribe((status) => {
-          if (status == SyncStatus.CHECKING_FOR_UPDATE) {
-            alert('Checking for Update.');
-          }
-          if (status == SyncStatus.DOWNLOADING_PACKAGE) {
-            alert('Downloading Package.');
-          }
-          if (status == SyncStatus.IN_PROGRESS) {
-            alert('In Progress.');
-          }
-          if (status == SyncStatus.INSTALLING_UPDATE) {
-            alert('Installing Update');
-          }
-          if (status == SyncStatus.UP_TO_DATE) {
-            alert('Up to Date');
-          }
-          if (status == SyncStatus.UPDATE_INSTALLED) {
-            alert('Update Installed.');
-          }
-          if (status == SyncStatus.ERROR) {
-            alert('Error.');
-          }
-        });
-        
-      });
-      */
+  constructor(public navCtrl: NavController) {
     
   }
-
-  goToPage(page : any) {
+  /** Build a navigation stack from the current root page. */
+  pushPage(page : any) {
     if (!page) {
       return;
     }

@@ -10,7 +10,7 @@
       "@modules/*": ["modules/*"],
       "@pipes/*": ["pipes/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"]
+      "@util/*": ["util/*"]
     },
     "allowSyntheticDefaultImports": true,
     "declaration": false,

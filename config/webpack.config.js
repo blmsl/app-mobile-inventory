@@ -30,5 +30,7 @@ useDefaultConfig[env].resolve.alias = {
   "@pages": path.resolve('./src/pages/'),
   "@services": path.resolve('./src/services/'),
   "@tests": path.resolve('./src/'),      
-  "@theme": path.resolve('./src/theme/')
+  "@theme": path.resolve('./src/theme/'),
+  "@node_modules": path.resolve('./node_modules/'),
+  "@util": path.resolve('./src/util/')
 };

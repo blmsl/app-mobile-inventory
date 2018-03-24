@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button menuToggle icon-only>
+       <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{ 'PROFILE.PROFILE' | translate }}
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <!-- Profile image. -->
+  <div class="avatar">
+    <avatar [avatardata]="getAvatar()"></avatar>
+  </div>
+
+  <!-- Profile data. -->
+  <ion-item-divider>{{ 'PROFILE.INFORMATION' | translate }}</ion-item-divider>
+  <ion-item>
+    <ion-icon name="mail"></ion-icon>
+    email@domain.com
+  </ion-item>
+
+  <!-- Settings. -->
+  <ion-item-divider>{{ 'COMMONS.SETTINGS' | translate }}</ion-item-divider>
+  <ion-item>
+    <ion-icon name="key"></ion-icon>
+    {{ 'COMMONS.CHANGE_PASSWORD' | translate }}
+  </ion-item>
+
+</ion-content>
