@@ -17,14 +17,14 @@ export class ProductsPage {
   }
   
   public filterDropdown() : any {
-    let items = document.getElementsByClassName('filter-item') as HTMLCollectionOf<HTMLElement>;
+    let items = document.getElementsByClassName('filter-item') as HTMLCollectionOf<HTMLElement>;;
     if (items.length != 0) {
-      for (let item of items) {
-        if (item.style.display === 'block') {
-          item.style.display = 'none';
+      for (let i in items) {
+        if (items[i].style.display === 'block') {
+          items[i].style.display = 'none';
           this.filterVisible = false;
         } else {
-          item.style.display = 'block'
+          items[i].style.display = 'block'
           this.filterVisible = true;
         }
       }
