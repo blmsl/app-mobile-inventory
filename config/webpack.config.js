@@ -24,6 +24,7 @@ module.exports = function () {
 };
 
 useDefaultConfig[env].resolve.alias = {
+  "@environments": path.resolve('./src/environments/'),
   "@app": path.resolve('./src/app/'),
   "@assets": path.resolve('./src/assets/'),
   "@env": path.resolve(environmentPath()),

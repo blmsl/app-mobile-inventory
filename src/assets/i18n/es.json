@@ -11,7 +11,9 @@
    "LOGOUT": "Cerrar Sesión",
    "SETTINGS": "Configuración y Privacidad",
    "CHANGE_PASSWORD":"Cambiar contraseña",
-   "LOADING": "Cargando..."
+   "LOADING": "Cargando...",
+   "LOGIN": "Iniciar Sesión",
+   "LOGOUT": "Cerrar Sesión"
   },
   "DASHBOARD": {
    "DASHBOARD": "Dashboard",

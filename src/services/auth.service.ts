@@ -1,96 +1,105 @@
 import { Injectable, NgZone } from '@angular/core';
-
 import Auth0Cordova from '@auth0/cordova';
-import Auth0 from 'auth0-js';
+import * as auth0 from 'auth0-js';
+/** Services. */
+import { CookieService } from 'ngx-cookie-service';
+import { environment } from '@environments/environment';
 
-const auth0Config = {
-  // Needed for auth0.
-  clientID: 'FK7SHa0ycyrxlGAh9CZOKGVY4MtCQvXd',
-
-  // Needed for auth0cordova.
-  clientId: 'FK7SHa0ycyrxlGAh9CZOKGVY4MtCQvXd',
-  domain: 'inventory-system.auth0.com',
-  callbackURL: location.href,
-  packageIdentifier: 'YOUR_PACKAGE_ID'
+const options = {
+  clientID: environment.auth0.clientid,
+  clientId: environment.auth0.clientid,
+  domain: environment.auth0.domain,
+  responseType: 'token id_token',
+  audience: environment.auth0.audience,
+  redirectUri: environment.auth0.callback,
+  scope: environment.auth0.scope,
+  callbackURL: environment.auth0.callback,
+  packageIdentifier: environment.auth0.packageId
 };
 
 @Injectable()
 export class AuthService {
-  auth0 = new Auth0.WebAuth(auth0Config);
+  
+   /** Application web auths. There will be one for each api to which we connect. */
+  webAuth = new auth0.WebAuth(options);
+  
+  authCordova = new Auth0Cordova(options);
   /**
    * Service constructor.
    */
-  constructor(public zone: NgZone) {
-  }
-  /**
-   * Retrieves the value for a key from localStorage.
-   */
-  private getStorageValue(key) {
-    return JSON.parse(window.localStorage.getItem(key));
-  }
-  /**
-   * Set the value for a key in the localStorage.
-   */
-  private setStorageValue(key, value) {
-    window.localStorage.setItem(key, JSON.stringify(value));
+  constructor(public zone: NgZone, private cookieService: CookieService) {
   }
   
   /**
    * True if the user is authenticated, flase otherwise.
    */
   public isAuthenticated() {
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return Date.now() < expiresAt;
+    // Check whether the current time is past the
+    // Access Token's expiry time.
+    const expiresAtValue: string = this.cookieService.get('expires_at');
+    let expiresAt = new Date().getTime();
+    if (expiresAtValue && expiresAtValue.length > 0) {
+     expiresAt = JSON.parse(expiresAtValue);
+    }
+    return new Date().getTime() < expiresAt;
   }
   
   /**
    * Perform a login action.
    */
   public login() {
-    // Set up the client.
-    const client = new Auth0Cordova(auth0Config);
-    // Client options.
-    const options = {
-      scope: 'openid profile offline_access'
+    const opts = {
+      scope: environment.auth0.scope
     };
     // Check if the client is authorized.
-    client.authorize(options, (err, authResult) => {
+    this.authCordova.authorize(opts, (err, authResult) => {
       if(err) {
+        // TODO: Handle error.
         throw err;
       }
-      // Update the localStorage.
-      // Set the TokenID.
-      this.setStorageValue('token_id', authResult.idToken);
-      // Set the AccessToken.
-      this.setStorageValue('access_token', authResult.accessToken);
-      // Set the expiration time.
-      const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
-      this.setStorageValue('expires_at', expiresAt);
       // Fetch user information.
-      this.auth0.client.userInfo(authResult.accessToken, (err, userInfo) => {
+      this.webAuth.client.userInfo(authResult.accessToken, (err, userInfo) => {
         if(err) {
           throw err;
         }
         // Validate user metadata.
         userInfo.user_metadata = userInfo.user_metadata || {};
-        // If it's ok, set the user information to localStorage.
-        this.setStorageValue('user_information', userInfo);
-        
+        // If it's ok, set session.
+        this.setSession(authResult, userInfo);
+        //
         this.zone.run(() => {
           //
         });
       });
     });
   }
+  
+  private setSession(authResult: any, userInfo: any): void {
+    // Setup user information.
+    this.cookieService.set('user_information', userInfo);
+    // Set up customer_id.
+    this.cookieService.set('customer_id', 
+      authResult.idTokenPayload['https://inventory-system-web/customer_id']);
+    // Setup scopes.
+    const scopes = authResult.scope || environment.auth0.scope || '';
+    this.cookieService.set('scopes', JSON.stringify(scopes));
+    // Set the time that the Access Token will expire at
+    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    this.cookieService.set('access_token', authResult.accessToken);
+    this.cookieService.set('id_token', authResult.idToken);
+    this.cookieService.set('expires_at', expiresAt);
+  }
   /**
    * Perform the logout action.
    */
-  public logout() {
-    // Delete all the LocalStorageKeys.
-    window.localStorage.removeItem('user_information');
-    window.localStorage.removeItem('expires_at');
-    window.localStorage.removeItem('token_id');
-    window.localStorage.removeItem('access_token');
+  public logout(): void {
+    // Remove cookies.
+    this.cookieService.delete('user_information');
+    this.cookieService.delete('customer_id');
+    this.cookieService.delete('access_token');
+    this.cookieService.delete('id_token');
+    this.cookieService.delete('expires_at');
+    this.cookieService.delete('scopes');
   }
 
 }

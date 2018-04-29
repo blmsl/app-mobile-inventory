@@ -1,0 +1,16 @@
+<ion-content>
+ 
+ <ng-template [ngIf]="!authService.isAuthenticated()">
+  
+  <div class="login" text-center>
+   <h1 padding>{{ 'COMMONS.TITLE' | translate }}</h1>
+   <button
+    ion-button
+    color="primary"
+    *ngIf="!authService.isAuthenticated()"
+    (click)="authService.login()">{{ 'COMMONS.LOGIN' | translate }}</button>
+  </div>
+  
+ </ng-template>
+
+</ion-content>

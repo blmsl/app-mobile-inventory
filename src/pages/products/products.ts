@@ -20,6 +20,9 @@ export class ProductsPage {
     let items = document.getElementsByClassName('filter-item') as HTMLCollectionOf<HTMLElement>;;
     if (items.length != 0) {
       for (let i in items) {
+        if (!items[i] || !items[i].style) {
+          continue;
+        }
         if (items[i].style.display === 'block') {
           items[i].style.display = 'none';
           this.filterVisible = false;

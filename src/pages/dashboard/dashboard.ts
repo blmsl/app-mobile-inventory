@@ -5,10 +5,10 @@ import { CreateProductPage } from '@pages/create-product/create-product';
 import { ScannPage } from '@pages/scann/scann';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-dashboard',
+  templateUrl: 'dashboard.html'
 })
-export class HomePage {
+export class DashboardPage {
   // Pages.
   createProductPage : any = CreateProductPage;
   scannPage : any = ScannPage;

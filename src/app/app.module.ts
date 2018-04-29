@@ -11,26 +11,30 @@ export function getTranslateFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 import { LetterAvatarDirective } from '@node_modules/angular2-letter-avatar/directives/letter-avatar.directive';
-/**
-import { CodePush } from '@ionic-native/code-push';
-*/
+
 import { Camera } from '@ionic-native/camera';
+import { QRScanner } from '@ionic-native/qr-scanner';
+/*import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';*/
 
 import { MyApp } from './app.component';
-/** pages */
-import { HomePage } from '../pages/home/home';
+/** Pages */
+import { IndexPage } from '../pages/index/index';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 import { CreateProductPage } from '@pages/create-product/create-product';
 import { ScannPage } from '@pages/scann/scann';
 import { ProfilePage } from '@pages/profile/profile';
 import { ProductsPage } from '@pages/products/products';
+/** Services. */
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '@services/auth.service';
 
-/** utils */
-import { LocalStorageUtil } from '@util/local-storage.util';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    IndexPage,
+    DashboardPage,
     CreateProductPage,
     ScannPage,
     ProfilePage,
@@ -51,26 +55,28 @@ import { LocalStorageUtil } from '@util/local-storage.util';
         useFactory: (getTranslateFactory),
         deps: [HttpClient]
       }
-    })
+    }),
+    /*NgxQRCodeModule*/
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    IndexPage,
+    DashboardPage,
     CreateProductPage,
     ScannPage,
     ProfilePage,
     ProductsPage
   ],
   providers: [
+    CookieService,
+    AuthService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
-    LocalStorageUtil
-    /**
-    CodePush,
-    */
+    QRScanner
+    /*BarcodeScanner*/
   ]
 })
 export class AppModule {}

@@ -5,11 +5,10 @@
   <ion-list>
    
    <button ion-item icon-start (click)="setRootPage(profilePage)" [ngClass]="{'active': getActivePage() === 'ProfilePage' }">
-    <avatar  [avatardata]="getAvatar()"></avatar>
     <span>{{ 'PROFILE.PROFILE' | translate }}</span>
    </button>
    
-   <button ion-item icon-start (click)="setRootPage(rootPage)" [ngClass]="{'active': getActivePage() === 'HomePage' }">
+   <button ion-item icon-start (click)="setRootPage(dashboardPage)" [ngClass]="{'active': getActivePage() === 'DashboardPage' }">
     <ion-icon name="stats"></ion-icon>
     {{ 'DASHBOARD.DASHBOARD' | translate }}
    </button>
@@ -20,7 +19,7 @@
    </button>
    
    <!-- Logout. -->
-   <button ion-item icon-start >
+   <button ion-item icon-start (click)="authService.logout">
      <ion-icon name="exit"></ion-icon>
      {{ 'COMMONS.LOGOUT' | translate }}
    </button>
