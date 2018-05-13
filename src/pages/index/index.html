@@ -10,7 +10,12 @@
     *ngIf="!authService.isAuthenticated()"
     (click)="authService.login()">{{ 'COMMONS.LOGIN' | translate }}</button>
   </div>
-  
- </ng-template>
+</ng-template> 
+ 
+
+ <ng-template [ngIf]="authService.isAuthenticated()">
+  You are in!
+</ng-template>
+
 
 </ion-content>

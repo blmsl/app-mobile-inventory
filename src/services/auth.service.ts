@@ -9,12 +9,7 @@ const options = {
   clientID: environment.auth0.clientid,
   clientId: environment.auth0.clientid,
   domain: environment.auth0.domain,
-  responseType: 'token id_token',
-  audience: environment.auth0.audience,
-  redirectUri: environment.auth0.callback,
-  scope: environment.auth0.scope,
-  callbackURL: environment.auth0.callback,
-  packageIdentifier: environment.auth0.packageId
+  packageIdentifier: environment.auth0.packageIdentifier
 };
 
 @Injectable()
@@ -27,7 +22,9 @@ export class AuthService {
   /**
    * Service constructor.
    */
-  constructor(public zone: NgZone, private cookieService: CookieService) {
+  constructor(private zone: NgZone, 
+    private cookieService: CookieService
+    ) {
   }
   
   /**
@@ -63,12 +60,12 @@ export class AuthService {
           throw err;
         }
         // Validate user metadata.
-        userInfo.user_metadata = userInfo.user_metadata || {};
-        // If it's ok, set session.
-        this.setSession(authResult, userInfo);
-        //
+        userInfo.user_metadata = userInfo.user_metadata || {};        
+        // Validate app metadata.
+        userInfo.app_metadata = userInfo.app_metadata || {};
         this.zone.run(() => {
-          //
+          // If it's ok, set session.
+          this.setSession(authResult, userInfo);
         });
       });
     });

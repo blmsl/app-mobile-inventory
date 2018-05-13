@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { Platform, App, MenuController, LoadingController } from 'ionic-angular';
+import { Platform, App, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { TranslateService } from '@ngx-translate/core';
-
-import { Auth0Cordova } from '@auth0/cordova';
-
+import Auth0Cordova from '@auth0/cordova';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { environment } from '@environments/environment';
 /** Pages */
 import { IndexPage } from '../pages/index/index';
@@ -15,6 +12,7 @@ import { ProfilePage } from '@pages/profile/profile';
 import { ProductsPage } from '@pages/products/products';
 /** Services. */
 import { AuthService } from '@services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,10 +26,11 @@ export class MyApp {
   productsPage: any = ProductsPage;
 
   constructor(private platform: Platform, private app: App,
-    private menuCtrl: MenuController, private loadingCtrl: LoadingController,
+    private menuCtrl: MenuController,
     private translate: TranslateService, private authService: AuthService,
-    private statusBar: StatusBar, private splashScreen: SplashScreen) {
-      
+    private statusBar: StatusBar, private splashScreen: SplashScreen,
+    private androidPermissions: AndroidPermissions) {
+
       // Config supported languages.
       this.translate.addLangs(environment.supportedLanguages);
       // Setup default laanguage.
@@ -41,38 +40,25 @@ export class MyApp {
         this.translate.use(translate.getBrowserLang());
       }
       
-      // Loading.
-      let loading;
-      this.translate.get('COMMONS.LOADING').subscribe((response: string) => {
-          loading = this.loadingCtrl.create({
-            content: response
-          });
-          loading.present();
-      });
-      
       // On platform ready...
       this.platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
+        this.androidPermissions.requestPermissions(
+          [
+            this.androidPermissions.PERMISSION.CAMERA
+          ]
+        );
+
         this.statusBar.styleDefault();
         this.splashScreen.hide();
         
         // Set up URL redirects.
-        (<any>window).handleOpenURL = (url) => {
+        (window as any).handleOpenURL = (url : string) => {
           Auth0Cordova.onRedirectUri(url);
         };
         
-        // Dimiss loading.
-        if (loading) {
-          loading.dismiss();
-        }
-        
       });
-      
-      // In case the platform yet ready.
-      setTimeout(() => {
-        loading.dismiss();
-      }, environment.dimissTimeout);
   }
   /** Get nav controller. */
   getNavCtrl(): any {
@@ -105,4 +91,3 @@ export class MyApp {
     return navCtrl.getActive().name;
   }
 }
-

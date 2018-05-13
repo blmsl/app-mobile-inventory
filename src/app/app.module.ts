@@ -13,9 +13,8 @@ export function getTranslateFactory(http: HttpClient) {
 import { LetterAvatarDirective } from '@node_modules/angular2-letter-avatar/directives/letter-avatar.directive';
 
 import { Camera } from '@ionic-native/camera';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { QRScanner } from '@ionic-native/qr-scanner';
-/*import { NgxQRCodeModule } from 'ngx-qrcode2';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';*/
 
 import { MyApp } from './app.component';
 /** Pages */
@@ -75,8 +74,8 @@ import { AuthService } from '@services/auth.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
+    AndroidPermissions,
     QRScanner
-    /*BarcodeScanner*/
   ]
 })
 export class AppModule {}

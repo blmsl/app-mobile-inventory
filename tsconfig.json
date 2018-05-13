@@ -8,10 +8,8 @@
       "@pages/*": ["pages/*"],
       "@guards/*": ["guards/*"],
       "@models/*": ["models/*"],
-      "@modules/*": ["modules/*"],
       "@pipes/*": ["pipes/*"],
-      "@services/*": ["services/*"],
-      "@util/*": ["util/*"]
+      "@services/*": ["services/*"]
     },
     "allowSyntheticDefaultImports": true,
     "declaration": false,

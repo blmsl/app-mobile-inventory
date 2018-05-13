@@ -25,13 +25,14 @@ module.exports = function () {
 
 useDefaultConfig[env].resolve.alias = {
   "@environments": path.resolve('./src/environments/'),
-  "@app": path.resolve('./src/app/'),
-  "@assets": path.resolve('./src/assets/'),
   "@env": path.resolve(environmentPath()),
+  "@app": path.resolve('./src/app/'),
+  "@assets": path.resolve('./src/assets/'),  
   "@pages": path.resolve('./src/pages/'),
   "@services": path.resolve('./src/services/'),
-  "@tests": path.resolve('./src/'),      
+  "@models": path.resolve('./src/models/'),
+  "@guards": path.resolve('./src/guards/'),
+  "@pipes": path.resolve('./src/pipes/'),
   "@theme": path.resolve('./src/theme/'),
-  "@node_modules": path.resolve('./node_modules/'),
-  "@util": path.resolve('./src/util/')
+  "@node_modules": path.resolve('./node_modules/')
 };
