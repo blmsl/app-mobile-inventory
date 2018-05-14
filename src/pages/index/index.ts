@@ -9,6 +9,7 @@ import { AuthService } from '@services/auth.service';
 })
 export class IndexPage {
   
-  constructor(public navCtrl: NavController, private authService: AuthService) {
+  constructor(public navCtrl: NavController, 
+    private authService: AuthService) {
   }
 }

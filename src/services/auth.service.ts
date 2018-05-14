@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import Auth0Cordova from '@auth0/cordova';
 import * as auth0 from 'auth0-js';
 /** Services. */
-import { CookieService } from 'ngx-cookie-service';
+import { Storage } from '@ionic/storage';
 import { environment } from '@environments/environment';
 
 const options = {
@@ -19,26 +19,26 @@ export class AuthService {
   webAuth = new auth0.WebAuth(options);
   
   authCordova = new Auth0Cordova(options);
+
+  loggedIn : boolean = false;
   /**
    * Service constructor.
    */
   constructor(private zone: NgZone, 
-    private cookieService: CookieService
+    private storage: Storage
     ) {
+      this.storage.get('expires_at').then(expiresAtValue => {
+        console.log(expiresAtValue);
+        this.loggedIn = Date.now() < JSON.parse(expiresAtValue);
+      });
   }
   
   /**
    * True if the user is authenticated, flase otherwise.
    */
-  public isAuthenticated() {
-    // Check whether the current time is past the
-    // Access Token's expiry time.
-    const expiresAtValue: string = this.cookieService.get('expires_at');
-    let expiresAt = new Date().getTime();
-    if (expiresAtValue && expiresAtValue.length > 0) {
-     expiresAt = JSON.parse(expiresAtValue);
-    }
-    return new Date().getTime() < expiresAt;
+  public isAuthenticated() : boolean{
+    /* console.log(this.loggedIn); */
+    return this.loggedIn;
   }
   
   /**
@@ -52,51 +52,63 @@ export class AuthService {
     this.authCordova.authorize(opts, (err, authResult) => {
       if(err) {
         // TODO: Handle error.
+        console.log("Error authorizing: " + JSON.stringify(err));
         throw err;
       }
       // Fetch user information.
       this.webAuth.client.userInfo(authResult.accessToken, (err, userInfo) => {
         if(err) {
-          throw err;
+          // TODO: Handle error.
+          console.log("Error getting user information: " + JSON.stringify(err));
+          throw err; 
         }
         // Validate user metadata.
         userInfo.user_metadata = userInfo.user_metadata || {};        
         // Validate app metadata.
         userInfo.app_metadata = userInfo.app_metadata || {};
-        this.zone.run(() => {
-          // If it's ok, set session.
-          this.setSession(authResult, userInfo);
+        // If it's ok, set session.
+        this.setSession(authResult, userInfo);
+        // Set logged in.
+        this.loggedIn = true;
+        this.zone.run(() => {          
         });
       });
     });
   }
   
   private setSession(authResult: any, userInfo: any): void {
+    console.log(JSON.stringify(authResult));
+    console.log(JSON.stringify(userInfo));
     // Setup user information.
-    this.cookieService.set('user_information', userInfo);
+    this.storage.set('user_information', userInfo);
     // Set up customer_id.
-    this.cookieService.set('customer_id', 
-      authResult.idTokenPayload['https://inventory-system-web/customer_id']);
+    /* this.storage.set('customer_id', 
+      authResult.idTokenPayload['https://inventory-system-web/customer_id']); */
     // Setup scopes.
     const scopes = authResult.scope || environment.auth0.scope || '';
-    this.cookieService.set('scopes', JSON.stringify(scopes));
+    this.storage.set('scopes', JSON.stringify(scopes));
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    this.cookieService.set('access_token', authResult.accessToken);
-    this.cookieService.set('id_token', authResult.idToken);
-    this.cookieService.set('expires_at', expiresAt);
+    this.storage.set('access_token', authResult.accessToken);
+    this.storage.set('id_token', authResult.idToken);
+    this.storage.set('expires_at', expiresAt);    
   }
   /**
    * Perform the logout action.
    */
   public logout(): void {
+    /* console.log(JSON.stringify(this.storage)); */
     // Remove cookies.
-    this.cookieService.delete('user_information');
-    this.cookieService.delete('customer_id');
-    this.cookieService.delete('access_token');
-    this.cookieService.delete('id_token');
-    this.cookieService.delete('expires_at');
-    this.cookieService.delete('scopes');
+    this.storage.remove('user_information');
+    this.storage.remove('customer_id');
+    this.storage.remove('access_token');
+    this.storage.remove('id_token');
+    this.storage.remove('expires_at');
+    this.storage.remove('scopes');
+    // Clear storage.
+    /* this.storage.clear(); */
+    // Set logged in.
+    this.loggedIn = false;
   }
 
 }
