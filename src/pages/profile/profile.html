@@ -15,16 +15,18 @@
 
 <ion-content>
 
-  <!-- Profile image. -->
-  <div class="avatar">
-    
-  </div>
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="{{ picture }}">
+    </ion-avatar>
+    {{ username }}
+  </ion-item>
 
   <!-- Profile data. -->
-  <ion-item-divider>{{ 'PROFILE.INFORMATION' | translate }}</ion-item-divider>
+  <ion-item-divider>{{ 'PROFILE.INFORMATION' | translate }}</ion-item-divider>  
   <ion-item>
     <ion-icon name="mail"></ion-icon>
-    email@domain.com
+    {{ email }}
   </ion-item>
 
   <!-- Settings. -->

@@ -23,9 +23,10 @@ import { ProfilePage } from '@pages/profile/profile';
 import { ProductsPage } from '@pages/products/products';
 /** Services. */
 import { Camera } from '@ionic-native/camera';
+import { HTTP } from '@ionic-native/http';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { QRScanner } from '@ionic-native/qr-scanner';
-import { AuthService } from '@services/auth.service';
+import { Auth0Service } from '@services/auth0/auth0.service';
 
 
 @NgModule({
@@ -68,11 +69,12 @@ import { AuthService } from '@services/auth.service';
     ProductsPage
   ],
   providers: [
-    AuthService,
+    Auth0Service,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
+    HTTP,
     AndroidPermissions,
     QRScanner
   ]

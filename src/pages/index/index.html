@@ -1,15 +1,19 @@
-<ion-content>
+<ion-content class="login">
 
+  <ion-grid *ngIf="!auth0Service.isAuthenticated()">
+    <ion-row class="login-row" align-items-center justify-content-center>      
+        <div
+        align-items-center>
+          <h1 padding>{{ 'COMMONS.TITLE' | translate }}</h1>
+          <button ion-button color="primary" 
+          *ngIf="!auth0Service.isAuthenticated()" 
+          (click)="auth0Service.login()">{{ 'COMMONS.LOGIN' | translate }}</button>
 
-  <div class="login" text-center>
-    <h1 padding>{{ 'COMMONS.TITLE' | translate }}</h1>
-    <button ion-button color="primary" 
-    *ngIf="!authService.isAuthenticated()" 
-    (click)="authService.login()">{{ 'COMMONS.LOGIN' | translate }}</button>
-
-    <button ion-button color="primary" 
-    *ngIf="authService.isAuthenticated()" 
-    (click)="authService.logout()">LOGOUT</button>
-  </div>
+          <!-- <button ion-button color="primary" 
+          *ngIf="auth0Service.isAuthenticated()" 
+          (click)="auth0Service.logout()">{{ 'COMMONS.LOGOUT' | translate }}</button> -->
+        </div>     
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
