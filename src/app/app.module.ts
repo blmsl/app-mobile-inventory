@@ -21,12 +21,16 @@ import { CreateProductPage } from '@pages/create-product/create-product';
 import { ScannPage } from '@pages/scann/scann';
 import { ProfilePage } from '@pages/profile/profile';
 import { ProductsPage } from '@pages/products/products';
+import { PasswordModalPage } from '@pages/password-modal/password-modal'
 /** Services. */
 import { Camera } from '@ionic-native/camera';
 import { HTTP } from '@ionic-native/http';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { Auth0Service } from '@services/auth0/auth0.service';
+import { CustomersService } from '@services/customers/customers.service';
+import { UsersService } from '@services/users/users.service';
+import { ProductsService } from '@services/products/products.service';
 
 
 @NgModule({
@@ -38,6 +42,7 @@ import { Auth0Service } from '@services/auth0/auth0.service';
     ScannPage,
     ProfilePage,
     ProductsPage,
+    PasswordModalPage,
     LetterAvatarDirective
   ],
   imports: [
@@ -66,7 +71,8 @@ import { Auth0Service } from '@services/auth0/auth0.service';
     CreateProductPage,
     ScannPage,
     ProfilePage,
-    ProductsPage
+    ProductsPage,
+    PasswordModalPage
   ],
   providers: [
     Auth0Service,
@@ -76,7 +82,10 @@ import { Auth0Service } from '@services/auth0/auth0.service';
     Camera,
     HTTP,
     AndroidPermissions,
-    QRScanner
+    QRScanner,
+    CustomersService,
+    UsersService,
+    ProductsService
   ]
 })
 export class AppModule {}

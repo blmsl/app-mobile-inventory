@@ -111,7 +111,7 @@ export class Auth0Service {
 
   private setSession(authResult: any, userInfo: any): void {
     console.log(JSON.stringify(authResult));
-    console.log(JSON.stringify(userInfo));
+    /* console.log(JSON.stringify(userInfo)); */
 
     this.storage.set('access_token', authResult.accessToken);
     this.accessToken = authResult.accessToken;

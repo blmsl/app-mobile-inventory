@@ -1,28 +1,34 @@
 <ion-nav #content [root]="rootPage"></ion-nav>
 
 <ion-menu [content]="content">
- <ion-content>
-  <ion-list>
-   
-   <button ion-item icon-start (click)="setRootPage(profilePage)" [ngClass]="{'active': getActivePage() === 'ProfilePage' }">
-    <span>{{ 'PROFILE.PROFILE' | translate }}</span>
-   </button>
-   
-   <button ion-item icon-start (click)="setRootPage(dashboardPage)" [ngClass]="{'active': getActivePage() === 'DashboardPage' }">
-    <ion-icon name="stats"></ion-icon>
-    {{ 'DASHBOARD.DASHBOARD' | translate }}
-   </button>
-   
-   <button ion-item icon-start (click)="setRootPage(productsPage)" [ngClass]="{'active': getActivePage() === 'ProductsPage' }">
-    <ion-icon name="cube"></ion-icon>
-    {{ 'PRODUCTS.PRODUCTS' | translate }}
-   </button>
-   
-   <!-- Logout. -->
-   <button ion-item icon-start (click)="logout()">
-     <ion-icon name="exit"></ion-icon>
-     {{ 'COMMONS.LOGOUT' | translate }}
-   </button>
-  </ion-list>
- </ion-content>
+  <ion-content>
+    <ion-list>
+
+      <button ion-item icon-start no-lines
+      (click)="setRootPage(profilePage)" 
+      [ngClass]="{'active': getActivePage() === 'ProfilePage' }"
+      class="first-item">
+        <ion-avatar item-start>
+          <img src="{{ picture }}">
+        </ion-avatar>
+        {{ username }}
+      </button>
+
+      <button ion-item icon-start (click)="setRootPage(dashboardPage)" [ngClass]="{'active': getActivePage() === 'DashboardPage' }">
+        <ion-icon name="stats"></ion-icon>
+        {{ 'DASHBOARD.DASHBOARD' | translate }}
+      </button>
+
+      <button ion-item icon-start (click)="setRootPage(productsPage)" [ngClass]="{'active': getActivePage() === 'ProductsPage' }">
+        <ion-icon name="cube"></ion-icon>
+        {{ 'PRODUCTS.PRODUCTS' | translate }}
+      </button>
+
+      <!-- Logout. -->
+      <button ion-item icon-start (click)="logout()">
+        <ion-icon name="exit"></ion-icon>
+        {{ 'COMMONS.LOGOUT' | translate }}
+      </button>
+    </ion-list>
+  </ion-content>
 </ion-menu>

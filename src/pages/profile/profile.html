@@ -3,7 +3,7 @@
   <ion-toolbar>
     <ion-buttons left>
       <button ion-button menuToggle icon-only>
-       <ion-icon name="menu"></ion-icon>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
@@ -13,9 +13,9 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content class="profile">
 
-  <ion-item>
+  <ion-item no-lines class="profile-avatar-container">
     <ion-avatar item-start>
       <img src="{{ picture }}">
     </ion-avatar>
@@ -23,17 +23,19 @@
   </ion-item>
 
   <!-- Profile data. -->
-  <ion-item-divider>{{ 'PROFILE.INFORMATION' | translate }}</ion-item-divider>  
+  <ion-item-divider>{{ 'PROFILE.INFORMATION' | translate }}</ion-item-divider>
   <ion-item>
     <ion-icon name="mail"></ion-icon>
     {{ email }}
   </ion-item>
 
   <!-- Settings. -->
-  <ion-item-divider>{{ 'COMMONS.SETTINGS' | translate }}</ion-item-divider>
-  <ion-item>
+  <ion-item-divider>{{ 'PROFILE.SETTINGS' | translate }}</ion-item-divider>
+
+  <button ion-button icon-start full clear text-start class="setting-button" (click)="openUpdatePasswordModal()">
     <ion-icon name="key"></ion-icon>
-    {{ 'COMMONS.CHANGE_PASSWORD' | translate }}
-  </ion-item>
+    {{ 'PROFILE.CHANGE_PASSWORD' | translate }}
+  </button>
+
 
 </ion-content>

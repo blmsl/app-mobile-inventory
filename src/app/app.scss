@@ -13,12 +13,11 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @mixin align-vertically {
- margin-left: 10px;
- display: flex;
- justify-content: center;
- align-items: center;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 @mixin rounded-background {
     @include align-vertically;
     display: inline-flex;
@@ -29,22 +28,25 @@
     border-radius: 50%;
     text-align: center;
 }
-
 ion-menu {
- ion-label {
-  padding: 3px;
-  display: inline-flex;
-
-  span {
-   @include align-vertically;
-  }
- }
- 
- button {
-  background: transparent !important;
- }
- 
- button.item.item-block.item-md.active {
-  color: color($colors, primary);;
- }
+    button {
+        background: transparent !important;
+        ion-label {
+            padding: 3px;
+            display: inline-flex;
+       }
+   }
+    button.item.item-block.item-md.active {
+        color: color($colors, primary);
+   }
+    ion-content {
+        ion-list {
+            button.first-item {
+                padding-top: 20px;
+                padding-bottom: 15px;
+                background: color($colors, primary) !important;
+                color: white !important;
+           }
+       }
+   }
 }

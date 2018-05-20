@@ -36,15 +36,13 @@ $list-activated-background-color: #656565 !default;
 $card-text-color:           $text-color !default;
 
 $item-divider-color: $text-color !default;
-/*$item-divider-background: #515151 !default;*/
-/*$item-divider-background: transparent !default;*/
-$item-divider-background: #242424 !default;
+$item-divider-background: color($colors, dark) !default;
 
 ion-item {
   background: transparent !important;
 }
 
-$toast-background: #019875 !default;
+$toast-background: color($colors, dark) !default;
 
 $tabs-tab-color-inactive: #808080 !default;
 
@@ -59,7 +57,7 @@ $alert-background: $toolbar-background !default;
 $alert-button-background-color-activated: lighten($alert-background,30%) !default;
 $alert-message-text-color: $text-color !default;
 $alert-input-background-color: #bdc3c7 !default;
-$alert-input-text-color: #242424 !default;
+$alert-input-text-color: color($colors, dark) !default;
 
 ::-webkit-scrollbar {
   background-color: $toolbar-background;

@@ -12,6 +12,7 @@ import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ProfilePage } from '@pages/profile/profile';
 import { ProductsPage } from '@pages/products/products';
 /** Services. */
+import { Storage } from '@ionic/storage';
 import { Auth0Service } from '@services/auth0/auth0.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -25,13 +26,17 @@ export class MyApp {
   dashboardPage:any = DashboardPage;
   profilePage: any = ProfilePage;
   productsPage: any = ProductsPage;
+  // Attributes.
+  picture: string;
+  username: string;
 
   constructor(private platform: Platform, private app: App,
     private menuCtrl: MenuController,
     private translate: TranslateService, private auth0Service: Auth0Service,
     private statusBar: StatusBar, private splashScreen: SplashScreen,
     private androidPermissions: AndroidPermissions,
-    private events: Events) {
+    private events: Events,
+    private storage: Storage) {
       
       // On platform ready...
       this.platform.ready().then(() => {
@@ -66,6 +71,11 @@ export class MyApp {
         if (this.auth0Service.isAuthenticated()) {
           this.setRootPage(this.dashboardPage);
         }
+      });
+
+      this.storage.get('user_information').then(userInformation => {
+        this.picture = userInformation.picture;
+        this.username = userInformation.username || userInformation.nickname;
       });
   }
   /** Get nav controller. */
