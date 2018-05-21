@@ -3,7 +3,7 @@
   <ion-toolbar>
     <ion-buttons left>
       <button ion-button menuToggle icon-only>
-       <ion-icon name="menu"></ion-icon>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
@@ -17,38 +17,38 @@
 
   <ion-item-group>
     <!-- Range -->
-    <ion-item-divider>{{ 'DASHBOARD.RANGE' | translate  }}</ion-item-divider>
+    <ion-item-divider>{{ 'DASHBOARD.RANGE' | translate }}</ion-item-divider>
     <ion-item>
-      <ion-label>{{ 'DASHBOARD.START_DATE' | translate  }}</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY" ></ion-datetime>
+      <ion-label>{{ 'DASHBOARD.START_DATE' | translate }}</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>{{ 'DASHBOARD.END_DATE' | translate  }}</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY" ></ion-datetime>
+      <ion-label>{{ 'DASHBOARD.END_DATE' | translate }}</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY"></ion-datetime>
     </ion-item>
-    
+
     <!--Extract-->
-    <ion-item-divider>{{ 'DASHBOARD.EXTRACT' | translate  }}</ion-item-divider>
+    <ion-item-divider>{{ 'DASHBOARD.EXTRACT' | translate }}</ion-item-divider>
     <ion-item>
       <ion-icon name="cube" item-start></ion-icon>
-      {{ 'DASHBOARD.TOTAL_PRODUCTS' | translate  }}
+      {{ 'DASHBOARD.TOTAL_PRODUCTS' | translate }}
     </ion-item>
     <ion-item>
       <ion-icon name="logo-usd" item-start></ion-icon>
-      {{ 'DASHBOARD.INVENTORY_VALUE' | translate  }}
+      {{ 'DASHBOARD.INVENTORY_VALUE' | translate }}
     </ion-item>
     <ion-item>
       <ion-icon name="logo-usd" item-start></ion-icon>
-      {{ 'DASHBOARD.REVENUE' | translate  }}
+      {{ 'DASHBOARD.REVENUE' | translate }}
     </ion-item>
-    
+
     <!--Alerts-->
-    <ion-item-divider>{{ 'DASHBOARD.ALERTS' | translate  }}</ion-item-divider>
+    <ion-item-divider>{{ 'DASHBOARD.ALERTS' | translate }}</ion-item-divider>
     <ion-item>
       <ion-icon name="warning" item-start></ion-icon>
-      {{ 'DASHBOARD.ITEMS_WITH_LOW_COUNT' | translate  }}
+      {{ 'DASHBOARD.ITEMS_WITH_LOW_COUNT' | translate }}
     </ion-item>
-    
+
   </ion-item-group>
 
 </ion-content>
@@ -58,24 +58,59 @@
   <ion-grid class="button-bar">
     <ion-row>
       <ion-col col-4>
-        <button ion-button full icon-only (click)="pushPage(createProductPage)">
-          <ion-icon name="add" ></ion-icon>
+
+        <button ion-button full (click)="pushPage(createProductPage)">
+          <ion-grid text-center>
+            <ion-row>
+              <ion-col>
+                <ion-icon name="add"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{ 'COMMONS.CREATE' | translate }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </button>
+
+      </ion-col>
+
+      <ion-col col-4>
+        <button ion-button full (click)="pushPage(scannPage)">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-icon name="logo-usd"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{ 'COMMONS.SELL' | translate }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </button>
       </ion-col>
 
       <ion-col col-4>
-        <button ion-button full icon-only (click)="pushPage(scannPage)">
-          <ion-icon name="logo-usd" ></ion-icon>
-        </button>
-      </ion-col>
-      
-      <ion-col col-4>
-        <button ion-button full icon-only (click)="pushPage(scannPage)">
-          <ion-icon name="qr-scanner" ></ion-icon>
+        <button ion-button full (click)="pushPage(scannPage)">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-icon name="qr-scanner"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{ 'COMMONS.SCANN' | translate }}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </button>
       </ion-col>
 
     </ion-row>
   </ion-grid>
-  
+
 </ion-footer>

@@ -31,6 +31,7 @@ import { Auth0Service } from '@services/auth0/auth0.service';
 import { CustomersService } from '@services/customers/customers.service';
 import { UsersService } from '@services/users/users.service';
 import { ProductsService } from '@services/products/products.service';
+import { HeadquartersService } from '@services/headquarters/headquarters.service';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { ProductsService } from '@services/products/products.service';
     QRScanner,
     CustomersService,
     UsersService,
-    ProductsService
+    ProductsService,
+    HeadquartersService
   ]
 })
 export class AppModule {}

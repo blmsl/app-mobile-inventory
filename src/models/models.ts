@@ -62,3 +62,26 @@ export class Headquarters {
 
     constructor() { }
 }
+
+export class Product {
+    id: number;
+    name: string;
+    brand: string;
+    color: string;
+    price: number;
+    created: Date;
+    updated: Date;
+
+    constructor() {}
+}
+
+export class HeadquarterProduct {
+    id: number;
+    headquarterId: number;
+    productId: number;
+    amount: number;
+    created: Date;
+    updated: Date;
+
+    constructor() {}
+}

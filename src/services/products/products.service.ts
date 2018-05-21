@@ -12,35 +12,27 @@ export class ProductsService extends BaseService {
         super(http, storage);
     }
 
-    createProduct(product: any) : Promise<HTTPResponse> {
-        let headers = {'Content-Type': 'application/json'};
+    createProduct(product: any): Promise<HTTPResponse> {
+        let headers = { 'Content-Type': 'application/json' };
         let url = environment.api.url + 'products';
         return super.post(url, product, headers);
     }
 
-    getProduct(productID: number) : Promise<HTTPResponse> {
-        let headers = {'Content-Type': 'application/json'};
+    getProduct(productID: number): Promise<HTTPResponse> {
+        let headers = { 'Content-Type': 'application/json' };
         let url = environment.api.url + 'products/' + productID;
         return super.get(url, {}, headers);
     }
 
-    updateProduct(productID: number, product: any) : Promise<HTTPResponse> {
-        let headers = {'Content-Type': 'application/json'};
+    updateProduct(productID: number, product: any): Promise<HTTPResponse> {
+        let headers = { 'Content-Type': 'application/json' };
         let url = environment.api.url + 'products/' + productID;
         return super.patch(url, product, headers);
     }
 
-    deleteProduct(productID: number) : Promise<HTTPResponse> {
-        let headers = {'Content-Type': 'application/json'};
+    deleteProduct(productID: number): Promise<HTTPResponse> {
+        let headers = { 'Content-Type': 'application/json' };
         let url = environment.api.url + 'products/' + productID;
         return super.delete(url, {}, headers);
     }
-
-    getProducts(name: string, brand: string, color: string) {
-        let headers = {'Content-Type': 'application/json'};
-        let params = {'name': name, 'brand': brand, 'color': color};
-        let url = environment.api.url + 'products';
-        return super.get(url, params, headers);
-    }
-
 }

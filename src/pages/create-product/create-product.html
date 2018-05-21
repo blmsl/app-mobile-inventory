@@ -3,7 +3,7 @@
   <ion-toolbar>
     <ion-buttons left>
       <button ion-button icon-only (click)="goBack()">
-       <ion-icon name="arrow-back"></ion-icon>
+        <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
@@ -15,55 +15,86 @@
 
 <ion-content class="product-content">
 
-
-  <!-- Product image. -->
-  <div class="product-image">
-    <div class="no-image">
-      <img src="assets/imgs/img-icon.png" />
-    </div>
-    
-    <ion-fab bottom>
-      <button ion-fab class="right-ion-fab"><ion-icon name="create"></ion-icon></button>
-      <ion-fab-list side="left">
-        <button ion-fab (click)="uploadFromCamera()"><ion-icon name="camera"></ion-icon></button>
-        <button ion-fab (click)="uploadFromGallery()"><ion-icon name="cloud-upload"></ion-icon></button>
-      </ion-fab-list>
-    </ion-fab>
-    
-  </div>
-
   <!-- Product data. -->
-  <ion-item>
-    <ion-label fixed>{{ 'PRODUCTS.PRODUCT_NAME' | translate }}</ion-label>
-    <ion-input type="text" value=""></ion-input>
-  </ion-item>
+  <form [formGroup]="createProductFormGroup">
 
-  <ion-item>
-    <ion-label fixed>{{ 'PRODUCTS.PRODUCT_BRAND' | translate }}</ion-label>
-    <ion-input type="text" value=""></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label fixed>{{ 'PRODUCTS.PRODUCT_NAME' | translate }}</ion-label>
+      <ion-input type="text" id="productName" formControlName="nameFormControl" [ngClass]="{'invalid':nameFormControl.errors 
+      && (nameFormControl.dirty || nameFormControl.touched)}"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row *ngIf="nameFormControl.errors 
+        && (nameFormControl.dirty || nameFormControl.touched)">
+        <span *ngIf="nameFormControl.errors.required">
+          {{ 'COMMONS.REQUIRED_MESSAGE' | translate }}</span>
+      </ion-row>
+    </ion-grid>
 
-  <ion-item>
-    <ion-label fixed>{{ 'PRODUCTS.PRODUCT_COLOR' | translate }}</ion-label>
-    <ion-input type="text" value=""></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label fixed>{{ 'PRODUCTS.PRODUCT_BRAND' | translate }}</ion-label>
+      <ion-input type="text" id="productBrand" formControlName="brandFormControl" [ngClass]="{'invalid':brandFormControl.errors 
+      && (brandFormControl.dirty || brandFormControl.touched)}"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row *ngIf="brandFormControl.errors 
+        && (brandFormControl.dirty || brandFormControl.touched)">
+        <span *ngIf="brandFormControl.errors.required">
+          {{ 'COMMONS.REQUIRED_MESSAGE' | translate }}</span>
+      </ion-row>
+    </ion-grid>
 
-  <ion-item>
-    <ion-label fixed>{{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }}</ion-label>
-    <ion-input type="number" value=""></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label fixed>{{ 'PRODUCTS.PRODUCT_COLOR' | translate }}</ion-label>
+      <ion-input type="text" id="productColor" formControlName="colorFormControl" [ngClass]="{'invalid':colorFormControl.errors 
+      && (colorFormControl.dirty || colorFormControl.touched)}"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row *ngIf="colorFormControl.errors 
+        && (colorFormControl.dirty || colorFormControl.touched)">
+        <span *ngIf="colorFormControl.errors.required">
+          {{ 'COMMONS.REQUIRED_MESSAGE' | translate }}</span>
+      </ion-row>
+    </ion-grid>
 
-  <ion-item>
-    <ion-label fixed>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }}</ion-label>
-    <ion-input type="number" value=""></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label fixed>{{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }}</ion-label>
+      <ion-input type="number" id="productAmount" formControlName="amountFormControl" [ngClass]="{'invalid':amountFormControl.errors 
+      && (amountFormControl.dirty || amountFormControl.touched)}"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row *ngIf="amountFormControl.errors 
+        && (amountFormControl.dirty || amountFormControl.touched)">
+        <span *ngIf="amountFormControl.errors.required">
+          {{ 'COMMONS.REQUIRED_MESSAGE' | translate }}</span>
+        <span *ngIf="amountFormControl.errors.pattern">
+          {{ 'PRODUCTS.PATTERN_AMOUNT_MESSAGE' | translate }}</span>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-item>
+      <ion-label fixed>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }}</ion-label>
+      <ion-input type="number" id="productValue" formControlName="valueFormControl" [ngClass]="{'invalid':valueFormControl.errors 
+      && (valueFormControl.dirty || valueFormControl.touched)}"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row *ngIf="valueFormControl.errors 
+        && (valueFormControl.dirty || valueFormControl.touched)">
+        <span *ngIf="valueFormControl.errors.required">
+          {{ 'COMMONS.REQUIRED_MESSAGE' | translate }}</span>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
 
 </ion-content>
 
 <ion-footer>
   <!-- Create products. -->
-  <button ion-button full large icon-left>
-    <ion-icon name="add" ></ion-icon>
+  <button ion-button full large icon-left [disabled]="!createProductFormGroup.valid" (click)="createProduct()" >
+    <ion-icon name="add"></ion-icon>
     {{ 'COMMONS.CREATE' | translate }}
   </button>
 </ion-footer>

@@ -50,3 +50,8 @@ ion-menu {
        }
    }
 }
+.toast-error {
+    .toast-container{
+        background-color: color($colors, danger);
+    }
+}

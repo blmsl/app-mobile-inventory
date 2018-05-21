@@ -3,7 +3,7 @@
   <ion-toolbar>
     <ion-buttons left>
       <button ion-button menuToggle icon-only>
-       <ion-icon name="menu"></ion-icon>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
@@ -14,38 +14,47 @@
 </ion-header>
 
 <ion-content>
- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
- 
- <ion-list class="filter-list">
-  
-  <ion-item-divider class="filter-header" (click)="filterDropdown()">
-   {{ 'PRODUCTS.FILTERS' | translate }}
-   <ion-icon name="arrow-dropdown" item-end *ngIf="!filterVisible"></ion-icon>
-   <ion-icon name="arrow-dropup" item-end *ngIf="filterVisible"></ion-icon>
-  </ion-item-divider>
-  
-  <ion-item class="filter-item">
-   <ion-label>{{ 'PRODUCTS.PRODUCT_BRAND' | translate }} </ion-label>
-   <ion-select>
-   </ion-select>
-  </ion-item>
-  
-  <ion-item class="filter-item">
-   <ion-label>{{ 'PRODUCTS.PRODUCT_COLOR' | translate }} </ion-label>
-   <ion-select>
-   </ion-select>
-  </ion-item>
-  
- </ion-list>
- 
- <ion-list class="product-list">
-   <ion-item>
-     <ion-thumbnail item-start>
-       <img src="assets/imgs/img-icon.png">
-     </ion-thumbnail>
-     <h2>Product name</h2>
-     <p>Existencias</p>
-     <button ion-button clear item-end>Ver</button>
-   </ion-item>
- </ion-list>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+  <ion-list class="filter-list">
+
+    <ion-item-divider class="filter-header" (click)="filterDropdown()">
+      {{ 'PRODUCTS.FILTERS' | translate }}
+      <ion-icon name="arrow-dropdown" item-end *ngIf="!filterVisible"></ion-icon>
+      <ion-icon name="arrow-dropup" item-end *ngIf="filterVisible"></ion-icon>
+    </ion-item-divider>
+
+    <ion-item class="filter-item">
+      <ion-label>{{ 'PRODUCTS.PRODUCT_BRAND' | translate }} </ion-label>
+      <ion-select>
+
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="filter-item">
+      <ion-label>{{ 'PRODUCTS.PRODUCT_COLOR' | translate }} </ion-label>
+      <ion-select>
+
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list class="product-list">
+
+    <ion-item *ngFor="let product of products">
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/img-icon.png">
+      </ion-thumbnail>
+      <h2>product.name</h2>
+      <p>Existencias</p>
+      <button ion-button clear item-end>Ver</button>
+    </ion-item>
+
+    <ion-item *ngIf="!products" text-center>
+      {{ 'PRODUCTS.PRODUCTS_EMPTY_MESSAGE' | translate}}
+    </ion-item>
+
+  </ion-list>
+
 </ion-content>

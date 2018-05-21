@@ -11,7 +11,8 @@
     "LOADING": "Cargando...",
     "LOGIN": "Iniciar Sesión",
     "LOGOUT": "Cerrar Sesión",
-    "UPDATE": "Actualizar"
+    "UPDATE": "Actualizar",
+    "REQUIRED_MESSAGE": "Este campo es requerido."
   },
   "DASHBOARD": {
     "DASHBOARD": "Dashboard",
@@ -45,7 +46,17 @@
     "PRODUCT_COLOR": "Color",
     "PRODUCT_AMOUNT": "Cantidad",
     "PRODUCT_VALUE": "Precio",
-    "FILTERS": "Filtros"
+    "FILTERS": "Filtros",
+    "PRODUCTS_EMPTY_MESSAGE": "No hay productos creados.",
+    "PATTERN_AMOUNT_MESSAGE": "No has ingresado una cantidad valida.",
+    "CREATE_SUCCESS_MESSAGE": "El producto ha sido creado correctamente.",
+    "CREATE_FAILURE_MESSAGE": "Lo sentimos, el producto no ha podido ser creado.",
+    "COLORS": {
+
+    },
+    "BRANDS": {
+
+    }
   },
   "SCANN": {
     "SCANN": "Escanear",

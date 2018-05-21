@@ -16,12 +16,10 @@ export class BaseService {
     }
 
     protected post(url: string, model: any, headers: any): Promise<HTTPResponse> {
-        /* var json = JSON.stringify(model); */
         return this.http.post(url, model, headers);
     }
 
     protected patch(url: string, model: any, headers: any): Promise<HTTPResponse> {
-        /* var json = JSON.stringify(model); */
         return this.http.patch(url, model, headers);
     }
 
