@@ -23,7 +23,7 @@ export class ProductsPage {
     private productsService: ProductsService,
     private headquartersService: HeadquartersService) {
     this.storage.get('user_information').then(userInformation => {
-      this.headquarterID = userInformation['https://inventory-system-mobile/user_metadata']['headquarter']['id'];
+      this.headquarterID = userInformation.user_metadata.headquarter.id;
       this.getProducts();
     });
   }

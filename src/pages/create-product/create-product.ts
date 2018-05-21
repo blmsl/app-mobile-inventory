@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 /** Services */
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -7,7 +7,7 @@ import { ProductsService } from '@services/products/products.service';
 import { Product, HeadquarterProduct } from '@models/models';
 import { HeadquartersService } from '@services/headquarters/headquarters.service';
 import { Storage } from '@ionic/storage';
-import { TranslateService } from '@ngx-translate/core';
+import { ToastService } from '@services/toast/toast.service';
 
 @Component({
   selector: 'page-create-product',
@@ -25,14 +25,11 @@ export class CreateProductPage {
   private amountFormControl: FormControl;
   private integerPattern: any = /^\d+$/;
   private valueFormControl: FormControl;
-  private createSuccessMessage: any;
-  private createFailureMessage: any;
 
   constructor(public navCtrl: NavController,
     private camera: Camera,
     private storage: Storage,
-    private toastCtrl: ToastController,
-    private translate: TranslateService,
+    private toastService: ToastService,
     private productsService: ProductsService,
     private headquartersService: HeadquartersService) {
     this.nameFormControl = new FormControl('', [
@@ -58,19 +55,8 @@ export class CreateProductPage {
     });
 
     this.storage.get('user_information').then(userInformation => {
-      this.headquarterID = userInformation['https://inventory-system-mobile/user_metadata']['headquarter']['id'];
+      this.headquarterID = userInformation.user_metadata.headquarter.id;
     });
-
-    if (!this.createSuccessMessage) {
-      this.translate.get('PRODUCTS.CREATE_SUCCESS_MESSAGE').subscribe((response: string) => {
-        this.createSuccessMessage = response;
-      });
-    }
-    if (!this.createFailureMessage) {
-      this.translate.get('PRODUCTS.CREATE_FAILURE_MESSAGE').subscribe((response: string) => {
-        this.createFailureMessage = response;
-      });
-    }
   }
 
   goBack() {
@@ -124,28 +110,14 @@ export class CreateProductPage {
       headquarterProduct.amount = this.amountFormControl.value;
 
       this.headquartersService.addProduct(this.headquarterID, headquarterProduct).then (response => {
-        let toast = this.toastCtrl.create({
-          message:  this.createSuccessMessage,
-          duration: 3000
-        });
-        toast.present();
+        this.toastService.showToast('PRODUCTS.CREATE_SUCCESS_MESSAGE');
       }).catch(error => {
         console.error(JSON.stringify(error));
-        let toast = this.toastCtrl.create({
-          message:  this.createFailureMessage,
-          duration: 3000,
-          cssClass: "toast-error"
-        });
-        toast.present();  
+        this.toastService.showDangerToast('PRODUCTS.CREATE_FAILURE_MESSAGE');
       });      
     }).catch(error => {
       console.error(JSON.stringify(error));
-      let toast = this.toastCtrl.create({
-        message:  this.createFailureMessage,
-        duration: 3000,
-        cssClass: "toast-error"
-      });
-      toast.present();
+      this.toastService.showDangerToast('PRODUCTS.CREATE_FAILURE_MESSAGE');
     });
   }
 

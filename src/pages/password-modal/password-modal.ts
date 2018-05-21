@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 /** Services. */
-import { TranslateService } from '@ngx-translate/core';
 import { UsersService } from '@services/users/users.service';
+import { ToastService } from '@services/toast/toast.service';
 /** Models. */
 import { User } from '@models/models';
 @Component({
@@ -22,8 +22,7 @@ export class PasswordModalPage implements OnInit {
   constructor(private navCtrl: NavController,
     private viewCtrl: ViewController,
     private navParams: NavParams,
-    private toastCtrl: ToastController,
-    private translate: TranslateService,
+    private toastService: ToastService,
     private usersService: UsersService) {
 
     this.passwordFormControl = new FormControl('', [
@@ -33,18 +32,6 @@ export class PasswordModalPage implements OnInit {
     this.updatePasswordFormGroup = new FormGroup({
       passwordFormControl: this.passwordFormControl,
     });
-
-    // Setup update password feedback messages.
-    if (!this.updatePasswordSuccessMessage) {
-      this.translate.get('PROFILE.UPDATE_PASSWORD_SUCCESS_MESSAGE').subscribe((response: string) => {
-        this.updatePasswordSuccessMessage = response;
-      });
-    }
-    if (!this.updatePasswordFailureMessage) {
-      this.translate.get('PROFILE.UPDATE_PASSWORD_FAILURE_MESSAGE').subscribe((response: string) => {
-        this.updatePasswordFailureMessage = response;
-      });
-    }
   }
 
   ngOnInit() {
@@ -65,21 +52,12 @@ export class PasswordModalPage implements OnInit {
     var user: User = new User();
     user.password = this.passwordFormControl.value;
     this.usersService.updateUser(this.sub, user).then(data => {
-      let toast = this.toastCtrl.create({
-        message:  this.updatePasswordSuccessMessage,
-        duration: 3000
-      });
-      toast.present();
+      this.toastService.showToast('PROFILE.UPDATE_PASSWORD_SUCCESS_MESSAGE');
       // Close modal.
       this.closeModal();
     }).catch(error => {
       console.log(JSON.stringify(error));
-      let toast = this.toastCtrl.create({
-        message:  this.updatePasswordFailureMessage,
-        duration: 3000,
-        cssClass: "toast-error"
-      });
-      toast.present();
+      this.toastService.showDangerToast('PROFILE.UPDATE_PASSWORD_FAILURE_MESSAGE');
     });
   }
 }

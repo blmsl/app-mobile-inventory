@@ -101,6 +101,10 @@ export class Auth0Service {
         /* console.log(JSON.stringify(userInfo)); */
         // Validate app metadata.
         userInfo.app_metadata = userInfo['https://inventory-system-mobile/app_metadata'] || {};
+        delete userInfo['https://inventory-system-mobile/app_metadata'];
+        // Validate user_metadata.
+        userInfo.user_metadata = userInfo['https://inventory-system-mobile/user_metadata'] || {};
+        delete userInfo['https://inventory-system-mobile/user_metadata'];
         // If it's ok, set session.
         this.setSession(authResult, userInfo);
         this.zone.run(() => {

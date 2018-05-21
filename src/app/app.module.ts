@@ -32,6 +32,7 @@ import { CustomersService } from '@services/customers/customers.service';
 import { UsersService } from '@services/users/users.service';
 import { ProductsService } from '@services/products/products.service';
 import { HeadquartersService } from '@services/headquarters/headquarters.service';
+import { ToastService } from '@services/toast/toast.service';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { HeadquartersService } from '@services/headquarters/headquarters.service
     CustomersService,
     UsersService,
     ProductsService,
-    HeadquartersService
+    HeadquartersService,
+    ToastService
   ]
 })
 export class AppModule {}
