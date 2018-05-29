@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      {{ 'SELL.SELL' | translate }}
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="sell-content">
+
+  <form [formGroup]="sellFormGroup">
+
+    <ion-item>
+      <ion-label fixed>{{ 'SELL.DISCOUNT' | translate }}</ion-label>
+      <ion-input type="number" id="productValue" formControlName="discountFormControl" [ngClass]="{'invalid':discountFormControl.errors 
+        && (discountFormControl.dirty || discountFormControl.touched)}"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row *ngIf="discountFormControl.errors 
+          && (discountFormControl.dirty || discountFormControl.touched)">
+        <span *ngIf="discountFormControl.errors.required">
+          {{ 'COMMONS.REQUIRED_MESSAGE' | translate }}</span>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+  <ion-item-group>
+
+    <ion-item *ngIf="!products || products.length == 0" text-center>
+      {{ 'SELL.PRODUCTS_EMPTY_MESSAGE' | translate}}
+    </ion-item>
+  </ion-item-group>
+
+  <div text-center>
+    <button ion-button icon-left>
+      <ion-icon name="add"></ion-icon>
+      {{ 'SELL.ADD_PRODUCT' | translate }}</button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <!-- Create products. -->
+  <button ion-button full large icon-left (click)="sell()">
+    <ion-icon name="logo-usd"></ion-icon>
+    {{ 'SELL.SELL' | translate }}
+  </button>
+</ion-footer>

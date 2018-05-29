@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class ToastService {
+    /* Private attributes. */
+    private toast: any;
 
     constructor(private translate: TranslateService,
         private toastCtrl: ToastController) {
@@ -14,22 +16,29 @@ export class ToastService {
 
     showToast(key: string) {
         this.translate.get(key).subscribe((translation: string) => {
-            let toast = this.toastCtrl.create({
+            this.toast = this.toastCtrl.create({
                 message: translation,
                 duration: 3000
             });
-            toast.present();
+            this.toast.present();
         });
     }
 
-    showDangerToast(key: string) {
+    showDangerToast(key: string, dimiss? : boolean) {
+        dimiss = dimiss || true;
         this.translate.get(key).subscribe((translation: string) => {
-            let toast = this.toastCtrl.create({
+            this.toast = this.toastCtrl.create({
                 message: translation,
-                duration: 3000,
+                duration: dimiss? 3000 : null,
                 cssClass: "toast-danger"
             });
-            toast.present();
+            this.toast.present();
         });
+    }
+
+    dimissToast() {
+        if (this.toast) {
+            this.toast.dimiss();
+        }        
     }
 }

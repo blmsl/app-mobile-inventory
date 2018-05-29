@@ -77,11 +77,17 @@ export class Product {
 
 export class HeadquarterProduct {
     id: number;
-    headquarterId: number;
-    productId: number;
+    headquarter_id: number;
+    product_id: number;
     amount: number;
     created: Date;
     updated: Date;
+
+    constructor() {}
+}
+
+export class HeadquarterProducts {
+    products : HeadquarterProduct[];
 
     constructor() {}
 }

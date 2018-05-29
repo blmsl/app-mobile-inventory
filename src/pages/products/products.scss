@@ -1,21 +1,17 @@
-.filter-list {
- 
- .filter-header {
-  ion-icon {
-    margin-right: 10px;
-  }
- }
- 
- .filter-item {
-  display: none;
- }
- 
-}
-
-.product-list {
- .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
-  border-radius: 50%;
-  padding: 20px;
-  background-color: #F4F5F8;
- }
+.products-content {
+    .filter-list {
+        margin-bottom: 0px;
+        .filter-header {
+            height: 40px;
+            ion-icon {
+                margin-right: 10px;
+            }
+        }
+        .filter-item {
+            display: none;
+        }
+    }
+    .products-item-group {
+        height: 100px;
+    }
 }

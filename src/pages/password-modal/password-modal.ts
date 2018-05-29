@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 /** Services. */
@@ -10,14 +10,11 @@ import { User } from '@models/models';
   selector: 'page-password-modal',
   templateUrl: 'password-modal.html'
 })
-export class PasswordModalPage implements OnInit {
+export class PasswordModalPage {
   sub: string;
   /** Form controls. */
   private updatePasswordFormGroup: FormGroup;
   private passwordFormControl: FormControl;
-  /** Feedback messages. */
-  updatePasswordSuccessMessage: string;
-  updatePasswordFailureMessage: string;
 
   constructor(private navCtrl: NavController,
     private viewCtrl: ViewController,
@@ -32,20 +29,16 @@ export class PasswordModalPage implements OnInit {
     this.updatePasswordFormGroup = new FormGroup({
       passwordFormControl: this.passwordFormControl,
     });
-  }
-
-  ngOnInit() {
-  }
-
-  private closeModal() {
-    this.viewCtrl.dismiss();
-  }
+  }  
 
   ionViewDidLoad() {
     /* console.log(this.navParams.get('sub')); */
     this.sub = this.navParams.get('sub');
   }
 
+  private closeModal() {
+    this.viewCtrl.dismiss();
+  }
 
   updatePassword() {
     /* console.log("Update password."); */

@@ -13,8 +13,9 @@
 
 </ion-header>
 
-<ion-content>
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+<ion-content class="no-scroll products-content">
+  <ion-searchbar [(ngModel)]="name" [showCancelButton]="shouldShowCancel" placeholder="{{ 'COMMONS.SEARCH' | translate }}"
+    (ionInput)="getItems($event)"></ion-searchbar>
 
   <ion-list class="filter-list">
 
@@ -26,35 +27,42 @@
 
     <ion-item class="filter-item">
       <ion-label>{{ 'PRODUCTS.PRODUCT_BRAND' | translate }} </ion-label>
-      <ion-select>
-
+      <ion-select [(ngModel)]="brand" (ngModelChange)="getItems($event)" okText="{{ 'COMMONS.ACCEPT' | translate }}" cancelText="{{ 'COMMONS.CANCEL' | translate }}">
+        <ion-option>{{ selectBrandMessage }}</ion-option>
+        <ion-option *ngFor="let brand of brands">{{ brand }}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item class="filter-item">
       <ion-label>{{ 'PRODUCTS.PRODUCT_COLOR' | translate }} </ion-label>
-      <ion-select>
-
+      <ion-select [(ngModel)]="color" (ngModelChange)="getItems($event)" okText="{{ 'COMMONS.ACCEPT' | translate }}" cancelText="{{ 'COMMONS.CANCEL' | translate }}">
+        <ion-option>{{ selectColorMessage }}</ion-option>
+        <ion-option *ngFor="let color of colors">{{ color.name }}</ion-option>
       </ion-select>
     </ion-item>
 
   </ion-list>
 
-  <ion-list class="product-list">
+  <ion-item-divider>
+    {{ 'PRODUCTS.PRODUCTS' | translate }}
+  </ion-item-divider>
+  <ion-scroll scrollX="true" scrollY="true">
+    <ion-item-group class="products-item-group">
 
-    <ion-item *ngFor="let product of products">
-      <ion-thumbnail item-start>
-        <img src="assets/imgs/img-icon.png">
-      </ion-thumbnail>
-      <h2>product.name</h2>
-      <p>Existencias</p>
-      <button ion-button clear item-end>Ver</button>
-    </ion-item>
+      <ion-item *ngFor="let product of products">
+        <ion-icon name="cube" item-start></ion-icon>
+        <h2>{{ product.name }}</h2>
+        <p>{{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }} {{ product.amount }}</p>
+        <p>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }} {{ product.price | currency:'COP' }}</p>
+        <button ion-button item-end (click)="goToProduct(product)">{{ 'COMMONS.SEE' | translate }}</button>
+      </ion-item>
 
-    <ion-item *ngIf="!products" text-center>
-      {{ 'PRODUCTS.PRODUCTS_EMPTY_MESSAGE' | translate}}
-    </ion-item>
+      <ion-item *ngIf="!products || products.length == 0" text-center>
+        {{ 'PRODUCTS.PRODUCTS_EMPTY_MESSAGE' | translate}}
+      </ion-item>
 
-  </ion-list>
+    </ion-item-group>
+
+  </ion-scroll>
 
 </ion-content>

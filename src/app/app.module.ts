@@ -12,28 +12,35 @@ export function getTranslateFactory(http: HttpClient) {
 }
 import { LetterAvatarDirective } from '@node_modules/angular2-letter-avatar/directives/letter-avatar.directive';
 import { IonicStorageModule } from '@ionic/storage';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 /** Components. */
 import { MyApp } from './app.component';
 /** Pages */
 import { IndexPage } from '../pages/index/index';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { CreateProductPage } from '@pages/create-product/create-product';
-import { ScannPage } from '@pages/scann/scann';
 import { ProfilePage } from '@pages/profile/profile';
 import { ProductsPage } from '@pages/products/products';
-import { PasswordModalPage } from '@pages/password-modal/password-modal'
+import { PasswordModalPage } from '@pages/password-modal/password-modal';
+import { QrModalPage } from '@pages/qr-modal/qr-modal';
+import { SellPage } from '@pages/sell/sell';
+import { ProductDetailsPage } from '@pages/product-details/product-details';
 /** Services. */
 import { Camera } from '@ionic-native/camera';
 import { HTTP } from '@ionic-native/http';
+import { Network } from '@ionic-native/network';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { QRScanner } from '@ionic-native/qr-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Auth0Service } from '@services/auth0/auth0.service';
 import { CustomersService } from '@services/customers/customers.service';
 import { UsersService } from '@services/users/users.service';
 import { ProductsService } from '@services/products/products.service';
+import { ColorsService } from '@services/colors/colors.service';
 import { HeadquartersService } from '@services/headquarters/headquarters.service';
 import { ToastService } from '@services/toast/toast.service';
-
+import { ScannerService } from '@services/scanner/scanner.service'
+/* Pipes. */
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -41,10 +48,12 @@ import { ToastService } from '@services/toast/toast.service';
     IndexPage,
     DashboardPage,
     CreateProductPage,
-    ScannPage,
     ProfilePage,
     ProductsPage,
     PasswordModalPage,
+    QrModalPage,
+    SellPage,
+    ProductDetailsPage,
     LetterAvatarDirective
   ],
   imports: [
@@ -63,7 +72,7 @@ import { ToastService } from '@services/toast/toast.service';
         deps: [HttpClient]
       }
     }),
-    /*NgxQRCodeModule*/
+    NgxQRCodeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -71,10 +80,12 @@ import { ToastService } from '@services/toast/toast.service';
     IndexPage,
     DashboardPage,
     CreateProductPage,
-    ScannPage,
     ProfilePage,
     ProductsPage,
-    PasswordModalPage
+    PasswordModalPage,
+    QrModalPage,
+    SellPage,
+    ProductDetailsPage
   ],
   providers: [
     Auth0Service,
@@ -83,13 +94,17 @@ import { ToastService } from '@services/toast/toast.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
     HTTP,
+    Network,
     AndroidPermissions,
-    QRScanner,
+    BarcodeScanner,
     CustomersService,
     UsersService,
     ProductsService,
     HeadquartersService,
-    ToastService
+    ToastService,
+    ColorsService,
+    CurrencyPipe,
+    ScannerService
   ]
 })
 export class AppModule {}

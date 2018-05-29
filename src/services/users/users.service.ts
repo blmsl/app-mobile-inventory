@@ -4,12 +4,13 @@ import { environment } from '@environments/environment';
 import { BaseService } from '@services/base/base.service';
 import { HTTP, HTTPResponse } from '@ionic-native/http';
 import { Storage } from '@ionic/storage';
+import { Events } from 'ionic-angular';
 
 @Injectable()
 export class UsersService extends BaseService {
 
-    constructor(http: HTTP, storage: Storage) {
-        super(http, storage);
+    constructor(http: HTTP, events: Events) {
+        super(http, events);
     }
 
     getUser(userID: string): Promise<HTTPResponse> {

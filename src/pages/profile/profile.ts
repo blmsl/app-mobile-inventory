@@ -34,7 +34,7 @@ export class ProfilePage {
   // Pages.
   passwordModalPage: any = PasswordModalPage;
 
-  constructor(public modalCtrl: ModalController,
+  constructor(private modalCtrl: ModalController,
     private storage: Storage,
     private customersService: CustomersService
   ) {

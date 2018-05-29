@@ -59,6 +59,10 @@ $alert-message-text-color: $text-color !default;
 $alert-input-background-color: #bdc3c7 !default;
 $alert-input-text-color: color($colors, dark) !default;
 
+$alert-md-radio-label-text-color: white !default;
+$alert-md-radio-border-color-off: white !default;
+$radio-md-color-off: white !default;
+
 ::-webkit-scrollbar {
   background-color: $toolbar-background;
   }

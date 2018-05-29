@@ -12,7 +12,10 @@
     "LOGIN": "Iniciar Sesión",
     "LOGOUT": "Cerrar Sesión",
     "UPDATE": "Actualizar",
-    "REQUIRED_MESSAGE": "Este campo es requerido."
+    "REQUIRED_MESSAGE": "Este campo es requerido.",
+    "ACCEPT": "Aceptar",
+    "SEARCH": "Buscar",
+    "SEE": "Ver"
   },
   "DASHBOARD": {
     "DASHBOARD": "Dashboard",
@@ -47,19 +50,28 @@
     "PRODUCT_AMOUNT": "Cantidad",
     "PRODUCT_VALUE": "Precio",
     "FILTERS": "Filtros",
-    "PRODUCTS_EMPTY_MESSAGE": "No hay productos creados.",
+    "PRODUCTS_EMPTY_MESSAGE": "No hay productos.",
     "PATTERN_AMOUNT_MESSAGE": "No has ingresado una cantidad valida.",
     "CREATE_SUCCESS_MESSAGE": "El producto ha sido creado correctamente.",
     "CREATE_FAILURE_MESSAGE": "Lo sentimos, el producto no ha podido ser creado.",
-    "COLORS": {
-
-    },
-    "BRANDS": {
-
-    }
+    "SELECT_BRAND_MESSAGE": "Selecciona una marca",
+    "SELECT_COLOR_MESSAGE": "Selecciona un color"
   },
   "SCANN": {
     "SCANN": "Escanear",
-    "SCANN_MESSAGE": "Escanea el código QR. Si no lo tienes ve a Productos en el menu."
+    "SCANN_MESSAGE": "Escanea el código QR. Si no lo tienes ve a Productos en el menu.",
+    "QR_CODE": "Código QR",
+    "QR_CODE_MESSAGE": "Asegurate de almacenar el código en tu dispositivo."
+  },
+  "SELL": {
+    "SELL": "Vender",
+    "ADD_PRODUCT": "Añadir producto",
+    "DISCOUNT": "Descuento",
+    "PRODUCTS_EMPTY_MESSAGE": "No hay productos añadidos en la venta."
+  },
+  "ERROR": {
+    "ERROR_CONNECTION": "Tu coneción a internet parece no estar disponible. La integridad de los datos no es garantizada.",
+    "ERROR_AUTHORIZING": "No tienes permisos para ingresar al aplicativo.",
+    "ERROR_GETTING_USER_INFORMATION": "Lo sentimos, no se ha podido obtener tu información de perfil."
   }
 }

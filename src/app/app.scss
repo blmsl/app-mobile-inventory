@@ -55,3 +55,12 @@ ion-menu {
         background-color: color($colors, danger);
     }
 }
+.no-scroll .scroll-content{
+    overflow: hidden;
+}
+
+/* Needed for ion-scroll. */
+ion-scroll { 
+    white-space: nowrap;
+    height: 100%;
+}

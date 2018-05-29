@@ -32,10 +32,12 @@
     <ion-item>
       <ion-icon name="cube" item-start></ion-icon>
       {{ 'DASHBOARD.TOTAL_PRODUCTS' | translate }}
+      <ion-badge item-end>{{ total }}</ion-badge>
     </ion-item>
     <ion-item>
       <ion-icon name="logo-usd" item-start></ion-icon>
       {{ 'DASHBOARD.INVENTORY_VALUE' | translate }}
+      <ion-badge *ngIf="price" item-end>{{ price | currency:'COP' }}</ion-badge>
     </ion-item>
     <ion-item>
       <ion-icon name="logo-usd" item-start></ion-icon>
@@ -77,7 +79,7 @@
       </ion-col>
 
       <ion-col col-4>
-        <button ion-button full (click)="pushPage(scannPage)">
+        <button ion-button full (click)="pushPage(sellPage)">
           <ion-grid>
             <ion-row>
               <ion-col>
@@ -94,7 +96,7 @@
       </ion-col>
 
       <ion-col col-4>
-        <button ion-button full (click)="pushPage(scannPage)">
+        <button ion-button full (click)="scann()">
           <ion-grid>
             <ion-row>
               <ion-col>
