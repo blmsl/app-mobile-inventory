@@ -39,7 +39,7 @@
     "angular2-letter-avatar": "^2.1.1",
     "auth0-js": "^9.5.1",
     "code-push": "^2.0.4",
-    "cordova-android": "~6.3.0",
+    "cordova-android": "^6.3.0",
     "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-calllog": "^1.2.2",
@@ -54,7 +54,6 @@
     "cordova-plugin-ionic": "^4.1.7",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.2.1",
-    "cordova-plugin-network-information": "^2.0.1",
     "cordova-plugin-safariviewcontroller": "^1.5.3",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
@@ -70,7 +69,8 @@
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
     "typings": "^2.1.1",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "cordova-browser": "~5.0.3"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
@@ -108,14 +108,14 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-calllog": {},
       "cordova-plugin-advanced-http": {},
-      "cordova-plugin-network-information": {},
       "phonegap-plugin-barcodescanner": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-statusbar": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   },
   "config": {

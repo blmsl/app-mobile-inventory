@@ -3,7 +3,6 @@ import { environment } from '@environments/environment';
 /* Services. */
 import { BaseService } from '@services/base/base.service';
 import { HTTP, HTTPResponse } from '@ionic-native/http';
-import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
 
 @Injectable()
@@ -23,11 +22,11 @@ export class HeadquartersService extends BaseService {
         let url = `${environment.api.url}headquarters/${headquarterID}/products`;
         return super.post(url, product, headers);
     }
-
-    addProducts (headquarterID: number, products: any) : Promise<HTTPResponse> {
+    
+    updateProduct( headquarterID: number, productID: number, product: any) : Promise<HTTPResponse> {
         let headers = {'Content-Type': 'application/json' };        
-        let url = `${environment.api.url}headquarters/${headquarterID}/products`;
-        return super.patch(url, products, headers);
+        let url = `${environment.api.url}headquarters/${headquarterID}/products/${productID}`;
+        return super.patch(url, product, headers);
     }
 
     getProduct(headquarterID: number, productID: number) : Promise<HTTPResponse> {
@@ -39,4 +38,4 @@ export class HeadquartersService extends BaseService {
         let url = `${environment.api.url}headquarters/${headquarterID}/products?name=${name}&brand=${brand}&color=${color}`;
         return super.get(url, {}, {});
     }
-}
+} 

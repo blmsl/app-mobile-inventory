@@ -15,8 +15,8 @@ import { Storage } from '@ionic/storage';
 import { Auth0Service } from '@services/auth0/auth0.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Events } from 'ionic-angular';
-import { Network } from '@ionic-native/network';
 import { ToastService } from '@services/toast/toast.service';
+import { constants } from '@app/app.constants';
 
 @Component({
   templateUrl: 'app.html'
@@ -39,7 +39,7 @@ export class MyApp {
     private androidPermissions: AndroidPermissions,
     private events: Events,
     private storage: Storage,
-    private network: Network,
+    /* private network: Network, */
     private toastService: ToastService) {
 
     // On platform ready...
@@ -78,7 +78,7 @@ export class MyApp {
       };
     });
 
-    this.events.subscribe('storage:opened', (value) => {
+    this.events.subscribe(constants.topics.storage.ready, (value) => {
       // Redirect to dashboard.
       if (this.auth0Service.isAuthenticated()) {
         this.setRootPage(this.dashboardPage);
@@ -90,13 +90,6 @@ export class MyApp {
           this.username = userInformation.username || userInformation.nickname;
         }
       });
-    });
-
-    let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-      this.toastService.showDangerToast('ERROR.ERROR_CONNECTION', false);
-    });
-    let connectSubscription = this.network.onConnect().subscribe(() => {
-      this.toastService.dimissToast();
     });
   }
   /** Get nav controller. */

@@ -9,6 +9,7 @@ import { ScannerService } from '@services/scanner/scanner.service';
 import { SellPage } from '@pages/sell/sell';
 import { CreateProductPage } from '@pages/create-product/create-product';
 import { TranslateService } from '@ngx-translate/core';
+import { constants } from '@app/app.constants';
 
 @Component({
   selector: 'page-dashboard',
@@ -16,8 +17,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class DashboardPage {
   // Pages.
-  createProductPage: any = CreateProductPage;
-  sellPage : any = SellPage;
+  private createProductPage: any = CreateProductPage;
+  private sellPage: any = SellPage;
 
   /** Attributes. */
   private total: number;
@@ -29,7 +30,11 @@ export class DashboardPage {
     private headquartersService: HeadquartersService,
     private toastService: ToastService,
     private scannerService: ScannerService,
-    private translateService: TranslateService) { 
+    private translateService: TranslateService) {
+    this.events.subscribe(constants.topics.products.create, (value) => {
+      // TODO: Optimize this.
+      this.getProducts();
+    });
   }
 
   ionViewDidLoad() {
@@ -39,15 +44,15 @@ export class DashboardPage {
     });
   }
   /** Build a navigation stack from the current root page. */
-  pushPage(page: any, params? :any) {
+  pushPage(page: any, params?: any) {
     if (!page) {
       return;
     }
     this.navCtrl.push(page, params);
   }
 
-  scann () {
-    try{
+  scann() {
+    try {
       this.translateService.get('SCANN.SCANN_MESSAGE').subscribe((response) => {
         this.scannerService.scann(response).then((data) => {
           var params = JSON.parse(data.text);
@@ -56,14 +61,13 @@ export class DashboardPage {
           console.log(JSON.stringify(error));
         });
       });
-    } catch(e) {
+    } catch (e) {
       console.log(JSON.stringify(e));
     }
-    
   }
 
   private getProducts() {
-    this.headquartersService.getProducts(this.headquarterID, "", "", "").then(response => {
+    this.headquartersService.getProducts(this.headquarterID, '', '', '').then(response => {
       /* console.log(JSON.stringify(response.data)); */
       try {
         var data = JSON.parse(response.data);
@@ -72,6 +76,7 @@ export class DashboardPage {
       }
       catch (e) {
         console.error(JSON.stringify(e));
+        this.toastService.showDangerToast('ERROR.ERROR_GENERAL');
       }
     }).catch(error => {
       this.toastService.showDangerToast(error.status);

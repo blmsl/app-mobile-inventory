@@ -3,7 +3,6 @@ import { environment } from '@environments/environment';
 /* Services. */
 import { BaseService } from '@services/base/base.service';
 import { HTTP, HTTPResponse } from '@ionic-native/http';
-import { Storage } from '@ionic/storage';
 /* Models. */
 import { Product } from '@models/models';
 import { Events } from 'ionic-angular';

@@ -55,7 +55,9 @@
     "CREATE_SUCCESS_MESSAGE": "El producto ha sido creado correctamente.",
     "CREATE_FAILURE_MESSAGE": "Lo sentimos, el producto no ha podido ser creado.",
     "SELECT_BRAND_MESSAGE": "Selecciona una marca",
-    "SELECT_COLOR_MESSAGE": "Selecciona un color"
+    "SELECT_COLOR_MESSAGE": "Selecciona un color",
+    "UPDATE_PRODUCT_SUCCESS_MESSAGE": "El producto ha sido actualizado correctamente.",
+    "UPDATE_PRODUCT_FAILURE_MESSAGE": "Lo sentimos, el producto no ha sido actualizado."
   },
   "SCANN": {
     "SCANN": "Escanear",
@@ -70,6 +72,7 @@
     "PRODUCTS_EMPTY_MESSAGE": "No hay productos añadidos en la venta."
   },
   "ERROR": {
+    "ERROR_GENERAL": "Lo sentimos, algo ha salido mal.",
     "ERROR_CONNECTION": "Tu coneción a internet parece no estar disponible. La integridad de los datos no es garantizada.",
     "ERROR_AUTHORIZING": "No tienes permisos para ingresar al aplicativo.",
     "ERROR_GETTING_USER_INFORMATION": "Lo sentimos, no se ha podido obtener tu información de perfil."

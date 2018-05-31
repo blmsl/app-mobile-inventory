@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { environment } from '@environments/environment';
 /* Services. */
 import { HTTP, HTTPResponse } from '@ionic-native/http';
-import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
+import { constants } from '@app/app.constants';
 
 @Injectable()
 export class BaseService {
@@ -12,10 +11,10 @@ export class BaseService {
     constructor(protected http: HTTP,
         private events: Events) {
         this.http.setDataSerializer('json');
-        this.events.subscribe('cookies:put', (value) => {
+        this.events.subscribe(constants.topics.cookies.put, (value) => {
             this.http.setCookie(environment.api.url, value);
         });
-        this.events.subscribe('cookies:clear', (value) => {
+        this.events.subscribe(constants.topics.cookies.clear, (value) => {
             this.http.clearCookies();
         });
     }

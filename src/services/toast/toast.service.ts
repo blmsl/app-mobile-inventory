@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { environment } from '@environments/environment';
 import { ToastController } from 'ionic-angular';
 /* Services. */
 import { TranslateService } from '@ngx-translate/core';

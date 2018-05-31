@@ -28,7 +28,6 @@ import { ProductDetailsPage } from '@pages/product-details/product-details';
 /** Services. */
 import { Camera } from '@ionic-native/camera';
 import { HTTP } from '@ionic-native/http';
-import { Network } from '@ionic-native/network';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Auth0Service } from '@services/auth0/auth0.service';
@@ -94,7 +93,6 @@ import { CurrencyPipe } from '@angular/common';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
     HTTP,
-    Network,
     AndroidPermissions,
     BarcodeScanner,
     CustomersService,

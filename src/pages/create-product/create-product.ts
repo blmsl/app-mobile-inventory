@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, Events } from 'ionic-angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 /** Services */
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -11,16 +11,17 @@ import { ColorsService } from '@services/colors/colors.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ScannerService } from '@services/scanner/scanner.service';
 /* Models */
-import { Product, HeadquarterProduct, HeadquarterProducts } from '@models/models';
+import { Product, HeadquarterProduct } from '@models/models';
 /* Pages. */
 import { QrModalPage } from '@pages/qr-modal/qr-modal';
+import { constants } from '@app/app.constants';
 
 
-@Component({ 
+@Component({
   selector: 'page-create-product',
   templateUrl: 'create-product.html'
 })
-export class CreateProductPage { 
+export class CreateProductPage {
   /* Pages. */
   private qrModalPage: any = QrModalPage;
 
@@ -44,45 +45,45 @@ export class CreateProductPage {
     private storage: Storage,
     private toastService: ToastService,
     private translateService: TranslateService,
-    private scannerService : ScannerService,
+    private scannerService: ScannerService,
     private colorsService: ColorsService,
+    private events: Events,
     private productsService: ProductsService,
     private headquartersService: HeadquartersService) {
-      // Initialize form controls.
-      this.nameFormControl = new FormControl('', [
-        Validators.required,
-      ]);
-      this.brandFormControl = new FormControl('', [
-      ]);
-      this.colorFormControl = new FormControl('', [
-      ]);
-      this.amountFormControl = new FormControl('', [
-        Validators.required,
-        Validators.pattern(this.integerPattern)
-      ]);
-      this.valueFormControl = new FormControl('', [
-        Validators.required      
-      ]);
-      this.createProductFormGroup = new FormGroup({
-        nameFormControl: this.nameFormControl,
-        brandFormControl: this.brandFormControl,
-        colorFormControl: this.colorFormControl,
-        amountFormControl: this.amountFormControl,
-        valueFormControl: this.valueFormControl
-      });
+    // Initialize form controls.
+    this.nameFormControl = new FormControl('', [
+      Validators.required,
+    ]);
+    this.brandFormControl = new FormControl('', [
+    ]);
+    this.colorFormControl = new FormControl('', [
+    ]);
+    this.amountFormControl = new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.integerPattern)
+    ]);
+    this.valueFormControl = new FormControl('', [
+      Validators.required
+    ]);
+    this.createProductFormGroup = new FormGroup({
+      nameFormControl: this.nameFormControl,
+      brandFormControl: this.brandFormControl,
+      colorFormControl: this.colorFormControl,
+      amountFormControl: this.amountFormControl,
+      valueFormControl: this.valueFormControl
+    });
+    // Get colors.
+    this.getColors();
   }
 
-  ionViewDidLoad() {  
+  ionViewDidLoad() {
     this.storage.get('user_information').then(userInformation => {
       this.headquarterID = userInformation.user_metadata.headquarter.id;
     });
-
     // Initialize messages.
     this.translateService.get('PRODUCTS.SELECT_COLOR_MESSAGE').subscribe((response) => {
       this.selectColorMessage = response;
     });
-    // Get colors.
-    this.getColors();
   }
 
   goBack() {
@@ -126,7 +127,7 @@ export class CreateProductPage {
     var product = new Product();
     product.name = this.nameFormControl.value;
     product.brand = this.brandFormControl.value;
-    product.color = this.colorFormControl.value;
+    product.color = this.colorFormControl.value != this.selectColorMessage ? this.colorFormControl.value : '';
     product.price = +this.valueFormControl.value;
 
     this.productsService.createProduct(product).then(response => {
@@ -138,7 +139,7 @@ export class CreateProductPage {
       headquarterProduct.amount = +this.amountFormControl.value;
       /* console.log(JSON.stringify(headquarterProduct)); */
 
-      this.headquartersService.addProduct(this.headquarterID, headquarterProduct).then (response => {
+      this.headquartersService.addProduct(this.headquarterID, headquarterProduct).then(response => {
         this.toastService.showToast('PRODUCTS.CREATE_SUCCESS_MESSAGE');
         // Limpiamos el formulario.
         this.createProductFormGroup.reset();
@@ -146,15 +147,18 @@ export class CreateProductPage {
         var headquarterProductData = JSON.parse(response.data);
         // Build the qr code data.
         var qrData: any = {
-          product : productData,
-          headquarterProduct : headquarterProductData
+          product: productData,
+          headquarterProduct: headquarterProductData
         };
 
         this.scannerService.encode(qrData);
+
+        // Publish product created event.
+        this.events.publish(constants.topics.products.create, '');
       }).catch(error => {
         console.error(JSON.stringify(error));
         this.toastService.showDangerToast('PRODUCTS.CREATE_FAILURE_MESSAGE');
-      });      
+      });
     }).catch(error => {
       console.error(JSON.stringify(error));
       this.toastService.showDangerToast('PRODUCTS.CREATE_FAILURE_MESSAGE');
@@ -166,7 +170,7 @@ export class CreateProductPage {
   }
 
   public openQrModal(qrData: any) {
-    var data = { qr_data : qrData};
+    var data = { qr_data: qrData };
     var modalPage = this.modalCtrl.create(this.qrModalPage, data);
     modalPage.present();
   }

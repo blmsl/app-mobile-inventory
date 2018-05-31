@@ -15,7 +15,7 @@
 
 <ion-content class="no-scroll products-content">
   <ion-searchbar [(ngModel)]="name" [showCancelButton]="shouldShowCancel" placeholder="{{ 'COMMONS.SEARCH' | translate }}"
-    (ionInput)="getItems($event)"></ion-searchbar>
+    (ionInput)="getProducts()"></ion-searchbar>
 
   <ion-list class="filter-list">
 
@@ -27,7 +27,7 @@
 
     <ion-item class="filter-item">
       <ion-label>{{ 'PRODUCTS.PRODUCT_BRAND' | translate }} </ion-label>
-      <ion-select [(ngModel)]="brand" (ngModelChange)="getItems($event)" okText="{{ 'COMMONS.ACCEPT' | translate }}" cancelText="{{ 'COMMONS.CANCEL' | translate }}">
+      <ion-select [(ngModel)]="brand" (ngModelChange)="getProducts()" okText="{{ 'COMMONS.ACCEPT' | translate }}" cancelText="{{ 'COMMONS.CANCEL' | translate }}">
         <ion-option>{{ selectBrandMessage }}</ion-option>
         <ion-option *ngFor="let brand of brands">{{ brand }}</ion-option>
       </ion-select>
@@ -35,7 +35,7 @@
 
     <ion-item class="filter-item">
       <ion-label>{{ 'PRODUCTS.PRODUCT_COLOR' | translate }} </ion-label>
-      <ion-select [(ngModel)]="color" (ngModelChange)="getItems($event)" okText="{{ 'COMMONS.ACCEPT' | translate }}" cancelText="{{ 'COMMONS.CANCEL' | translate }}">
+      <ion-select [(ngModel)]="color" (ngModelChange)="getProducts()" okText="{{ 'COMMONS.ACCEPT' | translate }}" cancelText="{{ 'COMMONS.CANCEL' | translate }}">
         <ion-option>{{ selectColorMessage }}</ion-option>
         <ion-option *ngFor="let color of colors">{{ color.name }}</ion-option>
       </ion-select>

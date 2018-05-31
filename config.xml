@@ -81,8 +81,11 @@
     <allow-navigation href="http://192.168.0.17:8100" />
     <allow-navigation href="http://localhost:8100" />
     <allow-navigation href="http://192.168.1.65:8100" />
+    <allow-navigation href="http://192.168.1.55:8100" />
     <allow-navigation href="http://10.84.29.251:8100" />
-    <engine name="android" spec="~6.3.0" />
+    <allow-navigation href="http://192.168.1.65:8080" />
+    <engine name="android" spec="^6.3.0" />
+    <engine name="browser" spec="~5.0.3" />
     <plugin name="cordova-plugin-safariviewcontroller" spec="^1.5.3" />
     <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
         <variable name="URL_SCHEME" value="com.inventory.system" />
@@ -110,9 +113,9 @@
     <plugin name="cordova-sqlite-storage" spec="^2.3.1" />
     <plugin name="cordova-plugin-calllog" spec="^1.2.2" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
-    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.1.2">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <allow-navigation href="http://10.42.0.1:8100" />
 </widget>

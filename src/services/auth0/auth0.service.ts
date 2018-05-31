@@ -1,11 +1,13 @@
 import { Injectable, NgZone } from '@angular/core';
 import Auth0Cordova from '@auth0/cordova';
 import * as auth0 from 'auth0-js';
-import { Events } from 'ionic-angular';
 /** Services. */
 import { Storage } from '@ionic/storage';
-import { environment } from '@environments/environment';
+import { Events } from 'ionic-angular';
 import { ToastService } from '@services/toast/toast.service';
+/* Constants. */
+import { environment } from '@environments/environment';
+import { constants } from '@app/app.constants';
 
 const options = {
   clientID: environment.auth0.clientid,
@@ -44,7 +46,7 @@ export class Auth0Service {
     });
     this.storage.get('expires_at').then(expiresAt => {
       this.expiresAt = expiresAt;
-      this.events.publish('storage:opened', this.expiresAt);
+      this.events.publish(constants.topics.storage.ready, this.expiresAt);
     });
     this.storage.get('scopes').then(scopes => {
       this.scopes = scopes;
@@ -54,7 +56,7 @@ export class Auth0Service {
     });
     this.storage.get('customer_id').then(customerID => {
       this.customerID = customerID;
-      this.events.publish('cookies:put', 'customer_id=' + this.customerID);
+      this.events.publish(constants.topics.cookies.put, 'customer_id=' + this.customerID);
     });
   }
 
@@ -130,7 +132,7 @@ export class Auth0Service {
     /* console.log(expiresAt); */
     this.storage.set('expires_at', expiresAt);
     this.expiresAt = expiresAt;
-    this.events.publish('storage:opened', this.expiresAt);
+    this.events.publish(constants.topics.storage.ready, this.expiresAt);
     // Setup scopes.
     const scopes = authResult.scope || environment.auth0.scope || '';
     this.storage.set('scopes', JSON.stringify(scopes));
@@ -141,7 +143,7 @@ export class Auth0Service {
     // Set up customer_id.
     this.storage.set('customer_id', userInfo['https://inventory-system-mobile/customer_id']);
     this.customerID = userInfo['https://inventory-system-mobile/customer_id'];
-    this.events.publish('cookies:put', 'customer_id=' + this.customerID);
+    this.events.publish(constants.topics.cookies.put, 'customer_id=' + this.customerID);
   }
   /**
    * Perform the logout action.
@@ -165,7 +167,7 @@ export class Auth0Service {
     this.customerID = null;
 
     // Clear cookies.
-    this.events.publish('cookies:clear');
+    this.events.publish(constants.topics.cookies.clear);
   }
 
 }
