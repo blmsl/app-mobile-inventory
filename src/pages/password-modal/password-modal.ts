@@ -50,7 +50,7 @@ export class PasswordModalPage {
       this.closeModal();
     }).catch(error => {
       console.log(JSON.stringify(error));
-      this.toastService.showDangerToast('PROFILE.UPDATE_PASSWORD_FAILURE_MESSAGE');
+      this.toastService.showDangerToast('ERROR.PROFILE.ERROR_UPDATING_PASSWORD');
     });
   }
 }

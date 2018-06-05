@@ -25,7 +25,7 @@
     "INVENTORY_VALUE": "Valor del inventario",
     "REVENUE": "Ganancias",
     "ITEMS_WITH_LOW_COUNT": "Productos con pocas existencias",
-    "RANGE": "Rango",
+    "RANGE": "Rango de Fechas",
     "START_DATE": "Fecha de inicio",
     "END_DATE": "Fecha final"
   },
@@ -37,8 +37,7 @@
     "PASSWORD": "Contraseña",
     "REQUIRED_PASSWORD_MESSAGE": "La contraseña es requerida.",
     "MINLENGTH_PASSWORD_MESSAGE": "La contraseña debe tener minimo de 6 caracteres de logitud.",
-    "UPDATE_PASSWORD_SUCCESS_MESSAGE": "Se ha actualizado la contraseña.",
-    "UPDATE_PASSWORD_FAILURE_MESSAGE": "Lo sentimos, la contraseña no pudo ser actualizada."
+    "UPDATE_PASSWORD_SUCCESS_MESSAGE": "Se ha actualizado la contraseña."    
   },
   "PRODUCTS": {
     "PRODUCTS": "Productos",
@@ -53,11 +52,9 @@
     "PRODUCTS_EMPTY_MESSAGE": "No hay productos.",
     "PATTERN_AMOUNT_MESSAGE": "No has ingresado una cantidad valida.",
     "CREATE_SUCCESS_MESSAGE": "El producto ha sido creado correctamente.",
-    "CREATE_FAILURE_MESSAGE": "Lo sentimos, el producto no ha podido ser creado.",
     "SELECT_BRAND_MESSAGE": "Selecciona una marca",
     "SELECT_COLOR_MESSAGE": "Selecciona un color",
-    "UPDATE_PRODUCT_SUCCESS_MESSAGE": "El producto ha sido actualizado correctamente.",
-    "UPDATE_PRODUCT_FAILURE_MESSAGE": "Lo sentimos, el producto no ha sido actualizado."
+    "UPDATE_PRODUCT_SUCCESS_MESSAGE": "El producto ha sido actualizado correctamente."
   },
   "SCANN": {
     "SCANN": "Escanear",
@@ -69,12 +66,32 @@
     "SELL": "Vender",
     "ADD_PRODUCT": "Añadir producto",
     "DISCOUNT": "Descuento",
-    "PRODUCTS_EMPTY_MESSAGE": "No hay productos añadidos en la venta."
+    "PRODUCTS_EMPTY_MESSAGE": "No hay productos añadidos en la venta.",
+    "PRODUCT_ALREADY_ADDED" : "El producto ya se encuentra en la lista.",
+    "SUBTOTAL": "Subtotal",
+    "TOTAL": "Total"
   },
   "ERROR": {
     "ERROR_GENERAL": "Lo sentimos, algo ha salido mal.",
     "ERROR_CONNECTION": "Tu coneción a internet parece no estar disponible. La integridad de los datos no es garantizada.",
     "ERROR_AUTHORIZING": "No tienes permisos para ingresar al aplicativo.",
-    "ERROR_GETTING_USER_INFORMATION": "Lo sentimos, no se ha podido obtener tu información de perfil."
+    "ERROR_GETTING_USER_INFORMATION": "Lo sentimos, no se ha podido obtener tu información de perfil.",
+    "PROFILE": {
+      "ERROR_UPDATING_PASSWORD": "Lo sentimos, la contraseña no pudo ser actualizada."
+    },
+    "PRODUCTS": {
+      "ERROR_CREATING_PRODUCT": "Lo sentimos, el producto no ha podido ser creado.",
+      "ERROR_UPDATING_PRODUCT": "Lo sentimos, el producto no ha sido actualizado.",
+      "ERROR_GETTING_PRODUCT": "Lo sentimos, no se han podido recuperar el producto.",
+      "ERROR_GETTING_PRODUCTS": "Lo sentimos, no se han podido recuperar los productos.",
+      "ERROR_GETTING_BRANDS" : "Lo sentimos, no se han podido recuperar marcas."
+    },
+    "SCANN":{
+      "ERROR_SCANNING_QR_CODE": "Lo sentimos, el código no pudo ser escaneado."
+    },
+    "SELL": {
+      "ERROR_VALIDATING_STOCK": "El producto no tiene suficientes existencias.",
+      "ERROR_ADDING_PRODUCT": "Lo sentimos, el producto no pudo ser añadido."
+    }
   }
 }

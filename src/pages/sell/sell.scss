@@ -1,6 +1,38 @@
-.sell-content {
+.sell-content {    
+
+    .product {
+        button{
+            width: 30px;
+            height: 30px;
+        }
+
+        .product-control {
+            padding-right: 5%;
+        }
+    }    
+}
+
+.sell-footer {
     form {
         padding-top: 15px;
         margin-right: 15px;
+
+        ion-row {
+            margin-left: 10px;
+        }
     }
+
+    .sell-extract {
+        span {
+            margin-left: 20px;
+        }
+
+        .total {
+            span{
+                font-weight: bold;
+            }        
+        }
+    }
+
+    
 }

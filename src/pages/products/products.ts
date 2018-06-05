@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events } from 'ionic-angular';
+import { NavController, Events, ModalController } from 'ionic-angular';
 /* Services. */
 import { HeadquartersService } from '@services/headquarters/headquarters.service';
 import { Storage } from '@ionic/storage';
@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 /* Pages. */
 import { ProductDetailsPage } from '@pages/product-details/product-details';
 import { constants } from '@app/app.constants';
+import { SearchModalPage } from '@pages/search-modal/search-modal';
 
 @Component({
   selector: 'page-products',
@@ -18,6 +19,7 @@ import { constants } from '@app/app.constants';
 export class ProductsPage {
   // Pages.
   private productDetailsPage: any = ProductDetailsPage;
+  private searchModalPage: any = SearchModalPage;
 
   private filterVisible: boolean = false;
   /** Attributes. */
@@ -35,6 +37,7 @@ export class ProductsPage {
 
 
   constructor(public navCtrl: NavController,
+    private modalCtrl: ModalController,
     private storage: Storage,
     private toastService: ToastService,
     private translateService: TranslateService,
@@ -54,11 +57,16 @@ export class ProductsPage {
     // Get colors.
     this.getColors();
 
+    // Subscribe to update product event.
     this.events.subscribe(constants.topics.products.update, (value) => {
       // TODO: Optimize this.
       this.getProducts();
     });
-
+    // Subscribe to search product event.
+    this.events.subscribe(constants.topics.products.search, (value) => {
+      this.name = value;
+      this.getProducts();
+    });
   }
 
   ionViewDidLoad() {
@@ -69,28 +77,20 @@ export class ProductsPage {
     });
   }
 
-  private goToProduct(product: any) {
+  public goToProduct(product: any) {
     if (product) {
       this.navCtrl.push(this.productDetailsPage, { product: product });
-    }    
+    }
+  }
+
+  public openSearchModal() {
+    var data = { headquarterID: this.headquarterID };
+    var modalPage = this.modalCtrl.create(this.searchModalPage, data);
+    modalPage.present();
   }
 
   public filterDropdown(): any {
-    let items = document.getElementsByClassName('filter-item') as HTMLCollectionOf<HTMLElement>;;
-    if (items.length != 0) {
-      for (let i in items) {
-        if (!items[i] || !items[i].style) {
-          continue;
-        }
-        if (items[i].style.display === 'block') {
-          items[i].style.display = 'none';
-          this.filterVisible = false;
-        } else {
-          items[i].style.display = 'block'
-          this.filterVisible = true;
-        }
-      }
-    }
+    this.filterVisible = this.filterVisible? false : true;
   }
 
   private getProducts() {
@@ -105,10 +105,11 @@ export class ProductsPage {
       }
       catch (e) {
         console.error(JSON.stringify(e));
+        this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_GETTING_PRODUCTS');
       }
     }).catch(error => {
-      var err = JSON.parse(error);
-      this.toastService.showDangerToast(err.status);
+      console.log(JSON.stringify(error));
+      this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_GETTING_PRODUCTS');
     });
   }
 
@@ -121,10 +122,11 @@ export class ProductsPage {
       }
       catch (e) {
         console.error(JSON.stringify(e));
+        this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_GETTING_BRANDS');
       }
     }).catch(error => {
-      var err = JSON.parse(error);
-      this.toastService.showDangerToast(err.status);
+      console.log(JSON.stringify(error));
+      this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_GETTING_BRANDS');
     });
   }
 

@@ -15,38 +15,76 @@
 
 <ion-content class="sell-content">
 
-  <form [formGroup]="sellFormGroup">
-
-    <ion-item>
-      <ion-label fixed>{{ 'SELL.DISCOUNT' | translate }}</ion-label>
-      <ion-input type="number" id="productValue" formControlName="discountFormControl" [ngClass]="{'invalid':discountFormControl.errors 
-        && (discountFormControl.dirty || discountFormControl.touched)}"></ion-input>
-    </ion-item>
-    <ion-grid>
-      <ion-row *ngIf="discountFormControl.errors 
-          && (discountFormControl.dirty || discountFormControl.touched)">
-        <span *ngIf="discountFormControl.errors.required">
-          {{ 'COMMONS.REQUIRED_MESSAGE' | translate }}</span>
-      </ion-row>
-    </ion-grid>
-
-  </form>
-
   <ion-item-group>
+
+    <ion-item *ngFor="let product of products" class="product">
+      <ion-icon name="cube" item-start></ion-icon>
+
+      <ion-label>
+        {{ product.name }}
+        <p>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }} {{ product.price | currency:'COP' }}</p>
+      </ion-label>
+
+      <div item-content class="product-control">
+        <button ion-button medium (click)="decreaseAmount(product)">
+          <ion-icon name="remove"></ion-icon>
+        </button>
+        <span>
+          {{ product.amount_}}
+        </span>
+        <button ion-button medium (click)="increaseAmount(product)">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+
+      <button ion-button medium item-end color="danger" (click)="removeProduct(product)">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-item>
 
     <ion-item *ngIf="!products || products.length == 0" text-center>
       {{ 'SELL.PRODUCTS_EMPTY_MESSAGE' | translate}}
     </ion-item>
+
   </ion-item-group>
 
   <div text-center>
-    <button ion-button icon-left>
+    <button ion-button icon-left (click)="addProduct()">
       <ion-icon name="add"></ion-icon>
       {{ 'SELL.ADD_PRODUCT' | translate }}</button>
   </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="sell-footer">
+  <form [formGroup]="sellFormGroup">
+
+    <ion-item>
+      <ion-label fixed>{{ 'SELL.DISCOUNT' | translate }}</ion-label>
+      <ion-input type="number" id="productValue" formControlName="discountFormControl" (input)="calculateExtract()" [ngClass]="{'invalid':discountFormControl.errors 
+            && (discountFormControl.dirty || discountFormControl.touched)}"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row *ngIf="discountFormControl.errors 
+              && (discountFormControl.dirty || discountFormControl.touched)">
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+  <ion-item-group class="sell-extract">
+    <ion-item text-right>
+      {{ 'SELL.SUBTOTAL' | translate}}
+      <span>{{ subtotal | currency:'COP' }}</span>
+    </ion-item>
+    <ion-item text-right>
+      {{ 'SELL.DISCOUNT' | translate}}
+      <span>{{ discount | currency:'COP' }}</span>
+    </ion-item>
+    <ion-item text-right class="total">
+      {{ 'SELL.TOTAL' | translate}}
+      <span>{{ total | currency:'COP' }}</span>
+    </ion-item>
+  </ion-item-group>
   <!-- Create products. -->
   <button ion-button full large icon-left (click)="sell()">
     <ion-icon name="logo-usd"></ion-icon>

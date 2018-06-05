@@ -13,19 +13,35 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content class="dashboard-content">
+
+  <ion-item-group class="filter-list">
+    <!-- Range -->
+    <ion-item-divider class="filter-header" (click)="rangeDropdown()">
+      {{ 'DASHBOARD.RANGE' | translate }}
+      <ion-icon name="arrow-dropdown" item-end *ngIf="!rangeVisible"></ion-icon>
+      <ion-icon name="arrow-dropup" item-end *ngIf="rangeVisible"></ion-icon>
+    </ion-item-divider>
+    <ion-item *ngIf="rangeVisible">
+      <ion-label>{{ 'DASHBOARD.START_DATE' | translate }}</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY"
+      [(ngModel)]="fromDate"
+      max = "{{ toDate }}"
+      doneText="{{ 'COMMONS.ACCEPT' | translate }}"
+      cancelText="{{ 'COMMONS.CANCEL' | translate }}"></ion-datetime>
+    </ion-item>
+    <ion-item *ngIf="rangeVisible">
+      <ion-label>{{ 'DASHBOARD.END_DATE' | translate }}</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY"
+      [(ngModel)]="toDate"
+      min = "{{ fromDate }}"
+      max = "{{ today }}"
+      doneText="{{ 'COMMONS.ACCEPT' | translate }}"
+      cancelText="{{ 'COMMONS.CANCEL' | translate }}"></ion-datetime>
+    </ion-item>
+  </ion-item-group>
 
   <ion-item-group>
-    <!-- Range -->
-    <ion-item-divider>{{ 'DASHBOARD.RANGE' | translate }}</ion-item-divider>
-    <ion-item>
-      <ion-label>{{ 'DASHBOARD.START_DATE' | translate }}</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>{{ 'DASHBOARD.END_DATE' | translate }}</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY"></ion-datetime>
-    </ion-item>
 
     <!--Extract-->
     <ion-item-divider>{{ 'DASHBOARD.EXTRACT' | translate }}</ion-item-divider>
@@ -45,11 +61,11 @@
     </ion-item>
 
     <!--Alerts-->
-    <ion-item-divider>{{ 'DASHBOARD.ALERTS' | translate }}</ion-item-divider>
+    <!-- <ion-item-divider>{{ 'DASHBOARD.ALERTS' | translate }}</ion-item-divider>
     <ion-item>
       <ion-icon name="warning" item-start></ion-icon>
       {{ 'DASHBOARD.ITEMS_WITH_LOW_COUNT' | translate }}
-    </ion-item>
+    </ion-item> -->
 
   </ion-item-group>
 

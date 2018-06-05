@@ -147,8 +147,13 @@ export class CreateProductPage {
         var headquarterProductData = JSON.parse(response.data);
         // Build the qr code data.
         var qrData: any = {
-          product: productData,
-          headquarterProduct: headquarterProductData
+          product_id: +productData.id,
+          name: productData.name,
+          brand: productData.brand,
+          color: productData.color,
+          price: +productData.price,
+          headquarter_id: +headquarterProductData.headquarter_id,
+          amount: +headquarterProductData.amount
         };
 
         this.scannerService.encode(qrData);
@@ -157,11 +162,11 @@ export class CreateProductPage {
         this.events.publish(constants.topics.products.create, '');
       }).catch(error => {
         console.error(JSON.stringify(error));
-        this.toastService.showDangerToast('PRODUCTS.CREATE_FAILURE_MESSAGE');
+        this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_CREATING_PRODUCT');
       });
     }).catch(error => {
       console.error(JSON.stringify(error));
-      this.toastService.showDangerToast('PRODUCTS.CREATE_FAILURE_MESSAGE');
+      this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_CREATING_PRODUCT');
     });
   }
 

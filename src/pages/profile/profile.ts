@@ -47,9 +47,8 @@ export class ProfilePage {
   }
 
   public openUpdatePasswordModal() {
-    var data = { sub : this.sub };
-    var modalPage = this.modalCtrl.create(
-      this.passwordModalPage, data);
+    var data = { sub: this.sub };
+    var modalPage = this.modalCtrl.create(this.passwordModalPage, data);
     modalPage.present();
   }
 }

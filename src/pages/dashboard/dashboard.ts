@@ -10,6 +10,7 @@ import { SellPage } from '@pages/sell/sell';
 import { CreateProductPage } from '@pages/create-product/create-product';
 import { TranslateService } from '@ngx-translate/core';
 import { constants } from '@app/app.constants';
+import { ProductDetailsPage } from '@pages/product-details/product-details';
 
 @Component({
   selector: 'page-dashboard',
@@ -19,11 +20,18 @@ export class DashboardPage {
   // Pages.
   private createProductPage: any = CreateProductPage;
   private sellPage: any = SellPage;
+  private productDetailsPage: any = ProductDetailsPage;
 
   /** Attributes. */
   private total: number;
   private price: number;
   private headquarterID: number;
+
+  public rangeVisible: boolean = false;
+  public today: string = new Date().toISOString();
+  public fromDate: string = new Date().toISOString();
+  public toDate: string = new Date().toISOString();
+  
   constructor(public navCtrl: NavController,
     private events: Events,
     private storage: Storage,
@@ -43,6 +51,11 @@ export class DashboardPage {
       this.getProducts();
     });
   }
+
+  public rangeDropdown(): any {
+    this.rangeVisible = this.rangeVisible ? false : true;
+  }
+
   /** Build a navigation stack from the current root page. */
   pushPage(page: any, params?: any) {
     if (!page) {
@@ -56,13 +69,22 @@ export class DashboardPage {
       this.translateService.get('SCANN.SCANN_MESSAGE').subscribe((response) => {
         this.scannerService.scann(response).then((data) => {
           var params = JSON.parse(data.text);
-          this.pushPage(null, params);
+
+          this.goToProduct(params);
         }, (error) => {
           console.log(JSON.stringify(error));
+          this.toastService.showDangerToast('ERROR.SCANN.ERROR_SCANNING_QR_CODE');
         });
       });
     } catch (e) {
       console.log(JSON.stringify(e));
+      this.toastService.showDangerToast('ERROR.SCANN.ERROR_SCANNING_QR_CODE');
+    }
+  }
+
+  private goToProduct(product: any) {
+    if (product) {
+      this.navCtrl.push(this.productDetailsPage, { product: product });
     }
   }
 
@@ -76,10 +98,10 @@ export class DashboardPage {
       }
       catch (e) {
         console.error(JSON.stringify(e));
-        this.toastService.showDangerToast('ERROR.ERROR_GENERAL');
+        this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_GETTING_PRODUCTS');
       }
     }).catch(error => {
-      this.toastService.showDangerToast(error.status);
+      this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_GETTING_PRODUCTS');
     });
   }
 }

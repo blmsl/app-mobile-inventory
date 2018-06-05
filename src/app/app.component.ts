@@ -69,7 +69,10 @@ export class MyApp {
         }
       });
 
-      this.statusBar.styleDefault();
+      // Style for dark backgrounds.
+      this.statusBar.styleBlackOpaque();
+      /* this.statusBar.overlaysWebView(false); */
+      // Hode the splash screen.
       this.splashScreen.hide();
 
       // Set up URL redirects.

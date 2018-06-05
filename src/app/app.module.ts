@@ -25,6 +25,7 @@ import { PasswordModalPage } from '@pages/password-modal/password-modal';
 import { QrModalPage } from '@pages/qr-modal/qr-modal';
 import { SellPage } from '@pages/sell/sell';
 import { ProductDetailsPage } from '@pages/product-details/product-details';
+import { SearchModalPage } from '@pages/search-modal/search-modal';
 /** Services. */
 import { Camera } from '@ionic-native/camera';
 import { HTTP } from '@ionic-native/http';
@@ -53,6 +54,7 @@ import { CurrencyPipe } from '@angular/common';
     QrModalPage,
     SellPage,
     ProductDetailsPage,
+    SearchModalPage,
     LetterAvatarDirective
   ],
   imports: [
@@ -84,7 +86,8 @@ import { CurrencyPipe } from '@angular/common';
     PasswordModalPage,
     QrModalPage,
     SellPage,
-    ProductDetailsPage
+    ProductDetailsPage,
+    SearchModalPage
   ],
   providers: [
     Auth0Service,

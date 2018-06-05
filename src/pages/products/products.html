@@ -6,18 +6,23 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
+
     <ion-title>
       {{ 'PRODUCTS.PRODUCTS' | translate }}
     </ion-title>
+
+    <ion-buttons right>
+      <button ion-button (click)="openSearchModal()" icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>
 
 <ion-content class="no-scroll products-content">
-  <ion-searchbar [(ngModel)]="name" [showCancelButton]="shouldShowCancel" placeholder="{{ 'COMMONS.SEARCH' | translate }}"
-    (ionInput)="getProducts()"></ion-searchbar>
 
-  <ion-list class="filter-list">
+  <ion-item-group class="filter-list">
 
     <ion-item-divider class="filter-header" (click)="filterDropdown()">
       {{ 'PRODUCTS.FILTERS' | translate }}
@@ -25,7 +30,7 @@
       <ion-icon name="arrow-dropup" item-end *ngIf="filterVisible"></ion-icon>
     </ion-item-divider>
 
-    <ion-item class="filter-item">
+    <ion-item *ngIf="filterVisible">
       <ion-label>{{ 'PRODUCTS.PRODUCT_BRAND' | translate }} </ion-label>
       <ion-select [(ngModel)]="brand" (ngModelChange)="getProducts()" okText="{{ 'COMMONS.ACCEPT' | translate }}" cancelText="{{ 'COMMONS.CANCEL' | translate }}">
         <ion-option>{{ selectBrandMessage }}</ion-option>
@@ -33,7 +38,7 @@
       </ion-select>
     </ion-item>
 
-    <ion-item class="filter-item">
+    <ion-item *ngIf="filterVisible">
       <ion-label>{{ 'PRODUCTS.PRODUCT_COLOR' | translate }} </ion-label>
       <ion-select [(ngModel)]="color" (ngModelChange)="getProducts()" okText="{{ 'COMMONS.ACCEPT' | translate }}" cancelText="{{ 'COMMONS.CANCEL' | translate }}">
         <ion-option>{{ selectColorMessage }}</ion-option>
@@ -41,7 +46,7 @@
       </ion-select>
     </ion-item>
 
-  </ion-list>
+  </ion-item-group>
 
   <ion-item-divider>
     {{ 'PRODUCTS.PRODUCTS' | translate }}
@@ -51,10 +56,14 @@
 
       <ion-item *ngFor="let product of products">
         <ion-icon name="cube" item-start></ion-icon>
-        <h2>{{ product.name }}</h2>
-        <p>{{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }} {{ product.amount }}</p>
-        <p>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }} {{ product.price | currency:'COP' }}</p>
-        <button ion-button item-end (click)="goToProduct(product)">{{ 'COMMONS.SEE' | translate }}</button>
+        <ion-label>
+          {{ product.name }}
+          <p>{{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }} {{ product.amount }}</p>
+          <p>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }} {{ product.price | currency:'COP' }}</p>
+        </ion-label>
+        <button ion-button item-end (click)="goToProduct(product)">
+          {{ 'COMMONS.SEE' | translate }}
+        </button>
       </ion-item>
 
       <ion-item *ngIf="!products || products.length == 0" text-center>

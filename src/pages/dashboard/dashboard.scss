@@ -1,17 +1,27 @@
+.dashboard-content {
+    .filter-list {
+        margin-bottom: 0px;
+        .filter-header {
+            height: 45px;
+            ion-icon {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
 .button-bar {
- text-align: center;
- background-color: color($colors, 'primary');
- padding: 0px;
- 
- ion-col {
-  padding: 0px;
- }
- 
- button {
-  background-color: transparent;
-  box-shadow: none;
-  margin: 0px;
-  height: 3.8em;
-  text-transform: capitalize; 
- }
+    text-align: center;
+    background-color: color($colors, 'primary');
+    padding: 0px;
+    ion-col {
+        padding: 0px;
+    }
+    button {
+        background-color: transparent;
+        box-shadow: none;
+        margin: 0px;
+        height: 3.8em;
+        text-transform: capitalize;
+    }
 }

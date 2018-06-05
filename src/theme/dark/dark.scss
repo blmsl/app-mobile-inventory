@@ -1,84 +1,74 @@
 @import "./ionic.globals";
-
 // Dark theme.
 // ----------------------------------------
-
-$text-color:                 #DADFE1 !default;
-$link-color:                 color($colors, primary) !default;
-$background-color:           #363232 !default;
-$subdued-text-color:         #666 !default;
-
-$font-family-base:            "Helvetica Neue", "Roboto", sans-serif !default;
-$font-size-base:             1.4rem !default; // 1.4rem == 14px
-
-$content-padding:            16px !default;
-$content-margin:             16px !default;
-
+$text-color : #DADFE1 !default;
+$link-color : color($colors, primary) !default;
+$background-color : #363232 !default;
+$subdued-text-color : #666 !default;
+$font-family-base : "Helvetica Neue",
+"Roboto",
+sans-serif !default;
+$font-size-base : 1.4rem !default; // 1.4rem == 14px
+$content-padding : 16px !default;
+$content-margin : 16px !default;
 $content-outer-background: #000;
-
-$toolbar-background:         #434343 !default;
-$toolbar-border-color:       #434343 !default;
-
-$toolbar-active-color:       $link-color !default;
-$toolbar-inactive-color:     #8c8c8c !default;
-
-$tabs-background:            $toolbar-background !default;
-$tabs-border-color:          $toolbar-border-color !default;
-$tabs-tab-color-inactive:    #8c8c8c !default;
-$tabs-tab-color-active:      $link-color !default;
-
-$list-text-color:            $text-color !default;
-$list-background-color:      #242424 !default;
-$list-border-color:          #4C4C4C !default;
-$list-header-color:          $text-color !default;
+$toolbar-background : #434343 !default;
+$toolbar-border-color : #434343 !default;
+$toolbar-active-color : $link-color !default;
+$toolbar-inactive-color : #8c8c8c !default;
+$tabs-background : $toolbar-background !default;
+$tabs-border-color : $toolbar-border-color !default;
+$tabs-tab-color-inactive : #8c8c8c !default;
+$tabs-tab-color-active : $link-color !default;
+$list-text-color : $text-color !default;
+$list-background-color : #242424 !default;
+$list-border-color : #4C4C4C !default;
+$list-header-color : $text-color !default;
 $list-activated-background-color: #656565 !default;
-
-$card-text-color:           $text-color !default;
-
+$card-text-color : $text-color !default;
 $item-divider-color: $text-color !default;
 $item-divider-background: color($colors, dark) !default;
-
 ion-item {
-  background: transparent !important;
+    background: transparent !important;
 }
 
 $toast-background: color($colors, dark) !default;
-
 $tabs-tab-color-inactive: #808080 !default;
 
 $searchbar-input-text-color: #bdc3c7 !default;
 $searchbar-input-placeholder-color: #A3A8AC !default;
 $searchbar-input-background-color: #313131 !default;
+$searchbar-input-search-icon-color: white !default;
+$searchbar-input-clear-icon-color: white !default;
 
 $toggle-background-color-off:#696969 !default;
-$toggle-background-color-on:#eeae15 !default;
+$toggle-background-color-on: color($colors, secondary) !default;
 
 $alert-background: $toolbar-background !default;
-$alert-button-background-color-activated: lighten($alert-background,30%) !default;
+$alert-button-background-color-activated: lighten($alert-background, 30%) !default;
 $alert-message-text-color: $text-color !default;
 $alert-input-background-color: #bdc3c7 !default;
 $alert-input-text-color: color($colors, dark) !default;
-
 $alert-md-radio-label-text-color: white !default;
 $alert-md-radio-border-color-off: white !default;
-$radio-md-color-off: white !default;
 
+$radio-md-color-off: white !default;
 ::-webkit-scrollbar {
-  background-color: $toolbar-background;
-  }
+    background-color: $toolbar-background;
+}
 
 ::-webkit-scrollbar-thumb {
-  background-color:#696969;
-  }
+    background-color: #696969;
+}
 
 .alert-input {
-  color: $alert-input-text-color;
-  background-color: $alert-input-background-color;
+    color: $alert-input-text-color;
+    background-color: $alert-input-background-color;
 }
 
 body {
-  /*background-color: $background-color;*/
-  color: $text-color;
+    /*background-color: $background-color;*/
+    color: $text-color;
 }
 
 @import "./dark.platforms.scss"

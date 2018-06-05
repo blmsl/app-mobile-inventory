@@ -32,13 +32,9 @@
   <!-- Settings. -->
   <ion-item-divider>{{ 'PROFILE.SETTINGS' | translate }}</ion-item-divider>
 
-  <ion-item>
-    <button ion-button icon-start full clear text-start class="setting-button" (click)="openUpdatePasswordModal()">
-      <ion-icon name="key"></ion-icon>
-      {{ 'PROFILE.CHANGE_PASSWORD' | translate }}
-    </button>
-  </ion-item>
-
-
+  <button ion-item icon-start full clear text-start (click)="openUpdatePasswordModal()">
+    <ion-icon name="key"></ion-icon>
+    {{ 'PROFILE.CHANGE_PASSWORD' | translate }}
+  </button>
 
 </ion-content>

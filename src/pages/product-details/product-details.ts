@@ -70,6 +70,7 @@ export class ProductDetailsPage {
         // Get params.
         this.product = this.navParams.get('product');
         /* console.log(JSON.stringify(this.product)); */
+        this.getProduct();
     }
 
     ionViewDidLoad() {
@@ -81,14 +82,15 @@ export class ProductDetailsPage {
         this.navCtrl.pop();
     }
 
-    private visualizingMode() {
+    private visualizingMode() {        
+        // Disable form.
+        this.updateProductFormGroup.disable();
+        // Mark controls as untouched.
         this.nameFormControl.markAsUntouched();
         this.brandFormControl.markAsUntouched();
         this.colorFormControl.markAsUntouched();
         this.amountFormControl.markAsUntouched();
         this.valueFormControl.markAsUntouched();
-        // Disable form.
-        this.updateProductFormGroup.disable();
         this.editing = false;
         // Load product.
         this.loadProduct();
@@ -112,6 +114,30 @@ export class ProductDetailsPage {
         this.valueFormControl.setValue(this.product.price);
     }
 
+    getProduct() {
+        // Promises.
+        var promises: any[] = [];
+        // Get product information.
+        promises.push(this.productsService.getProduct(this.product.product_id));
+        // Get existences.
+        promises.push(this.headquartersService.getProduct(this.product.headquarter_id, this.product.product_id));
+        // Do calls.
+        Promise.all(promises).then(values => {
+            /* console.log(JSON.stringify(values)); */
+            // Fetch the values ​​according to the order in which the promises were added.
+            var pr = JSON.parse(values[0].data);
+            var hpr = JSON.parse(values[1].data);
+
+            // Update product.
+            this.updateProduct_(pr, hpr);
+            this.loadProduct();
+        }, error => {
+            console.log(JSON.stringify(error));
+            this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_GETTING_PRODUCT');
+            this.goBack();
+        });
+    }
+
     updateProduct() {
         // Promises.
         var promises: any[] = [];
@@ -125,9 +151,9 @@ export class ProductDetailsPage {
         promises.push(this.productsService.updateProduct(this.product.product_id, pr));
 
         // Update existences.
-        var prHeadquarter: HeadquarterProduct = new HeadquarterProduct();
-        prHeadquarter.amount = +this.amountFormControl.value;
-        promises.push(this.headquartersService.updateProduct(this.product.headquarter_id, this.product.product_id, prHeadquarter));
+        var hpr: HeadquarterProduct = new HeadquarterProduct();
+        hpr.amount = +this.amountFormControl.value;
+        promises.push(this.headquartersService.updateProduct(this.product.headquarter_id, this.product.product_id, hpr));
 
         // Execute calls.
         Promise.all(promises).then(values => {
@@ -135,20 +161,24 @@ export class ProductDetailsPage {
             // Visualizing mode.
             this.visualizingMode();
             // Update product data for consistency.
-            this.product.name = pr.name;
-            this.product.brand = pr.brand;
-            this.product.color = pr.color;
-            this.product.price = +pr.price;
-            this.product.amount = +prHeadquarter.amount;
+            this.updateProduct_(pr, hpr);
             // Reload product.
             this.loadProduct();
             // TODO: Publish event for products page reload.
             this.events.publish(constants.topics.products.update, '');
         }, error => {
             console.log(JSON.stringify(error));
-            this.toastService.showDangerToast('PRODUCTS.UPDATE_PRODUCT_FAILURE_MESSAGE');
+            this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_UPDATING_PRODUCT');
             // Reload product.
             this.loadProduct();
         });        
+    }
+
+    private updateProduct_(pr: Product, hpr: HeadquarterProduct) {
+        this.product.name = pr.name;
+        this.product.brand = pr.brand;
+        this.product.color = pr.color;
+        this.product.price = +pr.price;
+        this.product.amount = +hpr.amount;
     }
 }

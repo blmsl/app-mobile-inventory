@@ -9,7 +9,8 @@ export const constants = {
         },
         products : {
             create : 'products:create',
-            update : 'products:update'
+            update : 'products:update',
+            search : 'products:search'
         }
     }
 }
