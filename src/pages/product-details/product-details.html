@@ -25,6 +25,7 @@
   <ion-item-group>
     <ion-item-divider>
       {{ 'PRODUCTS.PRODUCT' | translate }} {{ 'COMMONS.NUMERAL' | translate }} {{ product.product_id }}
+      <button ion-button item-end (click)="seeQR()" >{{ 'PRODUCTS.SEE_QR' | translate }}</button>
     </ion-item-divider>
   </ion-item-group>
 

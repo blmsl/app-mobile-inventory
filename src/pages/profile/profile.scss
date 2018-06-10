@@ -11,8 +11,10 @@
     .profile-avatar-container {
         padding-top: 20px;
         padding-bottom: 15px;
-        background: color($colors, primary) !important;
+        background: #242424 !important;
         color: white !important;
+        font-weight: bold;
+        border-bottom: 1px solid #4C4C4C !important;
 
         ion-avatar {
             img {

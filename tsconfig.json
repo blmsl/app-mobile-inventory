@@ -3,7 +3,7 @@
     "baseUrl": "./src",
     "paths": {
       "@node_modules/*": ["../node_modules/*"],
-      "@environments/*": ["environments/*"],
+      "@env": [ "environments/environment" ],
       "@app/*": ["app/*"],
       "@pages/*": ["pages/*"],
       "@guards/*": ["guards/*"],

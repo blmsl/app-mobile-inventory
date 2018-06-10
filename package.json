@@ -9,8 +9,7 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve",
-    "start": "ionic serve --host $IP --port 8080 --public $C9_HOSTNAME --address $IP --dev-logger-port 8081 --livereload-port 8082"
+    "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
     "@angular/common": "5.0.3",

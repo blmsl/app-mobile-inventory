@@ -16,14 +16,24 @@
     <ion-item-group>
         <ion-item-divider>
             {{ 'BILLS.BILL' | translate }} {{ 'COMMONS.NUMERAL' | translate }} {{ bill.id }}
+            <button ion-button item-end >{{ 'COMMONS.PDF' | translate }}</button>
         </ion-item-divider>
 
         <ion-item>
             <ion-label>
-                {{ 'BILLS.CREATED' | translate }}
+                {{ 'COMMONS.DATE' | translate }}
             </ion-label>
             <div item-content>
                 {{ bill.created | date: 'mediumDate' }}
+            </div>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                {{ 'COMMONS.HOUR' | translate }}
+            </ion-label>
+            <div item-content>
+                {{ bill.created | date: 'shortTime' }}
             </div>
         </ion-item>
 
@@ -68,8 +78,7 @@
             <ion-col col-2 text-center class="bill-detail-icon">
                 <ion-icon name="cube"></ion-icon>
             </ion-col>
-            <ion-col col-10 class="bill-detail-col"
-                [ngClass]="{'bill-detail-col-last': i == bill.sales.length - 1}" >
+            <ion-col col-10 class="bill-detail-col" [ngClass]="{'bill-detail-col-last': i == bill.sales.length - 1}">
                 <ion-grid>
                     <ion-row>
                         <ion-col col-4 text-nowrap>

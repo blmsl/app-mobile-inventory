@@ -16,7 +16,10 @@
     "ACCEPT": "Aceptar",
     "SEARCH": "Buscar",
     "SEE": "Ver",
-    "NUMERAL": "No."
+    "NUMERAL": "No.",
+    "DATE" : "Fecha ",
+    "HOUR": "Hora ",
+    "PDF": "PDF"
   },
   "DASHBOARD": {
     "DASHBOARD": "Dashboard",
@@ -55,7 +58,8 @@
     "CREATE_SUCCESS_MESSAGE": "El producto ha sido creado correctamente.",
     "SELECT_BRAND_MESSAGE": "Selecciona una marca",
     "SELECT_COLOR_MESSAGE": "Selecciona un color",
-    "UPDATE_PRODUCT_SUCCESS_MESSAGE": "El producto ha sido actualizado correctamente."
+    "UPDATE_PRODUCT_SUCCESS_MESSAGE": "El producto ha sido actualizado correctamente.",
+    "SEE_QR": "Ver QR"
   },
   "SCANN": {
     "SCANN": "Escanear",
@@ -74,10 +78,9 @@
     "CREATE_SUCCESS_MESSAGE": "La venta se ha registrado con exito."
   },
   "BILLS": {
-    "BILLS": "Facturas",
-    "BILL": "Factura",    
+    "BILLS": "Ventas",
+    "BILL": "Venta",    
     "BILL_DETAILS" : "Detalles",
-    "CREATED" : "Fecha ",
     "BILLS_EMPTY_MESSAGE": "No hay ventas."
   },
   "ERROR": {

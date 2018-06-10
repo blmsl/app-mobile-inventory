@@ -28,7 +28,7 @@
         <ion-item *ngFor="let bill of bills">
             <ion-icon name="paper" item-start></ion-icon>
             <ion-label>
-                {{ 'BILLS.BILL' | translate }} {{ 'BILLS.NUMERAL' | translate }} {{ bill.id }}
+                {{ 'BILLS.BILL' | translate }} {{ 'COMMONS.NUMERAL' | translate }} {{ bill.id }}
                 <p>{{ bill.created | date: 'mediumDate' }}</p>
             </ion-label>
             <button ion-button item-end (click)="goToBill(bill)">

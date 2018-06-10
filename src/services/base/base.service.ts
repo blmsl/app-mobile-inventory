@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@environments/environment';
+import { environment } from '@env';
 /* Services. */
 import { HTTP, HTTPResponse } from '@ionic-native/http';
 import { Events } from 'ionic-angular';

@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
 import { ToastService } from '@services/toast/toast.service';
 /* Constants. */
-import { environment } from '@environments/environment';
+import { environment } from '@env';
 import { constants } from '@app/app.constants';
 
 const options = {

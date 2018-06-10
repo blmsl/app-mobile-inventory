@@ -37,15 +37,16 @@ ion-menu {
        }
    }
     button.item.item-block.item-md.active {
-        color: color($colors, primary);
+        background: color($colors, primary) !important;
    }
     ion-content {
         ion-list {
             button.first-item {
                 padding-top: 20px;
                 padding-bottom: 15px;
-                background: color($colors, primary) !important;
                 color: white !important;
+                font-weight: bold;
+                border-bottom: 1px solid #4C4C4C !important;
            }
        }
    }

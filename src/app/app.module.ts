@@ -10,7 +10,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 export function getTranslateFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-import { LetterAvatarDirective } from '@node_modules/angular2-letter-avatar/directives/letter-avatar.directive';
 import { IonicStorageModule } from '@ionic/storage';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 /** Components. */
@@ -56,7 +55,6 @@ import { CurrencyPipe } from '@angular/common';
     CreateBillPage,
     ProductDetailsPage,
     SearchModalPage,
-    LetterAvatarDirective,
     BillsPage,
     BillDetailsPage
   ],

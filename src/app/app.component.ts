@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import Auth0Cordova from '@auth0/cordova';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { environment } from '@environments/environment';
+import { environment } from '@env';
 /** Pages */
 import { IndexPage } from '../pages/index/index';
 import { DashboardPage } from '../pages/dashboard/dashboard';
@@ -16,7 +16,6 @@ import { Storage } from '@ionic/storage';
 import { Auth0Service } from '@services/auth0/auth0.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Events } from 'ionic-angular';
-import { ToastService } from '@services/toast/toast.service';
 import { constants } from '@app/app.constants';
 
 
@@ -41,9 +40,7 @@ export class MyApp {
     private statusBar: StatusBar, private splashScreen: SplashScreen,
     private androidPermissions: AndroidPermissions,
     private events: Events,
-    private storage: Storage,
-    /* private network: Network, */
-    private toastService: ToastService) {
+    private storage: Storage) {
 
     // On platform ready...
     this.platform.ready().then(() => {

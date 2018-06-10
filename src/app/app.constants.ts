@@ -11,6 +11,9 @@ export const constants = {
             create : 'products:create',
             update : 'products:update',
             search : 'products:search'
+        },
+        bills: {
+            create : 'bills:create'
         }
     }
 }

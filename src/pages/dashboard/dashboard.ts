@@ -18,20 +18,21 @@ import { ProductDetailsPage } from '@pages/product-details/product-details';
 })
 export class DashboardPage {
   // Pages.
-  private createProductPage: any = CreateProductPage;
-  private createBillPage: any = CreateBillPage;
-  private productDetailsPage: any = ProductDetailsPage;
+  public createProductPage: any = CreateProductPage;
+  public createBillPage: any = CreateBillPage;
+  public productDetailsPage: any = ProductDetailsPage;
 
   /** Attributes. */
   private total: number;
   private price: number;
+  private revenue: number;
   private headquarterID: number;
 
   public rangeVisible: boolean = false;
   public today: string = new Date().toISOString();
   public fromDate: string = new Date().toISOString();
   public toDate: string = new Date().toISOString();
-  
+
   constructor(public navCtrl: NavController,
     private events: Events,
     private storage: Storage,
@@ -43,12 +44,17 @@ export class DashboardPage {
       // TODO: Optimize this.
       this.getProducts();
     });
+    this.events.subscribe(constants.topics.bills.create, (value) => {
+      // TODO: Optimize this.
+      this.getBills();
+    });
   }
 
   ionViewDidLoad() {
     this.storage.get('user_information').then(userInformation => {
       this.headquarterID = userInformation.user_metadata.headquarter.id;
       this.getProducts();
+      this.getBills();
     });
   }
 
@@ -102,6 +108,23 @@ export class DashboardPage {
       }
     }).catch(error => {
       this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_GETTING_PRODUCTS');
+    });
+  }
+
+  public getBills() {
+    this.headquartersService.getBills(this.headquarterID, this.fromDate, this.toDate).then(response => {
+      try {
+        /* console.log(JSON.stringify(response.data)); */
+        var data = JSON.parse(response.data);
+        this.revenue = data.revenue;
+      }
+      catch (e) {
+        console.error(JSON.stringify(e));
+        this.toastService.showDangerToast('ERROR.SALES.ERROR_GETTING_BILLS');
+      }
+    }).catch(error => {
+      console.error(JSON.stringify(error));
+      this.toastService.showDangerToast('ERROR.SELL.ERROR_GETTING_BILLS');
     });
   }
 }

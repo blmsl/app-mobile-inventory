@@ -47,7 +47,7 @@ export class BillsPage {
 
         this.headquartersService.getBills(this.headquarterID, from.toISOString(), to.toISOString()).then(response => {
             try {
-                console.log(JSON.stringify(response.data));
+                /* console.log(JSON.stringify(response.data)); */
                 var data = JSON.parse(response.data);
                 this.bills = data.bills;
             }

@@ -7,6 +7,7 @@ var useDefaultConfig = require('@ionic/app-scripts/config/webpack.config.js');
 var env = process.env.IONIC_ENV;
 
 function environmentPath(env) {
+  console.log('IONIC_ENV: ' + env);
   // Default to dev config.
   if (!env) {
     env = 'dev';
@@ -19,13 +20,8 @@ function environmentPath(env) {
   }
 }
 
-module.exports = function () {
-  return useDefaultConfig;
-};
-
 useDefaultConfig[env].resolve.alias = {
-  "@environments": path.resolve('./src/environments/'),
-  "@env": path.resolve(environmentPath()),
+  "@env": path.resolve(environmentPath(env)),
   "@app": path.resolve('./src/app/'),
   "@assets": path.resolve('./src/assets/'),  
   "@pages": path.resolve('./src/pages/'),
@@ -35,4 +31,8 @@ useDefaultConfig[env].resolve.alias = {
   "@pipes": path.resolve('./src/pipes/'),
   "@theme": path.resolve('./src/theme/'),
   "@node_modules": path.resolve('./node_modules/')
+};
+
+module.exports = function () {
+  return useDefaultConfig;
 };

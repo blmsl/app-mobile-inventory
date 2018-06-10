@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 /* Models. */
 import { Bill, Sale, Product } from '@models/models';
@@ -11,6 +11,7 @@ import { ScannerService } from '@services/scanner/scanner.service';
 import { ProductsService } from '@services/products/products.service';
 import { HeadquartersService } from '@services/headquarters/headquarters.service';
 import { ToastService } from '@services/toast/toast.service';
+import { constants } from '@app/app.constants';
 
 @Component({
   selector: 'page-create-bill',
@@ -33,6 +34,7 @@ export class CreateBillPage {
     private scannerService: ScannerService,
     private toastService: ToastService,
     private storage: Storage,
+    private events: Events,
     private productsService: ProductsService,
     private headquartersService: HeadquartersService,
     private billsService: BillsService) {
@@ -194,6 +196,8 @@ export class CreateBillPage {
 
     this.billsService.createBill(bill).then(response => {
       this.toastService.showToast('SELL.CREATE_SUCCESS_MESSAGE');
+      // Publish event.
+      this.events.publish(constants.topics.bills.create, '');
     }).catch(error => {
       console.log(JSON.stringify(error));
       this.toastService.showDangerToast('ERROR.SELL.ERROR_CREATING_BILL');

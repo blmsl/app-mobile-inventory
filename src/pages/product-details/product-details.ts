@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Product, HeadquarterProduct } from '@models/models';
 import { ProductsService } from '@services/products/products.service';
 import { constants } from '@app/app.constants';
+import { ScannerService } from '@services/scanner/scanner.service';
 
 @Component({
     selector: 'page-product-details',
@@ -34,6 +35,7 @@ export class ProductDetailsPage {
         private viewCtrl: ViewController,
         private navParams: NavParams,
         private colorsService: ColorsService,
+        private scannerService: ScannerService,
         private translateService: TranslateService,
         private toastService: ToastService,
         private events: Events,
@@ -82,7 +84,7 @@ export class ProductDetailsPage {
         this.navCtrl.pop();
     }
 
-    private visualizingMode() {        
+    private visualizingMode() {
         // Disable form.
         this.updateProductFormGroup.disable();
         // Mark controls as untouched.
@@ -171,7 +173,7 @@ export class ProductDetailsPage {
             this.toastService.showDangerToast('ERROR.PRODUCTS.ERROR_UPDATING_PRODUCT');
             // Reload product.
             this.loadProduct();
-        });        
+        });
     }
 
     private updateProduct_(pr: Product, hpr: HeadquarterProduct) {
@@ -180,5 +182,14 @@ export class ProductDetailsPage {
         this.product.color = pr.color;
         this.product.price = +pr.price;
         this.product.amount = +hpr.amount;
+    }
+
+    public seeQR() {
+        // Build the qr code data.
+        var qrData: any = {
+            product_id: +this.product.product_id,
+            headquarter_id: +this.product.headquarter_id
+        };
+        this.scannerService.encode(qrData);
     }
 }
