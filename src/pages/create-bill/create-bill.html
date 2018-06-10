@@ -71,21 +71,43 @@
 
   </form>
 
-  <ion-item-group class="sell-extract">
-    <ion-item text-right>
-      {{ 'SELL.SUBTOTAL' | translate}}
-      <span>{{ subtotal | currency:'COP' }}</span>
-    </ion-item>
-    <ion-item text-right>
-      {{ 'SELL.DISCOUNT' | translate}}
-      <span>{{ discount | currency:'COP' }}</span>
-    </ion-item>
-    <ion-item text-right class="total">
-      {{ 'SELL.TOTAL' | translate}}
-      <span>{{ total | currency:'COP' }}</span>
-    </ion-item>
-  </ion-item-group>
-  <!-- Create products. -->
+  <ion-grid class="bill-extract">
+    <ion-row>
+      <ion-col col-4>
+      </ion-col>
+      <ion-col col-4>
+        <span>{{ 'SELL.SUBTOTAL' | translate}}</span>
+      </ion-col>
+      <ion-col col-4 class="bill-extract-value">
+        <span>{{ subtotal | currency:'COP' }}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-4>
+      </ion-col>
+      <ion-col col-4>
+        <span>{{ 'SELL.DISCOUNT' | translate}}</span>
+      </ion-col>
+      <ion-col col-4 class="bill-extract-value">
+        <span>{{ discount | currency:'COP' }}</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-4>
+      </ion-col>
+      <ion-col col-4>
+        <span>{{ 'SELL.TOTAL' | translate}}</span>
+      </ion-col>
+      <ion-col col-4 class="bill-extract-value">
+        <span>{{ total | currency:'COP' }}</span>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <!-- Create bill. -->
   <button ion-button full large icon-left (click)="sell()">
     <ion-icon name="logo-usd"></ion-icon>
     {{ 'SELL.SELL' | translate }}

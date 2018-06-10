@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="products-header">
 
   <ion-toolbar>
     <ion-buttons left>
@@ -17,10 +17,6 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
-
-</ion-header>
-
-<ion-content class="no-scroll products-content">
 
   <ion-item-group class="filter-list">
 
@@ -51,27 +47,30 @@
   <ion-item-divider>
     {{ 'PRODUCTS.PRODUCTS' | translate }}
   </ion-item-divider>
-  <ion-scroll scrollX="true" scrollY="true">
-    <ion-item-group class="products-item-group">
 
-      <ion-item *ngFor="let product of products">
-        <ion-icon name="cube" item-start></ion-icon>
-        <ion-label>
-          {{ product.name }}
-          <p>{{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }} {{ product.amount }}</p>
-          <p>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }} {{ product.price | currency:'COP' }}</p>
-        </ion-label>
-        <button ion-button item-end (click)="goToProduct(product)">
-          {{ 'COMMONS.SEE' | translate }}
-        </button>
-      </ion-item>
+</ion-header>
 
-      <ion-item *ngIf="!products || products.length == 0" text-center>
-        {{ 'PRODUCTS.PRODUCTS_EMPTY_MESSAGE' | translate}}
-      </ion-item>
+<ion-content class="products-content" [ngClass]="{'filter-visible': filterVisible}">
 
-    </ion-item-group>
+  <ion-item-group>
 
-  </ion-scroll>
+    <ion-item *ngFor="let product of products">
+      <ion-icon name="cube" item-start></ion-icon>
+      <ion-label>
+        {{ product.name }}
+        <p>{{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }} {{ product.amount }}</p>
+        <p>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }} {{ product.price | currency:'COP' }}</p>
+      </ion-label>
+      <button ion-button item-end (click)="goToProduct(product)">
+        {{ 'COMMONS.SEE' | translate }}
+      </button>
+    </ion-item>
+
+    <ion-item *ngIf="!products || products.length == 0" text-center>
+      {{ 'PRODUCTS.PRODUCTS_EMPTY_MESSAGE' | translate}}
+    </ion-item>
+
+  </ion-item-group>
+
 
 </ion-content>

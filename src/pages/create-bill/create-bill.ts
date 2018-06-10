@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+/* Models. */
+import { Bill, Sale, Product } from '@models/models';
+/* Services. */
+import { Storage } from '@ionic/storage';
+import { BillsService } from '@services/bills/bills.services';
 import { TranslateService } from '@ngx-translate/core';
 import { ScannerService } from '@services/scanner/scanner.service';
 import { ProductsService } from '@services/products/products.service';
@@ -8,10 +13,13 @@ import { HeadquartersService } from '@services/headquarters/headquarters.service
 import { ToastService } from '@services/toast/toast.service';
 
 @Component({
-  selector: 'page-sell',
-  templateUrl: 'sell.html'
+  selector: 'page-create-bill',
+  templateUrl: 'create-bill.html'
 })
-export class SellPage {
+export class CreateBillPage {
+  private sub: string;
+  private headquarterID: number;
+
   private sellFormGroup: FormGroup;
   private discountFormControl: FormControl;
   private products: any = [];
@@ -24,12 +32,22 @@ export class SellPage {
     private translateService: TranslateService,
     private scannerService: ScannerService,
     private toastService: ToastService,
+    private storage: Storage,
     private productsService: ProductsService,
-    private headquartersService: HeadquartersService) {
+    private headquartersService: HeadquartersService,
+    private billsService: BillsService) {
     this.discountFormControl = new FormControl('', [
     ]);
     this.sellFormGroup = new FormGroup({
       discountFormControl: this.discountFormControl
+    });
+    
+  }
+
+  ionViewDidLoad() {
+    this.storage.get('user_information').then(userInformation => {
+      this.sub = userInformation.sub;
+      this.headquarterID = userInformation.user_metadata.headquarter.id;
     });
   }
 
@@ -155,5 +173,30 @@ export class SellPage {
 
   sell() {
 
+    var bill : Bill = new Bill();
+    bill.user_id = this.sub;
+    bill.headquarter_id = this.headquarterID;
+    bill.sales = [];
+    // Configuramos las ventas.
+    var i = 0;
+    for (i; i < this.products.length; i++) {
+      var pr = this.products[i];
+
+      var sale : Sale = new Sale();
+      sale.amount = pr.amount_;
+      sale.product = new Product();
+      sale.product.id = pr.product_id;
+
+      bill.sales.push(sale);
+    }
+
+    /* console.log(JSON.stringify(bill)); */
+
+    this.billsService.createBill(bill).then(response => {
+      this.toastService.showToast('SELL.CREATE_SUCCESS_MESSAGE');
+    }).catch(error => {
+      console.log(JSON.stringify(error));
+      this.toastService.showDangerToast('ERROR.SELL.ERROR_CREATING_BILL');
+    });
   }
 }

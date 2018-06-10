@@ -1,0 +1,45 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-buttons left>
+            <button ion-button menuToggle icon-only>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>
+            {{ 'BILLS.BILLS' | translate }}
+        </ion-title>
+
+    </ion-toolbar>
+
+    <ion-item-group>
+        <ion-item-divider>
+            {{ 'BILLS.BILLS' | translate }}
+        </ion-item-divider>
+    </ion-item-group>
+
+</ion-header>
+
+<ion-content class="bills-content">
+
+    <ion-item-group class="bills-item-group">
+
+        <ion-item *ngFor="let bill of bills">
+            <ion-icon name="paper" item-start></ion-icon>
+            <ion-label>
+                {{ 'BILLS.BILL' | translate }} {{ 'BILLS.NUMERAL' | translate }} {{ bill.id }}
+                <p>{{ bill.created | date: 'mediumDate' }}</p>
+            </ion-label>
+            <button ion-button item-end (click)="goToBill(bill)">
+                {{ 'COMMONS.SEE' | translate }}
+            </button>
+        </ion-item>
+
+        <ion-item *ngIf="!bills || bills.length == 0" text-center>
+            {{ 'BILLS.BILLS_EMPTY_MESSAGE' | translate}}
+        </ion-item>
+
+    </ion-item-group>
+
+</ion-content>

@@ -6,7 +6,7 @@ import { ToastService } from '@services/toast/toast.service';
 import { Storage } from '@ionic/storage';
 import { ScannerService } from '@services/scanner/scanner.service';
 /* Pages. */
-import { SellPage } from '@pages/sell/sell';
+import { CreateBillPage } from '@pages/create-bill/create-bill';
 import { CreateProductPage } from '@pages/create-product/create-product';
 import { TranslateService } from '@ngx-translate/core';
 import { constants } from '@app/app.constants';
@@ -19,7 +19,7 @@ import { ProductDetailsPage } from '@pages/product-details/product-details';
 export class DashboardPage {
   // Pages.
   private createProductPage: any = CreateProductPage;
-  private sellPage: any = SellPage;
+  private createBillPage: any = CreateBillPage;
   private productDetailsPage: any = ProductDetailsPage;
 
   /** Attributes. */

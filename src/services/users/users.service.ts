@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@environments/environment';
 /* Services. */
 import { BaseService } from '@services/base/base.service';
 import { HTTP, HTTPResponse } from '@ionic-native/http';
@@ -14,13 +13,13 @@ export class UsersService extends BaseService {
 
     getUser(userID: string): Promise<HTTPResponse> {
         let headers = {'Content-Type': 'application/json' };
-        let url = environment.api.url + 'users/' + userID;
+        let url = `users/${userID}`;
         return super.get(url, {}, headers);
     }
 
     updateUser(userID: string, user: any): Promise<HTTPResponse> {
         let headers = {'Content-Type': 'application/json' };
-        let url = environment.api.url + 'users/' + userID;
+        let url = `users/${userID}`;
         return super.patch(url, user, headers);
     }
 }

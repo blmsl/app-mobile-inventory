@@ -1,0 +1,26 @@
+.bill-details-content {
+    .bill-details-header {
+        font-size: 1.6rem;
+        font-weight: bold;
+    }
+    .bill-detail {
+        .bill-detail-icon {
+            padding-top: 16px;
+        }
+        .bill-detail-col {
+            border-bottom: 1px solid #4C4C4C;
+        }
+        .bill-detail-col.bill-detail-col-last {
+            border-bottom: 0px;
+        }
+    }
+}
+
+.bill-details-footer {
+    .bill-extract {
+        font-size: 1.6rem;
+        .bill-extract-value {
+            font-weight: bold;
+        }
+    }
+}

@@ -22,10 +22,11 @@ import { CreateProductPage } from '@pages/create-product/create-product';
 import { ProfilePage } from '@pages/profile/profile';
 import { ProductsPage } from '@pages/products/products';
 import { PasswordModalPage } from '@pages/password-modal/password-modal';
-import { QrModalPage } from '@pages/qr-modal/qr-modal';
-import { SellPage } from '@pages/sell/sell';
+import { CreateBillPage } from '@pages/create-bill/create-bill';
 import { ProductDetailsPage } from '@pages/product-details/product-details';
 import { SearchModalPage } from '@pages/search-modal/search-modal';
+import { BillsPage } from '@pages/bills/bills';
+import { BillDetailsPage } from '@pages/bill-details/bill-details';
 /** Services. */
 import { Camera } from '@ionic-native/camera';
 import { HTTP } from '@ionic-native/http';
@@ -38,7 +39,8 @@ import { ProductsService } from '@services/products/products.service';
 import { ColorsService } from '@services/colors/colors.service';
 import { HeadquartersService } from '@services/headquarters/headquarters.service';
 import { ToastService } from '@services/toast/toast.service';
-import { ScannerService } from '@services/scanner/scanner.service'
+import { ScannerService } from '@services/scanner/scanner.service';
+import { BillsService } from '@services/bills/bills.services';
 /* Pipes. */
 import { CurrencyPipe } from '@angular/common';
 
@@ -51,11 +53,12 @@ import { CurrencyPipe } from '@angular/common';
     ProfilePage,
     ProductsPage,
     PasswordModalPage,
-    QrModalPage,
-    SellPage,
+    CreateBillPage,
     ProductDetailsPage,
     SearchModalPage,
-    LetterAvatarDirective
+    LetterAvatarDirective,
+    BillsPage,
+    BillDetailsPage
   ],
   imports: [
     HttpClientModule,
@@ -84,10 +87,11 @@ import { CurrencyPipe } from '@angular/common';
     ProfilePage,
     ProductsPage,
     PasswordModalPage,
-    QrModalPage,
-    SellPage,
+    CreateBillPage,
     ProductDetailsPage,
-    SearchModalPage
+    SearchModalPage,
+    BillsPage,
+    BillDetailsPage
   ],
   providers: [
     Auth0Service,
@@ -105,7 +109,8 @@ import { CurrencyPipe } from '@angular/common';
     ToastService,
     ColorsService,
     CurrencyPipe,
-    ScannerService
+    ScannerService,
+    BillsService
   ]
 })
 export class AppModule {}

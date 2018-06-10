@@ -8,10 +8,6 @@
           <button ion-button color="primary" 
           *ngIf="!auth0Service.isAuthenticated()" 
           (click)="auth0Service.login()">{{ 'COMMONS.LOGIN' | translate }}</button>
-
-          <!-- <button ion-button color="primary" 
-          *ngIf="auth0Service.isAuthenticated()" 
-          (click)="auth0Service.logout()">{{ 'COMMONS.LOGOUT' | translate }}</button> -->
         </div>     
     </ion-row>
   </ion-grid>

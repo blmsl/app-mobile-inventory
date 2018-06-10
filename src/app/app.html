@@ -4,10 +4,8 @@
   <ion-content>
     <ion-list>
 
-      <button ion-item icon-start no-lines
-      (click)="setRootPage(profilePage)" 
-      [ngClass]="{'active': getActivePage() === 'ProfilePage' }"
-      class="first-item">
+      <button ion-item icon-start no-lines (click)="setRootPage(profilePage)" [ngClass]="{'active': getActivePage() === 'ProfilePage' }"
+        class="first-item">
         <ion-avatar item-start>
           <img src="{{ picture }}">
         </ion-avatar>
@@ -22,6 +20,11 @@
       <button ion-item icon-start (click)="setRootPage(productsPage)" [ngClass]="{'active': getActivePage() === 'ProductsPage' }">
         <ion-icon name="cube"></ion-icon>
         {{ 'PRODUCTS.PRODUCTS' | translate }}
+      </button>
+
+      <button ion-item icon-start (click)="setRootPage(billsPage)" [ngClass]="{'active': getActivePage() === 'BillsPage' }">
+        <ion-icon name="paper"></ion-icon>
+        {{ 'BILLS.BILLS' | translate }}
       </button>
 
       <!-- Logout. -->

@@ -1,4 +1,4 @@
-.products-content {
+.products-header {
     .filter-list {
         margin-bottom: 0px;
         .filter-header {
@@ -8,4 +8,9 @@
             }
         }
     }
+}
+
+.products-content.filter-visible {
+    margin-top: 90px;
+    height: 86%;
 }

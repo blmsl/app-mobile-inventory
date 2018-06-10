@@ -1,0 +1,158 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>
+            {{ 'BILLS.BILL' | translate }}
+        </ion-title>
+
+    </ion-toolbar>
+
+    <ion-item-group>
+        <ion-item-divider>
+            {{ 'BILLS.BILL' | translate }} {{ 'COMMONS.NUMERAL' | translate }} {{ bill.id }}
+        </ion-item-divider>
+
+        <ion-item>
+            <ion-label>
+                {{ 'BILLS.CREATED' | translate }}
+            </ion-label>
+            <div item-content>
+                {{ bill.created | date: 'mediumDate' }}
+            </div>
+        </ion-item>
+
+        <ion-item-divider>
+            {{ 'BILLS.BILL_DETAILS' | translate }}
+        </ion-item-divider>
+    </ion-item-group>
+
+</ion-header>
+
+<ion-content class="bill-details-content">
+
+    <ion-grid *ngIf="bill">
+
+        <ion-row class="bill-details-header">
+            <ion-col col-2>
+            </ion-col>
+            <ion-col col-10>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-4 text-nowrap>
+                            <span>
+                                {{ 'PRODUCTS.PRODUCT' | translate}}
+                            </span>
+                        </ion-col>
+                        <ion-col col-4 text-center>
+                            <span>
+                                {{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }}
+                            </span>
+                        </ion-col>
+                        <ion-col col-4>
+                            <span>
+                                {{ 'PRODUCTS.PRODUCT_VALUE' | translate }}
+                            </span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let sale of bill.sales; let i = index" class="bill-detail">
+            <ion-col col-2 text-center class="bill-detail-icon">
+                <ion-icon name="cube"></ion-icon>
+            </ion-col>
+            <ion-col col-10 class="bill-detail-col"
+                [ngClass]="{'bill-detail-col-last': i == bill.sales.length - 1}" >
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-4 text-nowrap>
+                            <span>
+                                {{ sale.product.name }}
+                            </span>
+                        </ion-col>
+                        <ion-col col-4 text-center>
+                            <span>
+                                {{ sale.amount }}
+                            </span>
+                        </ion-col>
+                        <ion-col col-4>
+                            <span>
+                                {{ sale.product.price | currency:'COP' }}
+                            </span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="!bill.sales || bill.sales == 0">
+            <ion-col text-center>
+                {{ 'SELL.PRODUCTS_EMPTY_MESSAGE' | translate}}
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+</ion-content>
+
+<ion-footer class="bill-details-footer">
+
+    <form *ngIf="editing" [formGroup]="sellFormGroup">
+
+        <ion-item>
+            <ion-label fixed>{{ 'SELL.DISCOUNT' | translate }}</ion-label>
+            <ion-input type="number" id="productValue" formControlName="discountFormControl" (input)="calculateExtract()" [ngClass]="{'invalid':discountFormControl.errors 
+                        && (discountFormControl.dirty || discountFormControl.touched)}"></ion-input>
+        </ion-item>
+        <ion-grid>
+            <ion-row *ngIf="discountFormControl.errors 
+                          && (discountFormControl.dirty || discountFormControl.touched)">
+            </ion-row>
+        </ion-grid>
+
+    </form>
+
+    <ion-grid class="bill-extract">
+        <ion-row>
+            <ion-col col-4>
+            </ion-col>
+            <ion-col col-4>
+                <span>{{ 'SELL.SUBTOTAL' | translate}}</span>
+            </ion-col>
+            <ion-col col-4 class="bill-extract-value">
+                <span>{{ bill.subtotal | currency:'COP' }}</span>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-4>
+            </ion-col>
+            <ion-col col-4>
+                <span>{{ 'SELL.DISCOUNT' | translate}}</span>
+            </ion-col>
+            <ion-col col-4 class="bill-extract-value">
+                <span>{{ bill.discount | currency:'COP' }}</span>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-4>
+            </ion-col>
+            <ion-col col-4>
+                <span>{{ 'SELL.TOTAL' | translate}}</span>
+            </ion-col>
+            <ion-col col-4 class="bill-extract-value">
+                <span>{{ bill.total | currency:'COP' }}</span>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+</ion-footer>

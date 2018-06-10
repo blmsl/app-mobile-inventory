@@ -22,17 +22,10 @@
         }
     }
 
-    .sell-extract {
-        span {
-            margin-left: 20px;
+    .bill-extract {
+        font-size: 1.6rem;
+        .bill-extract-value {
+            font-weight: bold;
         }
-
-        .total {
-            span{
-                font-weight: bold;
-            }        
-        }
-    }
-
-    
+    }    
 }

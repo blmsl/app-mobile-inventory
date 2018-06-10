@@ -91,3 +91,23 @@ export class HeadquarterProducts {
 
     constructor() {}
 }
+
+export class Bill {
+    id: number;
+    headquarter_id: number;
+    user_id: string;
+    discount: number;
+    subtotal: number;
+    total: number;
+    sales: Sale[];
+
+    constructor() {}
+}
+
+export class Sale {
+    id: number;
+    amount: number;
+    product: Product;
+
+    constructor() {}
+}

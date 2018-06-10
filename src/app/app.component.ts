@@ -10,6 +10,7 @@ import { IndexPage } from '../pages/index/index';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ProfilePage } from '@pages/profile/profile';
 import { ProductsPage } from '@pages/products/products';
+import { BillsPage } from '@pages/bills/bills';
 /** Services. */
 import { Storage } from '@ionic/storage';
 import { Auth0Service } from '@services/auth0/auth0.service';
@@ -17,6 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Events } from 'ionic-angular';
 import { ToastService } from '@services/toast/toast.service';
 import { constants } from '@app/app.constants';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -28,6 +30,7 @@ export class MyApp {
   dashboardPage: any = DashboardPage;
   profilePage: any = ProfilePage;
   productsPage: any = ProductsPage;
+  billsPage: any = BillsPage;
   // Attributes.
   picture: string;
   username: string;
@@ -62,7 +65,9 @@ export class MyApp {
       );
 
       platform.registerBackButtonAction(() => {
-        if (this.getActivePage() === 'ProfilePage' || this.getActivePage() === 'ProductsPage') {
+        if (this.getActivePage() === 'ProfilePage' 
+          || this.getActivePage() === 'ProductsPage'
+          || this.getActivePage() === 'BillsPage') {
           this.setRootPage(this.dashboardPage);
         } else {
           this.goBack();

@@ -16,13 +16,17 @@
       <button ion-button icon-only (click)="editingMode()" *ngIf="!editing">
         <ion-icon name="create"></ion-icon>
       </button>
-      <button ion-button icon-only 
-      [disabled]="!updateProductFormGroup.valid"  
-      (click)="updateProduct()" *ngIf="editing">
+      <button ion-button icon-only [disabled]="!updateProductFormGroup.valid" (click)="updateProduct()" *ngIf="editing">
         <ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
+
+  <ion-item-group>
+    <ion-item-divider>
+      {{ 'PRODUCTS.PRODUCT' | translate }} {{ 'COMMONS.NUMERAL' | translate }} {{ product.product_id }}
+    </ion-item-divider>
+  </ion-item-group>
 
 </ion-header>
 
@@ -33,8 +37,7 @@
 
     <ion-item>
       <ion-label fixed>{{ 'PRODUCTS.PRODUCT_NAME' | translate }}</ion-label>
-      <ion-input type="text" id="productName" formControlName="nameFormControl" 
-      [ngClass]="{'invalid':nameFormControl.errors 
+      <ion-input type="text" id="productName" formControlName="nameFormControl" [ngClass]="{'invalid':nameFormControl.errors 
         && (nameFormControl.dirty || nameFormControl.touched)}"></ion-input>
     </ion-item>
     <ion-grid>
@@ -47,8 +50,7 @@
 
     <ion-item>
       <ion-label fixed>{{ 'PRODUCTS.PRODUCT_BRAND' | translate }}</ion-label>
-      <ion-input type="text" id="productBrand" formControlName="brandFormControl" 
-      [ngClass]="{'invalid':brandFormControl.errors 
+      <ion-input type="text" id="productBrand" formControlName="brandFormControl" [ngClass]="{'invalid':brandFormControl.errors 
         && (brandFormControl.dirty || brandFormControl.touched)}"></ion-input>
     </ion-item>
     <ion-grid>

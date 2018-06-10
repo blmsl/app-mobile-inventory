@@ -15,7 +15,8 @@
     "REQUIRED_MESSAGE": "Este campo es requerido.",
     "ACCEPT": "Aceptar",
     "SEARCH": "Buscar",
-    "SEE": "Ver"
+    "SEE": "Ver",
+    "NUMERAL": "No."
   },
   "DASHBOARD": {
     "DASHBOARD": "Dashboard",
@@ -69,7 +70,15 @@
     "PRODUCTS_EMPTY_MESSAGE": "No hay productos añadidos en la venta.",
     "PRODUCT_ALREADY_ADDED" : "El producto ya se encuentra en la lista.",
     "SUBTOTAL": "Subtotal",
-    "TOTAL": "Total"
+    "TOTAL": "Total",
+    "CREATE_SUCCESS_MESSAGE": "La venta se ha registrado con exito."
+  },
+  "BILLS": {
+    "BILLS": "Facturas",
+    "BILL": "Factura",    
+    "BILL_DETAILS" : "Detalles",
+    "CREATED" : "Fecha ",
+    "BILLS_EMPTY_MESSAGE": "No hay ventas."
   },
   "ERROR": {
     "ERROR_GENERAL": "Lo sentimos, algo ha salido mal.",
@@ -91,7 +100,9 @@
     },
     "SELL": {
       "ERROR_VALIDATING_STOCK": "El producto no tiene suficientes existencias.",
-      "ERROR_ADDING_PRODUCT": "Lo sentimos, el producto no pudo ser añadido."
+      "ERROR_ADDING_PRODUCT": "Lo sentimos, el producto no pudo ser añadido.",
+      "ERROR_CREATING_BILL": "Lo sentimos, la venta no se pudo llevar a cabo.",
+      "ERROR_GETTING_BILLS": "Lo sentimos, no se ha podido recuperar las ventas."
     }
   }
 }

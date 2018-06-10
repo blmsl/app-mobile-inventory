@@ -2,10 +2,7 @@
 
     <ion-toolbar>
 
-       <ion-searchbar [(ngModel)]="name" 
-            showCancelButton = "false"
-            cancelButtonText = "{{ 'COMMONS.CANCEL' | translate }}"
-            placeholder="{{ 'COMMONS.SEARCH' | translate }}"
+        <ion-searchbar [(ngModel)]="name" showCancelButton="false" cancelButtonText="{{ 'COMMONS.CANCEL' | translate }}" placeholder="{{ 'COMMONS.SEARCH' | translate }}"
             (ionInput)="getProducts()" (ionCancel)="closeModal()">
         </ion-searchbar>
 
@@ -14,17 +11,18 @@
 </ion-header>
 
 <ion-content>
-    <ion-scroll scrollX="true" scrollY="true">
-        <ion-item-group>
+    <ion-item-group inset>
 
-            <button *ngFor="let name of names" ion-item (click)="selectName(name)">
-                {{ name }}
-            </button>
+        <button *ngFor="let name of names" ion-item (click)="selectName(name)">
+            {{ name }}
+        </button>
 
-            <ion-item *ngIf="!names || names.length == 0" text-center>
-                {{ 'PRODUCTS.PRODUCTS_EMPTY_MESSAGE' | translate}}
-            </ion-item>
+        <ion-item *ngIf="!names || names.length == 0" text-center>
+            {{ 'PRODUCTS.PRODUCTS_EMPTY_MESSAGE' | translate}}
+        </ion-item>
 
-        </ion-item-group>
-    </ion-scroll>
+    </ion-item-group>
 </ion-content>
+
+<ion-footer>
+</ion-footer>

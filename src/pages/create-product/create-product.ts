@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, Events } from 'ionic-angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { constants } from '@app/app.constants';
 /** Services */
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ProductsService } from '@services/products/products.service';
@@ -12,9 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ScannerService } from '@services/scanner/scanner.service';
 /* Models */
 import { Product, HeadquarterProduct } from '@models/models';
-/* Pages. */
-import { QrModalPage } from '@pages/qr-modal/qr-modal';
-import { constants } from '@app/app.constants';
+
 
 
 @Component({
@@ -22,9 +21,6 @@ import { constants } from '@app/app.constants';
   templateUrl: 'create-product.html'
 })
 export class CreateProductPage {
-  /* Pages. */
-  private qrModalPage: any = QrModalPage;
-
   private headquarterID: number;
 
   private image: string;
@@ -148,12 +144,7 @@ export class CreateProductPage {
         // Build the qr code data.
         var qrData: any = {
           product_id: +productData.id,
-          name: productData.name,
-          brand: productData.brand,
-          color: productData.color,
-          price: +productData.price,
-          headquarter_id: +headquarterProductData.headquarter_id,
-          amount: +headquarterProductData.amount
+          headquarter_id: +headquarterProductData.headquarter_id
         };
 
         this.scannerService.encode(qrData);
@@ -172,12 +163,6 @@ export class CreateProductPage {
 
   private getColors() {
     this.colors = this.colorsService.getColors();
-  }
-
-  public openQrModal(qrData: any) {
-    var data = { qr_data: qrData };
-    var modalPage = this.modalCtrl.create(this.qrModalPage, data);
-    modalPage.present();
   }
 
 }
