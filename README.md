@@ -1,3 +1,9 @@
+# AppMobileInventory
+
+GoStock mobile application.
+
+The APK will not be published until a more mature version of the system is released. It will be available on the CD.
+
 ## Installing
 
 ### Installing Dependencies
@@ -29,10 +35,15 @@ $ionic cordova platform add <platform>
 ```
 $ionic cordova emulate <platform>
 ```
+
 ## Running
 
-To execute the application execute the following command. Be sure to have ports 8080, 8081 and 8082 free otherwise the application can not be deployed.
+Run `ionic cordova run android --device --{IONIC_ENV} -l -c -s`. IONIC_ENV refers to `dev` or `prod`.
 
-```
-$npm start run
-```
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0 - see the [LICENSE.md](https://github.com/alobaton/app-mobile-inventory/blob/master/LICENSE) file for detail
+
+# Resources
+
+* [Launcher Icon Generator](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html#foreground.type=clipart&foreground.clipart=android&foreground.space.trim=1&foreground.space.pad=0.25&foreColor=rgba(96%2C%20125%2C%20139%2C%200)&backColor=rgb(68%2C%20138%2C%20255)&crop=0&backgroundShape=square&effects=none&name=ic_launcher)
