@@ -5,12 +5,13 @@ import { HTTP, HTTPResponse } from '@ionic-native/http';
 import { Events } from 'ionic-angular';
 /* Models. */
 import { Product } from '@models/models';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class ProductsService extends BaseService {
 
-    constructor(http: HTTP, events: Events) {
-        super(http, events);
+    constructor(http: HTTP, events: Events, storage: Storage) {
+        super(http, events, storage);
     }
 
     createProduct(product: Product): Promise<HTTPResponse> {

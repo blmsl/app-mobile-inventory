@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform, App, MenuController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, App, MenuController, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import Auth0Cordova from '@auth0/cordova';
@@ -23,6 +23,7 @@ import { constants } from '@app/app.constants';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  @ViewChild('content') navCtrl: NavController;
   // Root page.
   rootPage: any = IndexPage;
   // Pages.
@@ -57,19 +58,10 @@ export class MyApp {
 
       this.androidPermissions.requestPermissions(
         [
-          this.androidPermissions.PERMISSION.CAMERA
+          this.androidPermissions.PERMISSION.CAMERA,
+          this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
         ]
-      );
-
-      platform.registerBackButtonAction(() => {
-        if (this.getActivePage() === 'ProfilePage' 
-          || this.getActivePage() === 'ProductsPage'
-          || this.getActivePage() === 'BillsPage') {
-          this.setRootPage(this.dashboardPage);
-        } else {
-          this.goBack();
-        }
-      });
+      );      
 
       // Style for dark backgrounds.
       this.statusBar.styleBlackOpaque();
@@ -84,22 +76,31 @@ export class MyApp {
     });
 
     this.events.subscribe(constants.topics.storage.ready, (value) => {
-      // Redirect to dashboard.
-      if (this.auth0Service.isAuthenticated()) {
-        this.setRootPage(this.dashboardPage);
-      }
-
+      // Inicializamos alguna información del usuario.
       this.storage.get('user_information').then(userInformation => {
         if (userInformation) {
           this.picture = userInformation.picture;
           this.username = userInformation.username || userInformation.nickname;
         }
       });
+      // Redirect to dashboard.
+      if (this.auth0Service.isAuthenticated()) {
+        this.setRootPage(this.dashboardPage);
+      }
     });
   }
-  /** Get nav controller. */
-  getNavCtrl(): any {
-    return this.app.getActiveNavs()[0];
+
+  ngOnInit() {
+
+    this.platform.registerBackButtonAction(() => {
+      if (this.getActivePage() === this.profilePage
+        || this.getActivePage() === this.productsPage
+        || this.getActivePage() === this.billsPage) {
+        this.setRootPage(this.dashboardPage);
+      } else {
+        this.goBack();
+      }
+    });
   }
 
   /** Go directly to page cleaning the stack for new navigation. */
@@ -107,30 +108,27 @@ export class MyApp {
     if (!page) {
       return;
     }
-    let navCtrl = this.getNavCtrl();
-    if (!navCtrl) {
+    if (!this.navCtrl) {
       /** console.log('navCtrl undefined.'); */
       return;
     }
-    // Set root and clean the nav stack.
-    navCtrl.setRoot(page);
+    // Set root and clean the navCtrl stack.
+    this.navCtrl.setRoot(page);
     // Close menu.
     this.menuCtrl.close();
   }
 
   goBack() {
-    let navCtrl = this.getNavCtrl();
     // Back button action.
-    navCtrl.pop();
+    this.navCtrl.pop();
   }
 
   getActivePage(): string {
-    let navCtrl = this.getNavCtrl();
-    if (!navCtrl || !navCtrl.getActive() || !navCtrl.getActive().name) {
+    if (!this.navCtrl || !this.navCtrl.getActive() || !this.navCtrl.getActive().component) {
       /* console.log('navCtrl undefined'); */
-      return 'IndexPage';
+      return '';      
     }
-    return navCtrl.getActive().name;
+    return this.navCtrl.getActive().component;
   }
 
   /* Perform logout action. */

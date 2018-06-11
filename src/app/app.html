@@ -4,7 +4,7 @@
   <ion-content>
     <ion-list>
 
-      <button ion-item icon-start no-lines (click)="setRootPage(profilePage)" [ngClass]="{'active': getActivePage() === 'ProfilePage' }"
+      <button ion-item icon-start no-lines (click)="setRootPage(profilePage)" [ngClass]="{'active': getActivePage() === profilePage }"
         class="first-item">
         <ion-avatar item-start>
           <img src="{{ picture }}">
@@ -12,17 +12,17 @@
         {{ username }}
       </button>
 
-      <button ion-item icon-start (click)="setRootPage(dashboardPage)" [ngClass]="{'active': getActivePage() === 'DashboardPage' }">
+      <button ion-item icon-start (click)="setRootPage(dashboardPage)" [ngClass]="{'active': getActivePage() === dashboardPage }">
         <ion-icon name="stats"></ion-icon>
         {{ 'DASHBOARD.DASHBOARD' | translate }}
       </button>
 
-      <button ion-item icon-start (click)="setRootPage(productsPage)" [ngClass]="{'active': getActivePage() === 'ProductsPage' }">
+      <button ion-item icon-start (click)="setRootPage(productsPage)" [ngClass]="{'active': getActivePage() === productsPage }">
         <ion-icon name="cube"></ion-icon>
         {{ 'PRODUCTS.PRODUCTS' | translate }}
       </button>
 
-      <button ion-item icon-start (click)="setRootPage(billsPage)" [ngClass]="{'active': getActivePage() === 'BillsPage' }">
+      <button ion-item icon-start (click)="setRootPage(billsPage)" [ngClass]="{'active': getActivePage() === billsPage }">
         <ion-icon name="paper"></ion-icon>
         {{ 'BILLS.BILLS' | translate }}
       </button>

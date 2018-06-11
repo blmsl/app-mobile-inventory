@@ -46,7 +46,7 @@ export class Auth0Service {
     });
     this.storage.get('expires_at').then(expiresAt => {
       this.expiresAt = expiresAt;
-      this.events.publish(constants.topics.storage.ready, this.expiresAt);
+      this.events.publish(constants.topics.storage.ready, '');
     });
     this.storage.get('scopes').then(scopes => {
       this.scopes = scopes;
@@ -131,8 +131,7 @@ export class Auth0Service {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     /* console.log(expiresAt); */
     this.storage.set('expires_at', expiresAt);
-    this.expiresAt = expiresAt;
-    this.events.publish(constants.topics.storage.ready, this.expiresAt);
+    this.expiresAt = expiresAt;    
     // Setup scopes.
     const scopes = authResult.scope || environment.auth0.scope || '';
     this.storage.set('scopes', JSON.stringify(scopes));
@@ -143,7 +142,10 @@ export class Auth0Service {
     // Set up customer_id.
     this.storage.set('customer_id', userInfo['https://inventory-system-mobile/customer_id']);
     this.customerID = userInfo['https://inventory-system-mobile/customer_id'];
+    // The customer_id was configured.
     this.events.publish(constants.topics.cookies.put, 'customer_id=' + this.customerID);
+    // The sotrage is ready. (The session too.)
+    this.events.publish(constants.topics.storage.ready, '');
   }
   /**
    * Perform the logout action.

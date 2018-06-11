@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { BaseService } from '@services/base/base.service';
 import { HTTP, HTTPResponse } from '@ionic-native/http';
 import { Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class BillsService extends BaseService {
 
-    constructor(http: HTTP, events: Events) {
-        super(http, events);
+    constructor(http: HTTP, events: Events, storage: Storage) {
+        super(http, events, storage);
     }
 
     createBill(bill: any) : Promise<HTTPResponse> {

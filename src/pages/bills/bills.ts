@@ -39,7 +39,7 @@ export class BillsPage {
         }
     }
 
-    getBills() {
+    getBills() { 
         // For now bring the sales of the last month.
         var to = new Date();
         var from = new Date(to);
@@ -53,11 +53,11 @@ export class BillsPage {
             }
             catch (e) {
                 console.error(JSON.stringify(e));
-                this.toastService.showDangerToast('ERROR.SALES.ERROR_GETTING_BILLS');
+                this.toastService.showDangerToast('ERROR.SELL.ERROR_GETTING_BILLS');
             }
         }).catch(error => {
             console.log(JSON.stringify(error));
-            this.toastService.showDangerToast('ERROR.SALES.ERROR_GETTING_BILLS');
+            this.toastService.showDangerToast('ERROR.SELL.ERROR_GETTING_BILLS');
         });
 
     }

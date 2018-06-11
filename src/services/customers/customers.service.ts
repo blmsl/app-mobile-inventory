@@ -8,8 +8,8 @@ import { Events } from 'ionic-angular';
 @Injectable()
 export class CustomersService extends BaseService {
 
-    constructor(http: HTTP, events: Events) {
-        super(http, events);
+    constructor(http: HTTP, events: Events, storage: Storage) {
+        super(http, events, storage);
     }
 
     getCustomer(): Promise<HTTPResponse> {
