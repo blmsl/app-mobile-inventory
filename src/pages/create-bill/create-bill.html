@@ -108,8 +108,10 @@
   </ion-grid>
 
   <!-- Create bill. -->
-  <button ion-button full large icon-left (click)="sell()">
+  <button ion-button full large icon-left
+    [disabled]="!sellFormGroup.valid  && products.length == 0"
+    (click)="sell()">
     <ion-icon name="logo-usd"></ion-icon>
     {{ 'SELL.SELL' | translate }}
-  </button>
+  </button> 
 </ion-footer>

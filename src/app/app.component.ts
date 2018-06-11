@@ -66,7 +66,7 @@ export class MyApp {
       // Style for dark backgrounds.
       this.statusBar.styleBlackOpaque();
       /* this.statusBar.overlaysWebView(false); */
-      // Hode the splash screen.
+      // Hide the splash screen.
       this.splashScreen.hide();
 
       // Set up URL redirects.
