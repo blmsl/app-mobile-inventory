@@ -23,7 +23,7 @@ import { ProductsPage } from '@pages/products/products';
 import { PasswordModalPage } from '@pages/password-modal/password-modal';
 import { CreateBillPage } from '@pages/create-bill/create-bill';
 import { ProductDetailsPage } from '@pages/product-details/product-details';
-import { SearchModalPage } from '@pages/search-modal/search-modal';
+import { SearchProductPage } from '@pages/search-product/search-product';
 import { BillsPage } from '@pages/bills/bills';
 import { BillDetailsPage } from '@pages/bill-details/bill-details';
 /** Services. */
@@ -54,7 +54,7 @@ import { CurrencyPipe } from '@angular/common';
     PasswordModalPage,
     CreateBillPage,
     ProductDetailsPage,
-    SearchModalPage,
+    SearchProductPage,
     BillsPage,
     BillDetailsPage
   ],
@@ -87,7 +87,7 @@ import { CurrencyPipe } from '@angular/common';
     PasswordModalPage,
     CreateBillPage,
     ProductDetailsPage,
-    SearchModalPage,
+    SearchProductPage,
     BillsPage,
     BillDetailsPage
   ],

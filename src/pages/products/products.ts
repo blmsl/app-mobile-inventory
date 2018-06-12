@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events, ModalController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 /* Services. */
 import { HeadquartersService } from '@services/headquarters/headquarters.service';
 import { Storage } from '@ionic/storage';
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 /* Pages. */
 import { ProductDetailsPage } from '@pages/product-details/product-details';
 import { constants } from '@app/app.constants';
-import { SearchModalPage } from '@pages/search-modal/search-modal';
+import { SearchProductPage } from '@pages/search-product/search-product';
 
 @Component({
   selector: 'page-products',
@@ -19,7 +19,7 @@ import { SearchModalPage } from '@pages/search-modal/search-modal';
 export class ProductsPage {
   // Pages.
   private productDetailsPage: any = ProductDetailsPage;
-  private searchModalPage: any = SearchModalPage;
+  private searchModalPage: any = SearchProductPage;
 
   private filterVisible: boolean = false;
   /** Attributes. */
@@ -37,7 +37,6 @@ export class ProductsPage {
 
 
   constructor(public navCtrl: NavController,
-    private modalCtrl: ModalController,
     private storage: Storage,
     private toastService: ToastService,
     private translateService: TranslateService,
@@ -83,10 +82,9 @@ export class ProductsPage {
     }
   }
 
-  public openSearchModal() {
+  public goToSearchPage() {
     var data = { headquarterID: this.headquarterID };
-    var modalPage = this.modalCtrl.create(this.searchModalPage, data);
-    modalPage.present();
+    var modalPage = this.navCtrl.push(this.searchModalPage, data);
   }
 
   public filterDropdown(): any {

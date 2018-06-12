@@ -7,10 +7,10 @@ import { Storage } from '@ionic/storage';
 /* Services. */
 
 @Component({
-    selector: 'page-search-modal',
-    templateUrl: 'search-modal.html'
+    selector: 'page-search-product',
+    templateUrl: 'search-product.html'
 })
-export class SearchModalPage {
+export class SearchProductPage {
 
     /** Attributes. */
     private headquarterID: number;
@@ -25,7 +25,7 @@ export class SearchModalPage {
         private events: Events,
         private storage: Storage,
         private headquartersService: HeadquartersService) {
-        
+
     }
 
     ionViewDidLoad() {
@@ -35,21 +35,21 @@ export class SearchModalPage {
 
     selectName(n: string) {
         this.events.publish(constants.topics.products.search, n);
-        // Close modal.
-        this.closeModal();
+        this.goBack();
     }
 
-    private closeModal() {
-        this.viewCtrl.dismiss();
+    goBack() {
+        // Back button action.
+        this.navCtrl.pop();
     }
 
     private getProducts() {
-        
+
         if (!this.name || this.name.length == 0) {
             this.names = [];
             return;
         }
-        
+
         this.headquartersService.getProducts(this.headquarterID, this.name, '', '').then(response => {
             /* console.log(JSON.stringify(response.data)); */
             try {

@@ -1,6 +1,6 @@
 <ion-header>
 
-    <ion-toolbar>
+    <ion-toolbar>        
 
         <ion-searchbar [(ngModel)]="name" showCancelButton="false" cancelButtonText="{{ 'COMMONS.CANCEL' | translate }}" placeholder="{{ 'COMMONS.SEARCH' | translate }}"
             (ionInput)="getProducts()" (ionCancel)="closeModal()">
