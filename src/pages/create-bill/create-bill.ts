@@ -195,9 +195,10 @@ export class CreateBillPage {
     /* console.log(JSON.stringify(bill)); */
 
     this.billsService.createBill(bill).then(response => {
-      this.toastService.showToast('SELL.CREATE_SUCCESS_MESSAGE');
       // Publish event.
       this.events.publish(constants.topics.bills.create, '');
+      this.toastService.showToast('SELL.CREATE_SUCCESS_MESSAGE');      
+      this.goBack();
     }).catch(error => {
       console.log(JSON.stringify(error));
       this.toastService.showDangerToast('ERROR.SELL.ERROR_CREATING_BILL');

@@ -24,14 +24,14 @@ export class DashboardPage {
 
   /** Attributes. */
   private total: number;
-  private price: number;
+  private cost: number;
   private revenue: number;
   private headquarterID: number;
 
   public rangeVisible: boolean = false;
-  public today: string = new Date().toISOString();
-  public fromDate: string = new Date().toISOString();
-  public toDate: string = new Date().toISOString();
+  public today: string;
+  public fromDate: string;
+  public toDate: string;
 
   constructor(public navCtrl: NavController,
     private events: Events,
@@ -40,12 +40,22 @@ export class DashboardPage {
     private toastService: ToastService,
     private scannerService: ScannerService,
     private translateService: TranslateService) {
+    // Initialize dates.
+    var d = new Date();
+    this.today = d.toISOString();
+    this.toDate = d.toISOString();
+    d.setHours(0);
+    this.fromDate = d.toISOString();
+
     this.events.subscribe(constants.topics.products.create, (value) => {
       // TODO: Optimize this.
       this.getProducts();
     });
     this.events.subscribe(constants.topics.bills.create, (value) => {
       // TODO: Optimize this.
+      this.getProducts();
+      var d = new Date();
+      this.toDate = d.toISOString();
       this.getBills();
     });
   }
@@ -55,7 +65,7 @@ export class DashboardPage {
       this.headquarterID = userInformation.user_metadata.headquarter.id;
       this.getProducts();
       this.getBills();
-    });
+    });    
   }
 
   public rangeDropdown(): any {
@@ -100,7 +110,7 @@ export class DashboardPage {
       try {
         var data = JSON.parse(response.data);
         this.total = data.total;
-        this.price = data.price;
+        this.cost = data.cost;
       }
       catch (e) {
         console.error(JSON.stringify(e));

@@ -77,6 +77,19 @@
       </ion-row>
     </ion-grid>
 
+    <ion-item>
+      <ion-label fixed>{{ 'PRODUCTS.PRODUCT_COST' | translate }}</ion-label>
+      <ion-input type="number" id="productCost" formControlName="costFormControl" [ngClass]="{'invalid':costFormControl.errors 
+      && (costFormControl.dirty || costFormControl.touched)}"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row *ngIf="costFormControl.errors 
+        && (costFormControl.dirty || costFormControl.touched)">
+        <span *ngIf="costFormControl.errors.required">
+          {{ 'COMMONS.REQUIRED_MESSAGE' | translate }}</span>
+      </ion-row>
+    </ion-grid>
+
 
     <ion-item>
       <ion-label fixed>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }}</ion-label>

@@ -55,12 +55,12 @@
     <ion-item>
       <ion-icon name="logo-usd" item-start></ion-icon>
       {{ 'DASHBOARD.INVENTORY_VALUE' | translate }}
-      <ion-badge *ngIf="price" item-end>{{ price | currency:'COP' }}</ion-badge>
+      <ion-badge item-end>{{ cost | currency:'COP' }}</ion-badge>
     </ion-item>
     <ion-item>
       <ion-icon name="logo-usd" item-start></ion-icon>
       {{ 'DASHBOARD.REVENUE' | translate }}
-      <ion-badge *ngIf="price" item-end>{{ revenue | currency:'COP' }}</ion-badge>
+      <ion-badge item-end>{{ revenue | currency:'COP' }}</ion-badge>
     </ion-item>
 
     <!--Alerts-->

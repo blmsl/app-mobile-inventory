@@ -30,6 +30,7 @@ export class ProductDetailsPage {
     private amountFormControl: FormControl;
     private integerPattern: any = /^\d+$/;
     private valueFormControl: FormControl;
+    private costFormControl: FormControl;
 
     constructor(private navCtrl: NavController,
         private viewCtrl: ViewController,
@@ -56,12 +57,16 @@ export class ProductDetailsPage {
         this.valueFormControl = new FormControl('', [
             Validators.required
         ]);
+        this.costFormControl = new FormControl('', [
+            Validators.required
+        ]);
         this.updateProductFormGroup = new FormGroup({
             nameFormControl: this.nameFormControl,
             brandFormControl: this.brandFormControl,
             colorFormControl: this.colorFormControl,
             amountFormControl: this.amountFormControl,
-            valueFormControl: this.valueFormControl
+            valueFormControl: this.valueFormControl,
+            costFormControl: this.costFormControl
         });
         // Initialize messages.
         this.translateService.get('PRODUCTS.SELECT_COLOR_MESSAGE').subscribe((response) => {
@@ -93,6 +98,7 @@ export class ProductDetailsPage {
         this.colorFormControl.markAsUntouched();
         this.amountFormControl.markAsUntouched();
         this.valueFormControl.markAsUntouched();
+        this.costFormControl.markAsUntouched();
         this.editing = false;
         // Load product.
         this.loadProduct();
@@ -114,6 +120,7 @@ export class ProductDetailsPage {
         this.colorFormControl.setValue(this.product.color);
         this.amountFormControl.setValue(this.product.amount);
         this.valueFormControl.setValue(this.product.price);
+        this.costFormControl.setValue(this.product.cost);
     }
 
     getProduct() {
@@ -150,6 +157,7 @@ export class ProductDetailsPage {
         pr.brand = this.brandFormControl.value;
         pr.color = this.colorFormControl.value;
         pr.price = +this.valueFormControl.value;
+        pr.cost = +this.costFormControl.value;
         promises.push(this.productsService.updateProduct(this.product.product_id, pr));
 
         // Update existences.
@@ -181,6 +189,7 @@ export class ProductDetailsPage {
         this.product.brand = pr.brand;
         this.product.color = pr.color;
         this.product.price = +pr.price;
+        this.product.cost = +pr.cost;
         this.product.amount = +hpr.amount;
     }
 

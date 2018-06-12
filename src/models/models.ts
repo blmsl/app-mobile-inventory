@@ -69,6 +69,7 @@ export class Product {
     brand: string;
     color: string;
     price: number;
+    cost: number;
     created: Date;
     updated: Date;
 

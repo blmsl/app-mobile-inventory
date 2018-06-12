@@ -34,6 +34,7 @@ export class CreateProductPage {
   private amountFormControl: FormControl;
   private integerPattern: any = /^\d+$/;
   private valueFormControl: FormControl;
+  private costFormControl: FormControl;
 
   constructor(private modalCtrl: ModalController,
     public navCtrl: NavController,
@@ -61,11 +62,15 @@ export class CreateProductPage {
     this.valueFormControl = new FormControl('', [
       Validators.required
     ]);
+    this.costFormControl = new FormControl('', [
+      Validators.required
+    ]);
     this.createProductFormGroup = new FormGroup({
       nameFormControl: this.nameFormControl,
       brandFormControl: this.brandFormControl,
       colorFormControl: this.colorFormControl,
       amountFormControl: this.amountFormControl,
+      costFormControl: this.costFormControl,
       valueFormControl: this.valueFormControl
     });
     // Get colors.
@@ -125,6 +130,7 @@ export class CreateProductPage {
     product.brand = this.brandFormControl.value;
     product.color = this.colorFormControl.value != this.selectColorMessage ? this.colorFormControl.value : '';
     product.price = +this.valueFormControl.value;
+    product.cost = +this.costFormControl.value;
 
     this.productsService.createProduct(product).then(response => {
       /* console.log(JSON.stringify(response)); */

@@ -58,8 +58,8 @@
       <ion-icon name="cube" item-start></ion-icon>
       <ion-label>
         {{ product.name }}
-        <p>{{ 'PRODUCTS.PRODUCT_AMOUNT' | translate }} {{ product.amount }}</p>
-        <p>{{ 'PRODUCTS.PRODUCT_VALUE' | translate }} {{ product.price | currency:'COP' }}</p>
+        <p *ngIf="product.brand">{{ 'PRODUCTS.PRODUCT_BRAND' | translate }} {{ product.brand }}</p>
+        <p *ngIf="product.color">{{ 'PRODUCTS.PRODUCT_COLOR' | translate }} {{ product.color }}</p>
       </ion-label>
       <button ion-button item-end (click)="goToProduct(product)">
         {{ 'COMMONS.SEE' | translate }}

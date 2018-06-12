@@ -52,6 +52,7 @@
     "PRODUCT_COLOR": "Color",
     "PRODUCT_AMOUNT": "Cantidad",
     "PRODUCT_VALUE": "Precio",
+    "PRODUCT_COST": "Costo",
     "FILTERS": "Filtros",
     "PRODUCTS_EMPTY_MESSAGE": "No hay productos.",
     "PATTERN_AMOUNT_MESSAGE": "No has ingresado una cantidad valida.",
@@ -94,9 +95,9 @@
     "PRODUCTS": {
       "ERROR_CREATING_PRODUCT": "Lo sentimos, el producto no ha podido ser creado.",
       "ERROR_UPDATING_PRODUCT": "Lo sentimos, el producto no ha sido actualizado.",
-      "ERROR_GETTING_PRODUCT": "Lo sentimos, no se han podido recuperar el producto.",
-      "ERROR_GETTING_PRODUCTS": "Lo sentimos, no se han podido recuperar los productos.",
-      "ERROR_GETTING_BRANDS" : "Lo sentimos, no se han podido recuperar marcas."
+      "ERROR_GETTING_PRODUCT": "Lo sentimos, no se han podido recuperar del servidor el producto.",
+      "ERROR_GETTING_PRODUCTS": "Lo sentimos, no se han podido recuperar del servidor los productos.",
+      "ERROR_GETTING_BRANDS" : "Lo sentimos, no se han podido recuperar del servidor las marcas."
     },
     "SCANN":{
       "ERROR_SCANNING_QR_CODE": "Lo sentimos, el código no pudo ser escaneado."
@@ -105,7 +106,7 @@
       "ERROR_VALIDATING_STOCK": "El producto no tiene suficientes existencias.",
       "ERROR_ADDING_PRODUCT": "Lo sentimos, el producto no pudo ser añadido.",
       "ERROR_CREATING_BILL": "Lo sentimos, la venta no se pudo llevar a cabo.",
-      "ERROR_GETTING_BILLS": "Lo sentimos, no se ha podido recuperar las ventas."
+      "ERROR_GETTING_BILLS": "Lo sentimos, no se ha podido recuperar del servidor las ventas."
     }
   }
 }
